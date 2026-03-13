@@ -1,0 +1,22 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Office temp files
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+
+# OneDrive / Windows noise
+*.lnk
+
+# Logs
+*.log
+
+# Python cache (if any scripts)
+__pycache__/
+*.pyc
+
+# Node (if any tooling)
+node_modules/
+
