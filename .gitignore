@@ -20,3 +20,6 @@ __pycache__/
 # Node (if any tooling)
 node_modules/
 
+# Secrets
+.env
+

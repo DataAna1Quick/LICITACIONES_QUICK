@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(du -sh \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\"/* 2>/dev/null | sort -h)",
+      "Bash(git -C \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" log --oneline -10)",
+      "Bash(git -C \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" log --pretty=format:\"%h %s\" -10)",
+      "Bash(cd \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" && python PrimerAnalisis/src/auto_push.py --once)"
+    ]
+  }
+}
