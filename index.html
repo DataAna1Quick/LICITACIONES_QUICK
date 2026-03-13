@@ -1139,114 +1139,351 @@
       </div>
 
       <!-- ───────────────── SECCIÓN 5: COMERCIALES ───────────────── -->
-      <div class="section-label">
-        <span class="section-num">05</span>
-        <span class="section-title">Performance por Comercial</span>
-      </div>
+     <!-- ───────────────── SECCIÓN 05: PERFORMANCE POR COMERCIAL ───────────────── -->
+<div class="section-label">
+  <span class="section-num">05</span>
+  <span class="section-title">Performance por Comercial</span>
+</div>
 
-      <div class="table-wrap" style="margin-bottom: 24px">
-        <table>
-          <thead>
-            <tr>
-              <th>Comercial</th>
-              <th>Total LIC</th>
-              <th>Ganadas</th>
-              <th>Perdidas</th>
-              <th>Declinadas</th>
-              <th>Presentadas</th>
-              <th>En Construcción</th>
-              <th>Win Rate</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Erika Gonzalez</strong></td>
-              <td class="num">36</td>
-              <td class="num" style="color: var(--won); font-weight: 600">5</td>
-              <td class="num" style="color: var(--lost)">6</td>
-              <td class="num">1</td>
-              <td class="num">12</td>
-              <td class="num">7</td>
-              <td class="num"><strong>45%</strong></td>
-              <td><span class="tag tag-won">Top Performer</span></td>
-            </tr>
-            <tr>
-              <td><strong>Anderson Santos</strong></td>
-              <td class="num">17</td>
-              <td class="num" style="color: var(--won); font-weight: 600">1</td>
-              <td class="num" style="color: var(--lost)">3</td>
-              <td class="num">1</td>
-              <td class="num">6</td>
-              <td class="num">4</td>
-              <td class="num">25%</td>
-              <td><span class="tag tag-active">Pipeline Alto</span></td>
-            </tr>
-            <tr>
-              <td><strong>Milton Gonzalez</strong></td>
-              <td class="num">3</td>
-              <td class="num" style="color: var(--won); font-weight: 600">2</td>
-              <td class="num" style="color: var(--lost)">0</td>
-              <td class="num">1</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num"><strong>100%</strong></td>
-              <td><span class="tag tag-warn">Muestra Pequeña</span></td>
-            </tr>
-            <tr>
-              <td><strong>Jefferson Marquez</strong></td>
-              <td class="num">5</td>
-              <td class="num" style="color: var(--won); font-weight: 600">2</td>
-              <td class="num" style="color: var(--lost)">3</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">40%</td>
-              <td><span class="tag tag-gray">Sin Activas</span></td>
-            </tr>
-            <tr>
-              <td><strong>Yenifer Perez</strong></td>
-              <td class="num">6</td>
-              <td class="num" style="color: var(--won); font-weight: 600">0</td>
-              <td class="num" style="color: var(--lost)">4</td>
-              <td class="num">0</td>
-              <td class="num">1</td>
-              <td class="num">0</td>
-              <td class="num" style="color: var(--lost)">0%</td>
-              <td><span class="tag tag-lost">Atención</span></td>
-            </tr>
-            <tr>
-              <td><strong>Walter Vasquez</strong></td>
-              <td class="num">4</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">4</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">—</td>
-              <td><span class="tag tag-gray">Solo Declinadas</span></td>
-            </tr>
-            <tr>
-              <td><strong>Jeimy Acelas</strong></td>
-              <td class="num">2</td>
-              <td class="num">0</td>
-              <td class="num" style="color: var(--lost)">2</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num">0</td>
-              <td class="num" style="color: var(--lost)">0%</td>
-              <td><span class="tag tag-lost">Atención</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="alert alert-yellow">
-        <strong>⚠ Interpretación con cautela:</strong> Los win rates
-        individuales tienen baja validez estadística por el tamaño de muestra.
-        Se recomienda usar estos datos como orientación inicial, no como
-        evaluación de desempeño definitiva, hasta acumular más histórico con el
-        equipo de licitaciones.
-      </div>
+<!-- FILTRO SEGMENTO -->
+<div style="display:flex; align-items:center; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
+  <span style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted);">Segmento:</span>
+  <button id="filterSheet-lic" onclick="s05Show('lic')"
+    style="padding:6px 16px; border:1px solid var(--accent2); border-radius:4px;
+           background:var(--accent2); color:white; cursor:pointer;
+           font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px;
+           text-transform:uppercase; transition:all .18s;">
+    Licitaciones &nbsp;<span style="background:rgba(255,255,255,.25);border-radius:10px;padding:1px 6px;font-size:9px;">75</span>
+  </button>
+  <button id="filterSheet-bd" onclick="s05Show('bd')"
+    style="padding:6px 16px; border:1px solid var(--border); border-radius:4px;
+           background:#f5f3ef; color:var(--muted); cursor:pointer;
+           font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px;
+           text-transform:uppercase; transition:all .18s;">
+    Big Deals &nbsp;<span style="background:#e5e7eb;color:#6b7280;border-radius:10px;padding:1px 6px;font-size:9px;">17</span>
+  </button>
+</div>
+
+<!-- ── PANEL LICITACIONES ── -->
+<div id="s05PanelLic">
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Comercial</th>
+          <th>Total LIC</th>
+          <th>Ganadas</th>
+          <th>Perdidas</th>
+          <th>Declinadas</th>
+          <th>Presentadas</th>
+          <th>En Construcción</th>
+          <th>Win Rate</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Erika Gonzalez</strong></td>
+          <td class="num">36</td>
+          <td class="num" style="color:var(--won);font-weight:600;">5</td>
+          <td class="num" style="color:var(--lost);">6</td>
+          <td class="num">1</td>
+          <td class="num">12</td>
+          <td class="num">7</td>
+          <td class="num"><strong>45%</strong></td>
+          <td><span class="tag tag-won">Top Performer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Anderson Santos</strong></td>
+          <td class="num">17</td>
+          <td class="num" style="color:var(--won);font-weight:600;">1</td>
+          <td class="num" style="color:var(--lost);">3</td>
+          <td class="num">1</td>
+          <td class="num">6</td>
+          <td class="num">4</td>
+          <td class="num">25%</td>
+          <td><span class="tag tag-active">Pipeline Alto</span></td>
+        </tr>
+        <tr>
+          <td><strong>Milton Gonzalez</strong></td>
+          <td class="num">3</td>
+          <td class="num" style="color:var(--won);font-weight:600;">2</td>
+          <td class="num" style="color:var(--lost);">0</td>
+          <td class="num">1</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num"><strong>100%</strong></td>
+          <td><span class="tag tag-warn">Muestra Pequeña</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jefferson Marquez</strong></td>
+          <td class="num">5</td>
+          <td class="num" style="color:var(--won);font-weight:600;">2</td>
+          <td class="num" style="color:var(--lost);">3</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">40%</td>
+          <td><span class="tag tag-gray">Sin Activas</span></td>
+        </tr>
+        <tr>
+          <td><strong>Yenifer Perez</strong></td>
+          <td class="num">6</td>
+          <td class="num" style="color:var(--won);font-weight:600;">0</td>
+          <td class="num" style="color:var(--lost);">4</td>
+          <td class="num">0</td>
+          <td class="num">1</td>
+          <td class="num">0</td>
+          <td class="num" style="color:var(--lost);">0%</td>
+          <td><span class="tag tag-lost">Atención</span></td>
+        </tr>
+        <tr>
+          <td><strong>Walter Vasquez</strong></td>
+          <td class="num">4</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">4</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">—</td>
+          <td><span class="tag tag-gray">Solo Declinadas</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jeimy Acelas</strong></td>
+          <td class="num">2</td>
+          <td class="num">0</td>
+          <td class="num" style="color:var(--lost);">2</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num" style="color:var(--lost);">0%</td>
+          <td><span class="tag tag-lost">Atención</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── PANEL BIG DEALS ── -->
+<div id="s05PanelBd" style="display:none;">
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Comercial</th>
+          <th>Total BD</th>
+          <th>Ganados</th>
+          <th>Perdidos</th>
+          <th>Otros</th>
+          <th>Activos</th>
+          <th>Win Rate BD</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Anderson Santos</strong></td>
+          <td class="num">9</td>
+          <td class="num" style="color:var(--won);font-weight:600;">1</td>
+          <td class="num" style="color:var(--lost);">1</td>
+          <td class="num">0</td>
+          <td class="num">7</td>
+          <td class="num"><strong style="color:var(--warning);">50%</strong></td>
+          <td><span class="tag tag-won">Líder BD</span></td>
+        </tr>
+        <tr>
+          <td><strong>Erika Gonzalez</strong></td>
+          <td class="num">7</td>
+          <td class="num">0</td>
+          <td class="num" style="color:var(--lost);font-weight:600;">1</td>
+          <td class="num">1</td>
+          <td class="num">4</td>
+          <td class="num" style="color:var(--lost);">0%</td>
+          <td><span class="tag tag-warn">Potencial</span></td>
+        </tr>
+        <tr>
+          <td><strong>Carlos Pacasuca</strong></td>
+          <td class="num">1</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">0</td>
+          <td class="num">1</td>
+          <td class="num">—</td>
+          <td><span class="tag tag-gray">Nuevo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ALERT DINÁMICA -->
+<div id="s05Alert">
+  <div class="alert alert-yellow">
+    <strong>⚠ Interpretación con cautela:</strong> Los win rates individuales tienen baja validez estadística por el tamaño de muestra. Se recomienda usar estos datos como orientación inicial, no como evaluación de desempeño definitiva, hasta acumular más histórico con el equipo de licitaciones.
+  </div>
+</div>
+
+<!-- ── WIN RATE ACUMULADO ── -->
+<div style="background:white; border:1px solid var(--border); border-radius:6px; padding:24px; margin-top:24px;">
+  <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+    <span>Win Rate Acumulado por Comercial — Evolución Temporal</span>
+    <span style="font-size:9px;">Cada punto = cierre acumulado hasta esa fecha · línea punteada = promedio equipo</span>
+  </div>
+  <div style="position:relative; height:320px;">
+    <canvas id="s05Chart"></canvas>
+  </div>
+  <div id="s05Legend" style="display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:14px; justify-content:center;"></div>
+  <div id="s05ChartAlert"></div>
+</div>
+
+<!-- ── Chart.js (quitar si ya está cargado en tu HTML) ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+(function () {
+  var DATA = {
+    lic: {
+      avg: 36,
+      comerciales: [
+        { name:'Erika Gonzalez',    color:'#2e7d52', wr:[0,0,33,50,60,50,43,38,44,40,45] },
+        { name:'Anderson Santos',   color:'#1a5c96', wr:[0,0,33,25] },
+        { name:'Jefferson Marquez', color:'#f59e0b', wr:[100,50,33,25,40] },
+        { name:'Yenifer Perez',     color:'#c0392b', wr:[0,0,0,0] },
+        { name:'Milton Gonzalez',   color:'#7e22ce', wr:[100,100] }
+      ],
+      alertClass: 'alert-green',
+      alertHtml: '<strong>✅ Erika Gonzalez — tendencia más consistente del equipo (LIC)</strong>Comenzó en 0%, alcanzó 60% en su punto máximo (5.º cierre) y converge en 45% con 11 cierres — la muestra más representativa. Anderson Santos lleva 4 cierres y tiene 12 proyectos activos que pueden elevar su tasa.'
+    },
+    bd: {
+      avg: 25,
+      comerciales: [
+        { name:'Anderson Santos', color:'#1a5c96', wr:[100,50] },
+        { name:'Erika Gonzalez',  color:'#e84c2b', wr:[0] }
+      ],
+      alertClass: 'alert-blue',
+      alertHtml: '<strong>ℹ Big Deals — Histórico en construcción (4 cierres)</strong>Anderson Santos: Ganado (Deco) → Perdido (Avícola Miluc) · WR 50%. Erika Gonzalez: Perdido (UCCLOG LH) · WR 0%. Con 14 proyectos activos, los próximos cierres definirán la tendencia real del segmento BD.'
+    }
+  };
+
+  var chartInst = null;
+
+  function render(seg) {
+    var d = DATA[seg];
+    var maxLen = Math.max.apply(null, d.comerciales.map(function(c){ return c.wr.length; }));
+    var xLabels = Array.from({length:maxLen}, function(_,i){ return 'Cierre #'+(i+1); });
+
+    var datasets = d.comerciales.map(function(c) {
+      return {
+        label: c.name,
+        data: c.wr,
+        borderColor: c.color,
+        backgroundColor: c.color + '18',
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: c.wr.map(function(v){ return v>=50 ? c.color : v>=25 ? '#f59e0b' : '#c0392b'; }),
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointHoverRadius: 7,
+        fill: false,
+        tension: 0.32,
+        spanGaps: false
+      };
+    });
+
+    datasets.push({
+      label: 'Promedio (' + d.avg + '%)',
+      data: Array(maxLen).fill(d.avg),
+      borderColor: '#e84c2b',
+      borderWidth: 1.5,
+      borderDash: [6,4],
+      pointRadius: 0,
+      fill: false,
+      tension: 0
+    });
+
+    if (chartInst) { chartInst.destroy(); chartInst = null; }
+
+    var ctx = document.getElementById('s05Chart').getContext('2d');
+    chartInst = new Chart(ctx, {
+      type: 'line',
+      data: { labels: xLabels, datasets: datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode:'index', intersect:false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0d0d12',
+            titleFont: { size:10 },
+            bodyFont: { size:12 },
+            padding: 12,
+            callbacks: {
+              label: function(ctx) {
+                if (ctx.raw == null) return null;
+                return (ctx.dataset.label.startsWith('Promedio') ? '— ' : '● ') +
+                       ctx.dataset.label + ': ' + ctx.raw + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          x: { ticks:{ font:{size:10}, maxRotation:0 }, grid:{ color:'#f5f3ef' } },
+          y: {
+            min:0, max:110,
+            ticks:{ callback:function(v){ return v+'%'; }, font:{size:10}, stepSize:25 },
+            grid:{ color:'#f0ede8' }
+          }
+        }
+      }
+    });
+
+    // Leyenda
+    var legend = document.getElementById('s05Legend');
+    legend.innerHTML = d.comerciales.map(function(c){
+      return '<span style="display:flex;align-items:center;gap:6px;font-family:DM Mono,monospace;font-size:10px;color:#7a7a8a;">' +
+             '<span style="width:10px;height:10px;border-radius:2px;background:'+c.color+';flex-shrink:0;display:inline-block;"></span>' +
+             c.name + ' (n='+c.wr.length+')</span>';
+    }).join('') +
+    '<span style="display:flex;align-items:center;gap:6px;font-family:DM Mono,monospace;font-size:10px;color:#7a7a8a;">' +
+    '<span style="width:22px;height:0;border-top:2px dashed #e84c2b;flex-shrink:0;display:inline-block;"></span>' +
+    'Promedio ('+d.avg+'%)</span>';
+
+    // Alert
+    document.getElementById('s05ChartAlert').innerHTML =
+      '<div class="alert '+d.alertClass+'" style="margin-top:16px;">'+d.alertHtml+'</div>';
+  }
+
+  window.s05Show = function(seg) {
+    // Paneles tabla
+    document.getElementById('s05PanelLic').style.display = seg==='lic' ? '' : 'none';
+    document.getElementById('s05PanelBd').style.display  = seg==='bd'  ? '' : 'none';
+
+    // Botones
+    var btnLic = document.getElementById('filterSheet-lic');
+    var btnBd  = document.getElementById('filterSheet-bd');
+    if (seg==='lic') {
+      btnLic.style.cssText = 'padding:6px 16px;border:1px solid var(--accent2);border-radius:4px;background:var(--accent2);color:white;cursor:pointer;font-family:DM Mono,monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:all .18s;';
+      btnBd.style.cssText  = 'padding:6px 16px;border:1px solid var(--border);border-radius:4px;background:#f5f3ef;color:var(--muted);cursor:pointer;font-family:DM Mono,monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:all .18s;';
+    } else {
+      btnBd.style.cssText  = 'padding:6px 16px;border:1px solid #7e22ce;border-radius:4px;background:#7e22ce;color:white;cursor:pointer;font-family:DM Mono,monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:all .18s;';
+      btnLic.style.cssText = 'padding:6px 16px;border:1px solid var(--border);border-radius:4px;background:#f5f3ef;color:var(--muted);cursor:pointer;font-family:DM Mono,monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:all .18s;';
+    }
+
+    // Alert de tabla
+    var alertMap = {
+      lic: '<div class="alert alert-yellow"><strong>⚠ Interpretación con cautela:</strong> Los win rates individuales tienen baja validez estadística por el tamaño de muestra. Se recomienda usar estos datos como orientación inicial, no como evaluación de desempeño definitiva, hasta acumular más histórico con el equipo de licitaciones.</div>',
+      bd:  '<div class="alert alert-blue"><strong>ℹ Big Deals — Muestra pequeña:</strong> Solo 3 Big Deals cerrados en total. El win rate del 25-50% tiene baja validez estadística. A medida que crezca el histórico, este indicador será más confiable. Prioridad: no perder ningún registro histórico.</div>'
+    };
+    document.getElementById('s05Alert').innerHTML = alertMap[seg];
+
+    render(seg);
+  };
+
+  render('lic');
+})();
+</script>
+<!-- ─────────────────── FIN SECCIÓN 05 ─────────────────── -->
 
       <!-- ───────────────── SECCIÓN 6: TIPIFICACIÓN Y RONDAS ───────────────── -->
       <div class="section-label">
