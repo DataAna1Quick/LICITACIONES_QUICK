@@ -259,17 +259,131 @@ body {
 @keyframes fadePulse { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:1;} }
 .btn-clear { background: rgba(237,28,36,.15) !important; border-color: rgba(237,28,36,.4) !important; color: #ff6b6b !important; font-size: 11px !important; }
 .btn-clear:hover { background: var(--purina-red) !important; color: white !important; }
+
+/* ===== HOME / LOGIN SCREEN ===== */
+#homeScreen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #2d1a1a 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+}
+.home-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 48px 40px;
+  text-align: center; max-width: 480px; width: 90%;
+  backdrop-filter: blur(20px);
+}
+.home-card .home-logo {
+  background: var(--purina-red); color: white;
+  font-weight: 900; font-size: 22px; letter-spacing: 2px;
+  padding: 10px 28px; display: inline-block; margin-bottom: 16px;
+}
+.home-card h2 {
+  color: white; font-size: 18px; font-weight: 700; margin-bottom: 6px;
+}
+.home-card p {
+  color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 32px;
+}
+.home-roles { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.role-btn {
+  flex: 1; min-width: 180px; padding: 24px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 12px; cursor: pointer;
+  transition: all 0.3s; text-align: center;
+}
+.role-btn:hover { border-color: var(--purina-red); background: rgba(237,28,36,0.08); transform: translateY(-2px); }
+.role-btn .role-icon { font-size: 36px; margin-bottom: 10px; }
+.role-btn .role-name { color: white; font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.role-btn .role-desc { color: rgba(255,255,255,0.5); font-size: 11px; }
+/* Password modal */
+#pwdModal {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+}
+.pwd-box {
+  background: #1a1a2e; border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 32px; text-align: center; width: 340px;
+}
+.pwd-box h3 { color: white; font-family: 'Montserrat', sans-serif; font-size: 16px; margin-bottom: 16px; }
+.pwd-box input {
+  width: 100%; padding: 12px 16px; border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+  color: white; font-size: 14px; font-family: 'Montserrat', sans-serif;
+  text-align: center; outline: none; transition: border-color 0.2s;
+}
+.pwd-box input:focus { border-color: var(--purina-red); }
+.pwd-box .pwd-error { color: #ff6b6b; font-size: 12px; margin-top: 8px; display: none; font-family: 'Montserrat', sans-serif; }
+.pwd-box .pwd-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: center; }
+.pwd-box .pwd-actions button {
+  padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; transition: all 0.2s;
+}
+.pwd-box .btn-enter { background: var(--purina-red); color: white; }
+.pwd-box .btn-enter:hover { background: var(--purina-dark-red); }
+.pwd-box .btn-cancel { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+.pwd-box .btn-cancel:hover { background: rgba(255,255,255,0.2); }
+/* Role badge in nav */
+.role-badge {
+  font-size: 10px; font-family: 'Montserrat', sans-serif; font-weight: 700;
+  padding: 3px 10px; border-radius: 4px; letter-spacing: 1px;
+}
+.role-badge.editor { background: var(--purina-red); color: white; }
+.role-badge.consultor { background: var(--accent-blue); color: white; }
+/* Readonly mode */
+body.readonly-mode input {
+  pointer-events: none; opacity: 0.7; background: transparent !important;
+  border-color: transparent !important; cursor: default;
+}
+body.readonly-mode .btn-clear { display: none !important; }
 </style>
 </head>
 <body>
 
-<div class="nav-bar">
+<!-- ===== HOME SCREEN ===== -->
+<div id="homeScreen">
+  <div class="home-card">
+    <div class="home-logo">✦ PURINA</div>
+    <h2>Dashboard KPIs Operativos</h2>
+    <p>Semana 12 — Marzo 2026 &nbsp;|&nbsp; Selecciona tu perfil de acceso</p>
+    <div class="home-roles">
+      <div class="role-btn" onclick="enterAsConsultor()">
+        <div class="role-icon">📊</div>
+        <div class="role-name">Consultor</div>
+        <div class="role-desc">Solo lectura — visualiza indicadores y gráficas</div>
+      </div>
+      <div class="role-btn" onclick="showPwdModal()">
+        <div class="role-icon">✏️</div>
+        <div class="role-name">Editor</div>
+        <div class="role-desc">Editar datos — requiere contraseña</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PASSWORD MODAL ===== -->
+<div id="pwdModal">
+  <div class="pwd-box">
+    <h3>🔒 Acceso Editor</h3>
+    <input type="password" id="pwdInput" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPwd()">
+    <div class="pwd-error" id="pwdError">Contraseña incorrecta</div>
+    <div class="pwd-actions">
+      <button class="btn-cancel" onclick="hidePwdModal()">Cancelar</button>
+      <button class="btn-enter" onclick="checkPwd()">Ingresar</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar" style="display:none;">
   <div class="brand">
     <div class="brand-logo">✦ PURINA</div>
     <div class="brand-title">INDICADORES OPERATIVOS 2025–2026 | Dashboard Interactivo</div>
   </div>
   <div class="nav-controls">
     <div class="week-badge">SEMANA 12 — MARZO 2026</div>
+    <span class="role-badge" id="roleBadge"></span>
     <span class="save-badge" id="saveBadge" style="display:none;">Datos guardados</span>
     <span id="firebaseStatus" style="font-size:11px;font-family:'Montserrat',sans-serif;font-weight:600;padding:3px 8px;border-radius:4px;background:#27ae60;color:white;display:none;">SYNC</span>
     <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
@@ -279,7 +393,7 @@ body {
   </div>
 </div>
 
-<div class="slides-wrapper" id="slidesWrapper">
+<div class="slides-wrapper" id="slidesWrapper" style="display:none;">
 
 <!-- ===== SLIDE 1: PORTADA ===== -->
 <div class="slide title-slide active" data-slide="1">
@@ -920,9 +1034,53 @@ body {
 
 </div>
 
-<div class="thumb-nav" id="thumbNav"></div>
+<div class="thumb-nav" id="thumbNav" style="display:none;"></div>
 
 <script>
+// ===== SISTEMA DE ROLES =====
+let userRole = null;
+const EDITOR_PWD = 'Quick_123';
+
+function showPwdModal() {
+  document.getElementById('pwdModal').style.display = 'flex';
+  document.getElementById('pwdInput').value = '';
+  document.getElementById('pwdError').style.display = 'none';
+  setTimeout(() => document.getElementById('pwdInput').focus(), 100);
+}
+function hidePwdModal() {
+  document.getElementById('pwdModal').style.display = 'none';
+}
+function checkPwd() {
+  const val = document.getElementById('pwdInput').value;
+  if(val === EDITOR_PWD) {
+    hidePwdModal();
+    enterDashboard('editor');
+  } else {
+    document.getElementById('pwdError').style.display = 'block';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+function enterAsConsultor() { enterDashboard('consultor'); }
+
+function enterDashboard(role) {
+  userRole = role;
+  document.getElementById('homeScreen').style.display = 'none';
+  document.getElementById('navBar').style.display = 'flex';
+  document.getElementById('slidesWrapper').style.display = 'flex';
+  document.getElementById('thumbNav').style.display = 'flex';
+  // Badge de rol
+  const badge = document.getElementById('roleBadge');
+  badge.className = 'role-badge ' + role;
+  badge.textContent = role === 'editor' ? 'EDITOR' : 'CONSULTOR';
+  // Modo solo lectura para consultor
+  if(role === 'consultor') {
+    document.body.classList.add('readonly-mode');
+  }
+  // Renderizar slide activo
+  renderChartsForSlide(currentSlide);
+}
+
 Chart.register(ChartDataLabels);
 Chart.defaults.set('plugins.datalabels',{
   color:'#1A1A2E', font:{size:9,weight:'bold',family:'Montserrat'},
