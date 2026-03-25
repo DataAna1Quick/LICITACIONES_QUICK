@@ -248,6 +248,15 @@ body {
 }
 .thumb-btn:hover { background: rgba(255,255,255,0.12); color: white; }
 .thumb-btn.active { background: var(--purina-red); color: white; border-color: var(--purina-red); }
+.save-badge {
+  background: var(--accent-green); color: white;
+  padding: 4px 10px; border-radius: 4px; font-size: 10px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  animation: fadePulse 2s ease-in-out;
+}
+@keyframes fadePulse { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:1;} }
+.btn-clear { background: rgba(237,28,36,.15) !important; border-color: rgba(237,28,36,.4) !important; color: #ff6b6b !important; font-size: 11px !important; }
+.btn-clear:hover { background: var(--purina-red) !important; color: white !important; }
 </style>
 </head>
 <body>
@@ -259,9 +268,11 @@ body {
   </div>
   <div class="nav-controls">
     <div class="week-badge">SEMANA 12 — MARZO 2026</div>
+    <span class="save-badge" id="saveBadge" style="display:none;">Datos guardados</span>
     <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
     <span class="slide-counter" id="slideCounter">1 / 13</span>
     <button class="nav-btn" onclick="nextSlide()">Siguiente ▸</button>
+    <button class="nav-btn btn-clear" onclick="clearSavedData()">Limpiar datos</button>
   </div>
 </div>
 
@@ -971,6 +982,53 @@ function timeToDecimal(t) {
 
 const dlOff = {datalabels:{display:false}};
 
+// ===== PERSISTENCIA localStorage =====
+const STORAGE_KEY = 'purina_dashboard_data';
+const TABLE_IDS = ['table_tendencia','table_novedades','table_efect_sem','table_tiempos',
+  'table_posic_mes','table_posic_sem','table_vehiculos','table_arqueo_mes','table_arqueo_sem','table_rotacion'];
+
+function saveAllData() {
+  const data = {};
+  TABLE_IDS.forEach(id => {
+    const table = document.getElementById(id);
+    if(!table) return;
+    const rows = [];
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const vals = [];
+      row.querySelectorAll('input').forEach(inp => vals.push(inp.value));
+      rows.push(vals);
+    });
+    data[id] = rows;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  const badge = document.getElementById('saveBadge');
+  if(badge) { badge.style.display = 'inline-block'; badge.style.animation = 'none'; badge.offsetHeight; badge.style.animation = 'fadePulse 2s ease-in-out'; }
+}
+
+function loadAllData() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return; }
+  if(!data) return;
+  TABLE_IDS.forEach(id => {
+    const table = document.getElementById(id);
+    if(!table || !data[id]) return;
+    table.querySelectorAll('tbody tr').forEach((row, rIdx) => {
+      if(!data[id][rIdx]) return;
+      const inputs = row.querySelectorAll('input');
+      inputs.forEach((inp, cIdx) => {
+        if(data[id][rIdx][cIdx] !== undefined) inp.value = data[id][rIdx][cIdx];
+      });
+    });
+  });
+  document.getElementById('saveBadge').style.display = 'inline-block';
+}
+
+function clearSavedData() {
+  if(!confirm('Se borrarán todos los datos guardados y se restaurarán los valores originales del dashboard. ¿Continuar?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
 // ===== TENDENCIA =====
 function updateTendencia() {
   const d26 = getInputValues('table_tendencia',1);
@@ -982,6 +1040,7 @@ function updateTendencia() {
     if(valid.length>=2){ const r=(valid[valid.length-1]-valid[0]).toFixed(2); document.getElementById('kpi_recup_tend').textContent=(r>0?'+':'')+r+' pts'; }
   }
   if(charts.tendencia){ charts.tendencia.data.datasets[1].data=d26; charts.tendencia.update(); }
+  saveAllData();
 }
 function renderTendencia() {
   const ctx=document.getElementById('chart_tendencia'); if(!ctx) return;
@@ -1018,6 +1077,7 @@ function updateNovedades() {
     charts.novedades.data.datasets[1].data=cd;
     charts.novedades.update();
   }
+  saveAllData();
 }
 function renderNovedades() {
   const ctx=document.getElementById('chart_novedades'); if(!ctx) return;
@@ -1042,6 +1102,7 @@ function updateEfectSem() {
   d26.forEach((v,i)=>{if(v!==null&&d25[i]){gs+=v-d25[i];gc++;}});
   document.getElementById('gap_sem_label').textContent=gc>0?(gs/gc).toFixed(1)+' pp vs Año Anterior (semanas con datos)':'—';
   if(charts.efectSem){charts.efectSem.data.datasets[1].data=d26;charts.efectSem.update();}
+  saveAllData();
 }
 function renderEfectSem() {
   const ctx=document.getElementById('chart_efect_sem'); if(!ctx) return;
@@ -1058,7 +1119,7 @@ function renderEfectSem() {
 }
 
 // ===== TIEMPOS =====
-function updateTiempos(){renderTiempos();}
+function updateTiempos(){renderTiempos();saveAllData();}
 function renderTiempos() {
   const ctx=document.getElementById('chart_tiempos'); if(!ctx) return;
   const m=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
@@ -1087,7 +1148,7 @@ function renderBarComp(key,canvasId,tableId,labels,d25,target,yMin,yMax) {
 }
 
 // Posic Mes (12 meses)
-function updatePosicMes(){renderPosicMes();}
+function updatePosicMes(){renderPosicMes();saveAllData();}
 function renderPosicMes(){
   renderBarComp('posicMes','chart_posic_mes','table_posic_mes',
     ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
@@ -1095,7 +1156,7 @@ function renderPosicMes(){
 }
 
 // Posic Sem (S1-S12)
-function updatePosicSem(){renderPosicSem();renderDetallePosic();}
+function updatePosicSem(){renderPosicSem();renderDetallePosic();saveAllData();}
 function renderPosicSem(){
   renderBarComp('posicSem','chart_posic_sem','table_posic_sem',
     ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
@@ -1103,7 +1164,7 @@ function renderPosicSem(){
 }
 
 // Arqueo Mes
-function updateArqueoMes(){renderArqueoMes();}
+function updateArqueoMes(){renderArqueoMes();saveAllData();}
 function renderArqueoMes(){
   renderBarComp('arqueoMes','chart_arqueo_mes','table_arqueo_mes',
     ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
@@ -1111,7 +1172,7 @@ function renderArqueoMes(){
 }
 
 // Arqueo Sem (S1-S12)
-function updateArqueoSem(){renderArqueoSem();}
+function updateArqueoSem(){renderArqueoSem();saveAllData();}
 function renderArqueoSem(){
   renderBarComp('arqueoSem','chart_arqueo_sem','table_arqueo_sem',
     ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
@@ -1160,7 +1221,7 @@ function renderDetallePosic() {
 }
 
 // ===== VEHICULOS + DONUT (DINÁMICO desde tabla editable) =====
-function updateVehiculos(){renderVehiculos();}
+function updateVehiculos(){renderVehiculos();saveAllData();}
 function renderVehiculos() {
   const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
   const prom=getInputValues('table_vehiculos',0);
@@ -1213,6 +1274,7 @@ function updateRotacion() {
   document.getElementById('rot_feb_kpi').textContent=!isNaN(fv)?(fv/19*100).toFixed(1)+'%':'—';
   document.getElementById('rot_mar_kpi').textContent=!isNaN(mv)?(mv/19*100).toFixed(1)+'%':'—';
   renderRotacion();
+  saveAllData();
 }
 function renderRotacion() {
   const ctx=document.getElementById('chart_rotacion'); if(!ctx) return;
@@ -1244,6 +1306,7 @@ function renderChartsForSlide(n) {
 }
 
 initThumbNav();
+loadAllData();
 </script>
 </body>
 </html>
