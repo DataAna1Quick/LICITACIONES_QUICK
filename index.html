@@ -6,6 +6,8 @@
 <title>Nestlé Purina - KPIs Operativos 2025-2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap');
 
@@ -269,6 +271,7 @@ body {
   <div class="nav-controls">
     <div class="week-badge">SEMANA 12 — MARZO 2026</div>
     <span class="save-badge" id="saveBadge" style="display:none;">Datos guardados</span>
+    <span id="firebaseStatus" style="font-size:11px;font-family:'Montserrat',sans-serif;font-weight:600;padding:3px 8px;border-radius:4px;background:#27ae60;color:white;display:none;">SYNC</span>
     <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
     <span class="slide-counter" id="slideCounter">1 / 13</span>
     <button class="nav-btn" onclick="nextSlide()">Siguiente ▸</button>
@@ -982,11 +985,26 @@ function timeToDecimal(t) {
 
 const dlOff = {datalabels:{display:false}};
 
-// ===== PERSISTENCIA localStorage =====
+// ===== FIREBASE CONFIG =====
+const firebaseConfig = {
+  apiKey: "AIzaSyAn2ssRt5upilN6HKg02JlVbagBY6Nwcm8",
+  authDomain: "purina-dashboard-95be6.firebaseapp.com",
+  databaseURL: "https://purina-dashboard-95be6-default-rtdb.firebaseio.com",
+  projectId: "purina-dashboard-95be6",
+  storageBucket: "purina-dashboard-95be6.firebasestorage.app",
+  messagingSenderId: "23106539677",
+  appId: "1:23106539677:web:053617c8ac204d0c16c474"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const dbRef = db.ref('dashboard/semana12');
+
+// ===== PERSISTENCIA FIREBASE + localStorage =====
 const STORAGE_KEY = 'purina_dashboard_data';
 const TABLE_IDS = ['table_tendencia','table_novedades','table_efect_sem','table_tiempos',
   'table_posic_mes','table_posic_sem','table_vehiculos','table_arqueo_mes','table_arqueo_sem','table_rotacion'];
 
+let saveTimeout = null;
 function saveAllData() {
   const data = {};
   TABLE_IDS.forEach(id => {
@@ -1000,14 +1018,20 @@ function saveAllData() {
     });
     data[id] = rows;
   });
+  // Guardar en localStorage como cache local
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  // Guardar en Firebase (con debounce de 800ms para no saturar)
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    dbRef.set(data).then(() => {
+      console.log('Datos sincronizados con Firebase');
+    }).catch(err => console.warn('Error Firebase:', err));
+  }, 800);
   const badge = document.getElementById('saveBadge');
   if(badge) { badge.style.display = 'inline-block'; badge.style.animation = 'none'; badge.offsetHeight; badge.style.animation = 'fadePulse 2s ease-in-out'; }
 }
 
-function loadAllData() {
-  let data;
-  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return; }
+function applyData(data) {
   if(!data) return;
   TABLE_IDS.forEach(id => {
     const table = document.getElementById(id);
@@ -1023,10 +1047,34 @@ function loadAllData() {
   document.getElementById('saveBadge').style.display = 'inline-block';
 }
 
+function loadAllData() {
+  // Primero cargar cache local (instantáneo)
+  let localData;
+  try { localData = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) {}
+  if(localData) applyData(localData);
+  // Luego cargar desde Firebase (fuente de verdad)
+  dbRef.once('value').then(snap => {
+    const fbData = snap.val();
+    if(fbData) {
+      applyData(fbData);
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(fbData)); } catch(e) {}
+      console.log('Datos cargados desde Firebase');
+    }
+  }).catch(err => console.warn('Firebase offline, usando cache local:', err));
+  // Escuchar cambios en tiempo real de otros usuarios
+  dbRef.on('value', snap => {
+    const fbData = snap.val();
+    if(fbData) {
+      applyData(fbData);
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(fbData)); } catch(e) {}
+    }
+  });
+}
+
 function clearSavedData() {
-  if(!confirm('Se borrarán todos los datos guardados y se restaurarán los valores originales del dashboard. ¿Continuar?')) return;
+  if(!confirm('Se borrarán todos los datos guardados (local + Firebase) y se restaurarán los valores originales. ¿Continuar?')) return;
   localStorage.removeItem(STORAGE_KEY);
-  location.reload();
+  dbRef.remove().then(() => location.reload()).catch(() => location.reload());
 }
 
 // ===== TENDENCIA =====
@@ -1307,6 +1355,20 @@ function renderChartsForSlide(n) {
 
 initThumbNav();
 loadAllData();
+
+// ===== INDICADOR FIREBASE =====
+const fbStatus = document.getElementById('firebaseStatus');
+db.ref('.info/connected').on('value', snap => {
+  if(snap.val() === true) {
+    fbStatus.style.display = 'inline-block';
+    fbStatus.style.background = '#27ae60';
+    fbStatus.textContent = 'SYNC';
+  } else {
+    fbStatus.style.display = 'inline-block';
+    fbStatus.style.background = '#e74c3c';
+    fbStatus.textContent = 'OFFLINE';
+  }
+});
 </script>
 </body>
 </html>
