@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nestlé Purina - KPIs Operativos 2025-2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap');
 
@@ -259,7 +260,7 @@ body {
   <div class="nav-controls">
     <div class="week-badge">SEMANA 12 — MARZO 2026</div>
     <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
-    <span class="slide-counter" id="slideCounter">1 / 14</span>
+    <span class="slide-counter" id="slideCounter">1 / 13</span>
     <button class="nav-btn" onclick="nextSlide()">Siguiente ▸</button>
   </div>
 </div>
@@ -586,7 +587,7 @@ body {
   </div>
 </div>
 
-<!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (S2-S12) ===== -->
+<!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (S1-S12) ===== -->
 <div class="slide" data-slide="8">
   <div class="slide-header">
     <div class="tag">KPI: DETALLE POSICIONAMIENTO</div>
@@ -596,40 +597,40 @@ body {
     <div class="kpi-title-row">
       <h2>DETALLE DE POSICIONAMIENTO VEHICULAR</h2>
     </div>
-    <div class="kpi-subtitle">Análisis Diario — Semanas 2 a 12 (2026)</div>
+    <div class="kpi-subtitle">Análisis Semanal Dinámico — Calculado desde Posicionamiento Vehicular Semanal (2026)</div>
 
     <div class="kpi-cards">
-      <div class="kpi-card"><div class="kpi-card-label">DÍAS ANALIZADOS</div><div class="kpi-card-value">41</div><div class="kpi-card-sub">S2-S8 (actualiza con S9-S12)</div></div>
-      <div class="kpi-card"><div class="kpi-card-label">GAP ACUMULADO</div><div class="kpi-card-value red">-25 vehs</div></div>
-      <div class="kpi-card orange"><div class="kpi-card-label">PEOR REGISTRO</div><div class="kpi-card-value red">63%</div><div class="kpi-card-sub">13/1/2026</div></div>
-      <div class="kpi-card green"><div class="kpi-card-label">CUMPLIMIENTO PROM.</div><div class="kpi-card-value green">97.7%</div></div>
-      <div class="kpi-card"><div class="kpi-card-label">DÍAS CRÍTICOS (&lt;95%)</div><div class="kpi-card-value">5 (12%)</div></div>
+      <div class="kpi-card"><div class="kpi-card-label">SEMANAS ANALIZADAS</div><div class="kpi-card-value" id="dp_semanas">—</div><div class="kpi-card-sub" id="dp_semanas_sub">Datos de Posic. Semanal</div></div>
+      <div class="kpi-card"><div class="kpi-card-label">GAP ACUM. VS TARGET</div><div class="kpi-card-value red" id="dp_gap">—</div><div class="kpi-card-sub">Suma (valor - 100%) por semana</div></div>
+      <div class="kpi-card orange"><div class="kpi-card-label">PEOR SEMANA</div><div class="kpi-card-value red" id="dp_peor">—</div><div class="kpi-card-sub" id="dp_peor_sub"></div></div>
+      <div class="kpi-card green"><div class="kpi-card-label">CUMPLIMIENTO PROM.</div><div class="kpi-card-value green" id="dp_prom">—</div></div>
+      <div class="kpi-card"><div class="kpi-card-label">SEMANAS CRÍTICAS (&lt;95%)</div><div class="kpi-card-value" id="dp_criticas">—</div></div>
     </div>
 
     <div class="row">
       <div class="col-6">
-        <div class="chart-container" style="height:200px;"><canvas id="chart_detalle_posic"></canvas></div>
+        <div class="chart-container" style="height:220px;"><canvas id="chart_detalle_posic"></canvas></div>
       </div>
       <div class="col-6">
-        <div style="font-size:11px; font-weight:700; color:var(--purina-dark); margin-bottom:6px;">LOYALTY</div>
+        <div style="font-size:11px; font-weight:700; color:var(--purina-dark); margin-bottom:6px;">COMPARATIVA 2025 vs 2026</div>
         <div class="kpi-cards">
-          <div class="kpi-card orange"><div class="kpi-card-label">ENE</div><div class="kpi-card-value">72.9%</div></div>
-          <div class="kpi-card"><div class="kpi-card-label">FEB</div><div class="kpi-card-value">68.1%</div></div>
-          <div class="kpi-card blue"><div class="kpi-card-label">MAR</div><div class="kpi-card-value" style="color:var(--accent-blue);">—</div><div class="kpi-card-sub">Ingresa dato</div></div>
+          <div class="kpi-card"><div class="kpi-card-label">PROM. 2025 (S1-S12)</div><div class="kpi-card-value" id="dp_prom25">—</div></div>
+          <div class="kpi-card"><div class="kpi-card-label">PROM. 2026 (con datos)</div><div class="kpi-card-value" id="dp_prom26">—</div></div>
+          <div class="kpi-card blue"><div class="kpi-card-label">DIFERENCIA</div><div class="kpi-card-value" id="dp_diff" style="color:var(--accent-blue);">—</div></div>
         </div>
-        <div class="insight-box">
-          <strong>Mejora significativa en S2.</strong> Focos rojos en S3 (Ene). Semanas 4-8 estables (99-100%). Gap reducido a 25 unidades.
+        <div class="insight-box" id="dp_insight">
+          <strong>Análisis dinámico:</strong> Los KPIs se actualizan automáticamente con los datos de Posicionamiento Vehicular Semanal.
         </div>
       </div>
     </div>
   </div>
   <div class="slide-footer">
-    <span class="src">Fuente: Reporte de Tráfico Diario 2026 — Semana 12</span>
+    <span class="src">Fuente: Datos dinámicos de Posicionamiento Vehicular Semanal 2026</span>
     <span class="hashtag">#YosoySupplyChainTeam</span>
   </div>
 </div>
 
-<!-- ===== SLIDE 9: CANT. VEHÍCULOS (S2-S12) ===== -->
+<!-- ===== SLIDE 9: CANT. VEHÍCULOS (S1-S12) ===== -->
 <div class="slide" data-slide="9">
   <div class="slide-header">
     <div class="tag">KPI: FLOTA</div>
@@ -638,24 +639,66 @@ body {
   <div class="slide-body">
     <div class="kpi-title-row">
       <h2>CANTIDAD VEHÍCULOS POSICIONADOS 2026</h2>
+      <span class="edit-hint">Edita valores</span>
     </div>
-    <div class="kpi-subtitle">Evolución Semanal de Flota (S2-S12) y Participación</div>
+    <div class="kpi-subtitle">Evolución Semanal de Flota (S1-S12) — Datos editables, análisis dinámico</div>
+
+    <div class="kpi-cards">
+      <div class="kpi-card"><div class="kpi-card-label">PROM. SEMANAL</div><div class="kpi-card-value" id="vh_prom">—</div><div class="kpi-card-sub">Vehículos promedio</div></div>
+      <div class="kpi-card orange"><div class="kpi-card-label">MÁX. REGISTRADO</div><div class="kpi-card-value" id="vh_max">—</div><div class="kpi-card-sub" id="vh_max_sem"></div></div>
+      <div class="kpi-card green"><div class="kpi-card-label">MÍN. REGISTRADO</div><div class="kpi-card-value" id="vh_min">—</div><div class="kpi-card-sub" id="vh_min_sem"></div></div>
+      <div class="kpi-card blue"><div class="kpi-card-label">SEMANAS CON DATOS</div><div class="kpi-card-value" id="vh_count">—</div></div>
+    </div>
 
     <div class="row">
-      <div class="col-6">
-        <div class="chart-container" style="height:260px;"><canvas id="chart_vehiculos"></canvas></div>
+      <div class="col-7">
+        <div class="chart-container" style="height:220px;"><canvas id="chart_vehiculos"></canvas></div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div style="font-size:12px; font-weight:700; color:var(--purina-dark); margin-bottom:8px;">PARTICIPACIÓN POR FLOTA</div>
-        <div class="chart-container" style="height:180px;"><canvas id="chart_flota_donut"></canvas></div>
-        <div class="insight-box red" style="margin-top:8px;">
-          <strong>⚠ HALLAZGO CRÍTICO:</strong> El 43% de las veces se utiliza +20% de la flota base. Umbral mínimo: <strong>29 vehículos</strong>.
-        </div>
+        <div class="chart-container" style="height:160px;"><canvas id="chart_flota_donut"></canvas></div>
       </div>
+    </div>
+
+    <table class="data-table" id="table_vehiculos">
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">PROM.</td>
+          <td><input type="number" step="0.1" value="" placeholder="—" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="16.8" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="27.4" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="26.7" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="28.2" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="26.0" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="27.8" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="29.2" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S9" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S10" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S11" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S12" onchange="updateVehiculos()"></td>
+        </tr>
+        <tr><td class="row-label">MÁX.</td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="20" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="34" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="29" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="32" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="34" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="32" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="32" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S9" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S10" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S11" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S12" onchange="updateVehiculos()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box red" id="vh_insight">
+      <strong>Análisis dinámico:</strong> Los KPIs se recalculan al editar los datos semanales.
     </div>
   </div>
   <div class="slide-footer">
-    <span class="src">Fuente: Control de Tráfico 2026 — Semana 12</span>
+    <span class="src">Fuente: Control de Tráfico 2026 — Datos Editables</span>
     <span class="hashtag">#YosoySupplyChainTeam</span>
   </div>
 </div>
@@ -838,10 +881,10 @@ body {
       </div>
       <div class="action-col">
         <h4 style="background:#E8F5E9; color:var(--purina-dark);">EJE 3: PERSONAL</h4>
-        <div class="action-item high"><strong>Contratación y recursos</strong><div class="priority">Muy Alto</div></div>
-        <div class="action-item high"><strong>Cubrimiento vacantes HSEQ</strong><div class="priority">Muy Alto</div></div>
-        <div class="action-item med"><strong>Capacitación logística optimizada</strong><div class="priority">Muy Alto</div></div>
-        <div class="action-item high"><strong>Equipo completo y operativo</strong> <span class="status-badge progress">EN PROCESO</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Contratación y recursos</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Cubrimiento vacantes HSEQ</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item med"><strong>Capacitación logística optimizada</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Equipo completo y operativo</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
       </div>
     </div>
 
@@ -860,37 +903,27 @@ body {
   </div>
 </div>
 
-<!-- ===== SLIDE 14: CARTERA ===== -->
-<div class="slide" data-slide="14">
-  <div class="slide-header">
-    <div class="tag">CARTERA</div>
-    <div class="purina-badge">✦ PURINA</div>
-  </div>
-  <div class="slide-body" style="display:flex; align-items:center; justify-content:center; min-height:500px;">
-    <div style="text-align:center; color:var(--purina-muted);">
-      <div style="font-size:48px; opacity:.3;">📊</div>
-      <h2 style="font-family:'Montserrat',sans-serif; font-size:24px; color:var(--purina-dark); margin:12px 0;">CARTERA</h2>
-      <p style="font-size:13px;">Slide pendiente de datos. Agrega contenido según sea necesario.</p>
-    </div>
-  </div>
-  <div class="slide-footer">
-    <span class="src">Gestión Estratégica 2026</span>
-    <span class="hashtag">#YosoySupplyChainTeam</span>
-  </div>
-</div>
 
 </div>
 
 <div class="thumb-nav" id="thumbNav"></div>
 
 <script>
+Chart.register(ChartDataLabels);
+Chart.defaults.set('plugins.datalabels',{
+  color:'#1A1A2E', font:{size:9,weight:'bold',family:'Montserrat'},
+  anchor:'end', align:'end', offset:2,
+  formatter:function(v){return v!==null&&v!==undefined?v:'';},
+  display:function(ctx){return ctx.dataset.type!=='line'&&ctx.dataset.borderDash===undefined&&ctx.dataset.data[ctx.dataIndex]!==null;}
+});
+
 let currentSlide = 1;
-const totalSlides = 14;
+const totalSlides = 13;
 const slideNames = [
   '1. Portada','2. Tendencia','3. Novedades','4. Efect. Sem.',
   '5. Tiempos','6. Posic. Mes','7. Posic. Sem.',
   '8. Detalle Posic.','9. Vehículos','10. Arqueo Mes',
-  '11. Arqueo Sem.','12. Rotación','13. Plan Acción','14. Cartera'
+  '11. Arqueo Sem.','12. Rotación','13. Plan Acción'
 ];
 const charts = {};
 
@@ -936,6 +969,8 @@ function timeToDecimal(t) {
   const p=t.split(':'); return parseFloat(p[0])+(parseFloat(p[1]||0))/60;
 }
 
+const dlOff = {datalabels:{display:false}};
+
 // ===== TENDENCIA =====
 function updateTendencia() {
   const d26 = getInputValues('table_tendencia',1);
@@ -955,10 +990,11 @@ function renderTendencia() {
   const d26=getInputValues('table_tendencia',1);
   if(charts.tendencia) charts.tendencia.destroy();
   charts.tendencia=new Chart(ctx,{type:'line',data:{labels:m,datasets:[
-    {label:'2025',data:d25,borderColor:'#B0BEC5',backgroundColor:'rgba(176,190,197,.1)',borderWidth:2,pointRadius:3,tension:.3,fill:true},
-    {label:'2026',data:d26,borderColor:'#ED1C24',backgroundColor:'rgba(237,28,36,.08)',borderWidth:3,pointRadius:5,pointBackgroundColor:'#ED1C24',tension:.3,fill:true,spanGaps:false},
-    {label:'Objetivo',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[8,4],pointRadius:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:75,max:100,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+    {label:'2025',data:d25,borderColor:'#B0BEC5',backgroundColor:'rgba(176,190,197,.1)',borderWidth:2,pointRadius:3,tension:.3,fill:true,datalabels:{display:false}},
+    {label:'2026',data:d26,borderColor:'#ED1C24',backgroundColor:'rgba(237,28,36,.08)',borderWidth:3,pointRadius:5,pointBackgroundColor:'#ED1C24',tension:.3,fill:true,spanGaps:false,
+      datalabels:{display:function(ctx){return ctx.dataset.data[ctx.dataIndex]!==null;},color:'#ED1C24',anchor:'top',align:'top',font:{size:10,weight:'bold'}}},
+    {label:'Objetivo',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[8,4],pointRadius:0,fill:false,datalabels:{display:false}}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{min:75,max:100,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
   updateTendencia();
 }
 
@@ -993,7 +1029,7 @@ function renderNovedades() {
   if(charts.novedades) charts.novedades.destroy();
   charts.novedades=new Chart(ctx,{data:{labels:sd.map(d=>d.label),datasets:[
     {type:'bar',label:'Casos',data:sd.map(d=>d.val),backgroundColor:'#ED1C24',borderRadius:4,yAxisID:'y'},
-    {type:'line',label:'% Acum.',data:cd,borderColor:'#1A1A2E',borderWidth:2,pointRadius:3,yAxisID:'y1',tension:.3}
+    {type:'line',label:'% Acum.',data:cd,borderColor:'#1A1A2E',borderWidth:2,pointRadius:3,yAxisID:'y1',tension:.3,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,position:'left',ticks:{font:{size:9}}},y1:{min:0,max:100,position:'right',grid:{display:false},ticks:{callback:v=>v+'%',font:{size:9}}},x:{ticks:{font:{size:8},maxRotation:45}}}}});
   updateNovedades();
 }
@@ -1016,7 +1052,7 @@ function renderEfectSem() {
   charts.efectSem=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
     {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
     {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3},
-    {type:'line',label:'Target',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+    {type:'line',label:'Target',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:105,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
   updateEfectSem();
 }
@@ -1031,8 +1067,10 @@ function renderTiempos() {
   const d26=[]; inputs.forEach(inp=>d26.push(timeToDecimal(inp.value)));
   if(charts.tiempos) charts.tiempos.destroy();
   charts.tiempos=new Chart(ctx,{type:'bar',data:{labels:m,datasets:[
-    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
-    {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3}
+    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3,
+      datalabels:{formatter:function(v){if(v===null)return'';const h=Math.floor(v);const mn=Math.round((v-h)*60);return h+':'+(mn<10?'0':'')+mn;}}},
+    {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3,
+      datalabels:{formatter:function(v){if(v===null||v===undefined)return'';const h=Math.floor(v);const mn=Math.round((v-h)*60);return h+':'+(mn<10?'0':'')+mn;}}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{min:17.5,max:20.5,ticks:{callback:v=>{const h=Math.floor(v);const mn=Math.round((v-h)*60);return h+':'+(mn<10?'0':'')+mn;},font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
 }
 
@@ -1044,7 +1082,7 @@ function renderBarComp(key,canvasId,tableId,labels,d25,target,yMin,yMax) {
   charts[key]=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[
     {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
     {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3},
-    {type:'line',label:'Target',data:Array(labels.length).fill(target),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+    {type:'line',label:'Target',data:Array(labels.length).fill(target),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:yMin,max:yMax,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
 }
 
@@ -1057,7 +1095,7 @@ function renderPosicMes(){
 }
 
 // Posic Sem (S1-S12)
-function updatePosicSem(){renderPosicSem();}
+function updatePosicSem(){renderPosicSem();renderDetallePosic();}
 function renderPosicSem(){
   renderBarComp('posicSem','chart_posic_sem','table_posic_sem',
     ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
@@ -1080,37 +1118,90 @@ function renderArqueoSem(){
     [100,92,93,95,94,96,95,95,95,96,95,94],95,70,102);
 }
 
-// ===== DETALLE POSIC =====
+// ===== DETALLE POSIC (DINÁMICO desde Posic. Semanal) =====
 function renderDetallePosic() {
+  const d25=[100,100,100,100,100,100,100,100,99,100,100,100];
+  const d26=getInputValues('table_posic_sem',1);
+  const weeks=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const valid26=d26.map((v,i)=>({v:v,i:i})).filter(x=>x.v!==null);
+  const count=valid26.length;
+  const avg=count>0?(valid26.reduce((s,x)=>s+x.v,0)/count):0;
+  const gap=valid26.reduce((s,x)=>s+(x.v-100),0);
+  const worst=count>0?valid26.reduce((m,x)=>x.v<m.v?x:m,valid26[0]):{v:0,i:0};
+  const criticas=valid26.filter(x=>x.v<95).length;
+  const avg25=d25.reduce((s,v)=>s+v,0)/d25.length;
+  const avg26=count>0?avg:0;
+  const diff=avg26-avg25;
+
+  document.getElementById('dp_semanas').textContent=count;
+  document.getElementById('dp_semanas_sub').textContent=count>0?'S con datos: '+valid26.map(x=>weeks[x.i]).join(', '):'Sin datos';
+  document.getElementById('dp_gap').textContent=(gap>=0?'+':'')+gap.toFixed(0)+' pp';
+  document.getElementById('dp_peor').textContent=count>0?worst.v+'%':'—';
+  document.getElementById('dp_peor_sub').textContent=count>0?weeks[worst.i]:'';
+  document.getElementById('dp_prom').textContent=count>0?avg.toFixed(1)+'%':'—';
+  document.getElementById('dp_criticas').textContent=criticas+' ('+( count>0?Math.round(criticas/count*100):0)+'%)';
+  document.getElementById('dp_prom25').textContent=avg25.toFixed(1)+'%';
+  document.getElementById('dp_prom26').textContent=count>0?avg26.toFixed(1)+'%':'—';
+  document.getElementById('dp_diff').textContent=count>0?((diff>=0?'+':'')+diff.toFixed(1)+' pp'):'—';
+  document.getElementById('dp_diff').style.color=diff>=0?'var(--accent-green)':'var(--purina-red)';
+
+  if(count>0){
+    const best=valid26.reduce((m,x)=>x.v>m.v?x:m,valid26[0]);
+    document.getElementById('dp_insight').innerHTML='<strong>Resumen:</strong> Peor semana: '+weeks[worst.i]+' ('+worst.v+'%). Mejor: '+weeks[best.i]+' ('+best.v+'%). '+(criticas>0?'<strong style="color:var(--purina-red);">'+criticas+' semana(s) por debajo del 95%.</strong>':'Todas las semanas por encima del 95%.');
+  }
+
   const ctx=document.getElementById('chart_detalle_posic'); if(!ctx) return;
-  const w=['S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
-  const prom=[16.8,27.4,26.7,28.2,26.0,27.8,29.2,null,null,null,null];
-  const max=[20,34,29,32,34,32,32,null,null,null,null];
   if(charts.detallePosic) charts.detallePosic.destroy();
-  charts.detallePosic=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
-    {label:'Prom. Solicitados',data:prom,backgroundColor:'#ED1C24',borderRadius:3},
-    {label:'Máx. Solicitados',data:max,backgroundColor:'rgba(26,26,46,.2)',borderRadius:3}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{beginAtZero:true,ticks:{font:{size:9}}},x:{ticks:{font:{size:10}}}}}});
+  charts.detallePosic=new Chart(ctx,{type:'bar',data:{labels:weeks,datasets:[
+    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
+    {label:'2026',data:d26,backgroundColor:d26.map(v=>v!==null&&v<95?'#ED1C24':v!==null?'#27AE60':'#ddd'),borderRadius:3},
+    {type:'line',label:'Target 100%',data:Array(12).fill(100),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{min:75,max:105,ticks:{callback:v=>v+'%',font:{size:9}}},x:{ticks:{font:{size:10}}}}}});
 }
 
-// ===== VEHICULOS + DONUT =====
+// ===== VEHICULOS + DONUT (DINÁMICO desde tabla editable) =====
+function updateVehiculos(){renderVehiculos();}
 function renderVehiculos() {
+  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const prom=getInputValues('table_vehiculos',0);
+  const max=getInputValues('table_vehiculos',1);
+  const validP=prom.filter(v=>v!==null);
+  const validM=max.filter(v=>v!==null);
+
+  const avgP=validP.length>0?(validP.reduce((a,b)=>a+b,0)/validP.length):0;
+  const maxVal=validM.length>0?Math.max(...validM):0;
+  const minVal=validP.length>0?Math.min(...validP):0;
+  const maxIdx=validM.length>0?max.indexOf(maxVal):-1;
+  const minIdx=validP.length>0?prom.indexOf(minVal):-1;
+
+  document.getElementById('vh_prom').textContent=validP.length>0?avgP.toFixed(1):'—';
+  document.getElementById('vh_max').textContent=validM.length>0?maxVal:'—';
+  document.getElementById('vh_max_sem').textContent=maxIdx>=0?w[maxIdx]:'';
+  document.getElementById('vh_min').textContent=validP.length>0?minVal:'—';
+  document.getElementById('vh_min_sem').textContent=minIdx>=0?w[minIdx]:'';
+  document.getElementById('vh_count').textContent=validP.length;
+
+  const over20=validP.filter(v=>v>29).length;
+  const pctOver=validP.length>0?Math.round(over20/validP.length*100):0;
+  document.getElementById('vh_insight').innerHTML='<strong>Hallazgo:</strong> El '+pctOver+'% de las semanas supera 29 vehículos. Prom: <strong>'+avgP.toFixed(1)+'</strong> | Max: <strong>'+maxVal+'</strong> | Umbral mínimo recomendado: <strong>29 vehículos</strong>.';
+
   const ctx=document.getElementById('chart_vehiculos'); if(!ctx) return;
-  const w=['S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
-  const prom=[16.8,27.4,26.7,28.2,26.0,27.8,29.2,null,null,null,null];
-  const max=[20,34,29,32,34,32,32,null,null,null,null];
   if(charts.vehiculos) charts.vehiculos.destroy();
   charts.vehiculos=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
-    {label:'Prom. Target',data:prom,backgroundColor:'#ED1C24',borderRadius:4},
-    {label:'Máx. Target',data:max,backgroundColor:'#B0BEC5',borderRadius:4}
+    {label:'Prom. Solicitados',data:prom,backgroundColor:'#ED1C24',borderRadius:4},
+    {label:'Máx. Solicitados',data:max,backgroundColor:'#B0BEC5',borderRadius:4}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{beginAtZero:true},x:{ticks:{font:{size:10}}}}}});
 
+  // Donut dinámico: distribución por rangos de flota
+  const ranges=[0,0,0,0,0]; // <=24, 25-27, 28-29, 30-32, >32
+  validP.forEach(v=>{if(v<=24)ranges[0]++;else if(v<=27)ranges[1]++;else if(v<=29)ranges[2]++;else if(v<=32)ranges[3]++;else ranges[4]++;});
   const ctxD=document.getElementById('chart_flota_donut'); if(!ctxD) return;
   if(charts.flotaDonut) charts.flotaDonut.destroy();
   charts.flotaDonut=new Chart(ctxD,{type:'doughnut',data:{
-    labels:['Estándar (49%)','30% más (22%)','20% más (17%)','10% más (7%)','Otros (5%)'],
-    datasets:[{data:[49,22,17,7,5],backgroundColor:['#ED1C24','#F39C12','#FFD100','#B0BEC5','#E0E0E0'],borderWidth:0}]
-  },options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:12}}}}});
+    labels:['<=24 vehs','25-27 vehs','28-29 vehs','30-32 vehs','>32 vehs'],
+    datasets:[{data:ranges,backgroundColor:['#ED1C24','#F39C12','#FFD100','#27AE60','#2980B9'],borderWidth:0}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:12}},
+    datalabels:{color:'#fff',font:{size:10,weight:'bold'},formatter:function(v,ctx){var t=ctx.dataset.data.reduce((a,b)=>a+b,0);return t>0&&v>0?Math.round(v/t*100)+'%':'';}}}}});
 }
 
 // ===== ROTACIÓN =====
@@ -1132,8 +1223,9 @@ function renderRotacion() {
   const colors=data.map(v=>v!==null&&v>5?'#ED1C24':(v!==null?'#27AE60':'#ddd'));
   if(charts.rotacion) charts.rotacion.destroy();
   charts.rotacion=new Chart(ctx,{type:'bar',data:{labels:['DIC','ENE','FEB','MAR'],datasets:[
-    {label:'KPI %',data:data,backgroundColor:colors,borderRadius:4},
-    {type:'line',label:'Meta 5%',data:[5,5,5,5],borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+    {label:'KPI %',data:data,backgroundColor:colors,borderRadius:4,
+      datalabels:{formatter:function(v){return v!==null?v.toFixed(1)+'%':'';}}},
+    {type:'line',label:'Meta 5%',data:[5,5,5,5],borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:25,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
 }
 
