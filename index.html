@@ -1,289 +1,1157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Last Mile - Colsubsidio x Quick Help SAS</title>
-    <link rel="icon" type="image/x-icon" href="assest/favicon_io_Licitaciones/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assest/favicon_io_Licitaciones/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="assest/favicon_io_Licitaciones/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assest/favicon_io_Licitaciones/apple-touch-icon.png" />
-    <link rel="manifest" href="assest/favicon_io_Licitaciones/site.webmanifest" />
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { background: #f0f4f0; }
-    </style>
-  </head>
-  <body>
-    <div id="colsubsidio-root"></div>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-const { useState, useMemo } = React;
-const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, ComposedChart, Area, Line } = Recharts;
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nestlé Purina - KPIs Operativos 2025-2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap');
 
-const LOGO="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAA0AKEDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAUGAwQHAQII/8QANRAAAQMEAQMCBQIFAwUAAAAAAQIDBAAFBhEhBxIxE0EUIlFhcTJSCBVCgZEWI8EzYpKhsf/EABsBAQACAgMAAAAAAAAAAAAAAAABBgIEAwUH/8QAMxEAAQMCBQIDBQgDAAAAAAAAAQIDEQAhBAUSMVEGYUFxkRMiMqHwBxQzYrHB0fFSgeH/2gAMAwEAAhEDEQA/AOaUpUljlln3+6N2+3tFbiz8yv6UD3JP0r1DE4lrCtKeeUEpSJJOwFeTNNLeWG2xJNgBUbSux2LpLZptpjSZFxnh1xG1hBQE7+201BdQsPxXFYOhcbg/cHR/ssFaP/JXy8CqTgvtHyTHY4YDDFanCSICD4bmeBzxVgxHSmYYfD/eXQkIifiH1Pauc0rLFiyZbvpRY7r6/wBraCo/4Fey4kqI56cuM8wv9riCk/8Aur5ImKrkGJrDSlZI7D8hz047Ljq9b7UJKjr8ClN6x0r1aVIWULSUqB0QRoivKVFKUrIwy9Ic9Nhpx1et9qElR/wKVO9Y6V64hba1IcSpC0nRSoaINeUqKUr6abcedS00hTjizpKUjZJ+gFfUlh+K+piSy4y6g6UhaSlQ/INJ8KmDE1jpX2wy8+4G2GnHVnwlCSo/4FZUwZqmnnUxHy2wdPKDZ02f+76f3oSBQAnatelKUqKUpSlKkcds0+/XRu329ouOrPJ9kD3JPsK7j08xJFpsx+Gusxl5big8ppDWlFJI/qQTrjxuqV0Tyq2Wp5y0TmGo65K9ty/3H2So/T6VebSiYytapV1msQn5DnoOMemEtnvPyq2knn2Vv31x7+AfaXnGbYjEO5coBppOkpkavabyRYgxFk7iOYFemdJYHBNNIxQOtZkGDGjbuPXvWtd8wiYphkNJWJFwca0w0SNnk/MrXgVxRTlyyXImg88X5099LSVLPlSlAAfYc1PZ5i1zgNM3tTrkyHJH/UPJaP7T9vpVZtE522XaHcmAkvRH0PoCvHclQUN/4q+9BZBleBwrmMwSw444Val8GfgjwAO48d+IrnUeZ4vEvpYxCShCAIHaPi7k/Lbmv0dm2Q2jodZbdjuL2mJLvT7IdflyU7+xUoAgkk70NgACqBlvWH/WOGyrRf8AFLa/d3FARpjIUkND9wGyruHtzo75Hsb71KxWN1ntNuy7C50Zc5pj0pER5favzsJP0UCT9jvzVMY6T3DBYkLMsqulujG3z2Hzb+8KU+2hwFSUq8FWhwOd/UV3mEOE0BTv40331T/HypjBjCspZ/Bi0Rp0/wA/Oslj6A3J61sSshyW3WKRJSCxFdR3rJPsrak6P2G6nOiWDXjCOtyrZemmlpctjy2Hm+W3U9yORv8A+VJ9bOnuR9Qcit2R4rOjT7Y9HQls/EBKWffuGzzve+OeKu7F5tkLqRiWKvXFqTdYdqkNPrCt/OUtaTv6n01HXngVwPY551kgrCtQVIA+GB9b1ss4Bhp4EIKdKkwon4pP0bV+ck4dc836u3ix2pTTa/innHHHDpLaAvlR1+QNfet7OOkzePMQ3oeYWm6fES0RFNoHY4hxR1+kFWwPfxVxs2KdQsc643WXYmbcqS4y7LDch4dkiOtwgJ45BJT/AG1zVtzbH7LIw9zLMoxaHi14hTW3kLYkJX6xC0nZKQO7fPBGxritteYLQ62ELGkgWEEyefH0rSby1C2nCtB1gm5kCBx4etcKznpxccTzC141KuEWQ/cQ2W3WgoJR3uFA3sb8jddL6S4NLwTrtFs9xlxpjjtrcfCmkntAJ1rkeeKtfVfBLzlXUXF8qtTkRVpitMqkPreCQhKHC53fcEH2qwXS0zEfxAWe+FKDCetLsdCgobK0nuPH00RzWs9manmAgqElKp862mcrSy+VhJgLTHl41zXLOhdyv2WXqe3kloizJct6RHgrJK+wrJBURyOPoDVBw7pDkV9yO6Wma9HtCLTr42RI5SnfjtA/VwCd7A1711IdKcxX1yGVpubK7WLl8WZXr/OGwvZZ7fPgdn0qY/meUXDqVkl4wePar1a20MQ5sSQ8E+utIOyhXtoHWzsH6HXGaMe8hGlDgV7oM7aTIEf3WC8uYWvW42U+8REzqEEz/VcnODysJ6l4mmy5JZrw9NmIMVztJSghQG3Egn5ST7HfB8Vs59heX5p1xuNnWLcq4ek07IejpWmOy36adE72fBA+5rpGXYvj9vu+C5Kuyxsavbt8jtOw2XkqQpJJKvGhwQD3ADzo+Rqwx3Grf1myu2S5CIknIbZFXbXCofN6aFtq/Cu47A9+2sTmK7OpuoJNyB/kOLQBe3FZjLUXaVZJULAnbSebgk2vzVT6SdIpOI9QYt2byC2Xdlhp1qU218q2VKSQNp2djf4P2qLcTkycf6rG1uWhFrF4mCQmQ0sveeewjjxrW/BqS6KdMMtw/qC/eL7cGGohStodsjuMxSt643/fnmp+3Y1dHLP1OsKUs/H3K4PSozfqDlt4bbJPtvR81wO4ge2KlOBdk3j837VzM4Y+xSlLZRdVp/L+9cT6d9HLrlFjTf7jdYlhtLh/2n5I2pz22E7A1v3JFR/U/pbecHjM3FUqPdLS+rtbmR/Gz4Chzrf5I+9dYyOxzepvRTF4+HyWFPWxptmXCLoRpaGwgg7+hBI35BrTzqIvBv4cf9JZFMafvEx5JYYSvuLI9RKyB9gEnnxtVdg3mDynh7wkqjRFwOZ378V1zmXMJZV7pgJ1a5sTxG3bmvzrSlKsNVug4OxXV+k+bxvhk4zfQgsr2lh5fg7/AKVf8GuUUHB2K6DqTpzCdQYI4TE28UqG6VDYj6vXZ5Tmr2WYgPNeRHgRwa/UGPQ4snEo0J9lDsdbPYUK5BTXFepmDSMalqlwwt61uq+RXktH9qv+DUDFynI4sdEePfLg002O1CEPqASPoBuvJeT5FLjrjSr1PeZcGloceUpKh9waoPTHQ+e9P5m5iWsShTTiiVIOq4J32soc/wCjarLm/UWW5ng0tLZUFpEBVrf8rPj7F0iWx++Qrwq1paX6aFIdUhbq+0q7R2/Ye9Td5xfJLhckNXa+JlSE+qJCpD61/DqaYLykqJ8/Ik8jY3VTg3a5wYkiJDnyY8eSntfabcIS4Na5HvwSKyv3+9voZQ9dpriWGlNNBTyj2IUgoUkc+CklJ+3FeqKbcKtSYqoodaCNKgatOKsX6BlK8YYymbbYzkZx8uRX1pbWkR1OpOh7EAe3ua0Y+KXx5LVyi3BtyaosukJdUHUJdX2tuFX3JHvsbqvt3a6Nz2Z6LhJEphAQ096h70JA0AD9Nca+lZF329LgtQVXWYYrKw4216yu1ChyCBvgjZ19N1BacBlJF4m3rWQeaIhQNpi/lFXS527IHptuui8ykSJDcJx5ye4+4fh0IfLQSk/q/URx9Sai7ojI7xOu8DIr5PmP2pla0pdkKdSVBQGh3HxzUQ7lmTuymZTl/uS32UqS04ZCipAVruAO/B0OPtWg1crg1JfktzZCXpCVJeWHD3OBX6go++6hDDg3ifD18qleIbO0wd79vOrLkDOUWKyGAvIn3YCXzFkRWZK+xp0DZQUnQP5HHFSFws2YRWktryZ1xdv9ZtTSZTm4ym2i4tA9vCdccbqm3O8XW5tMtXG4ypaGBppLzpUEfjf4H+KkDmGRmFGjG7SiYrvqMPF1XqN/J2doO+BrjVQWXIERN5tUh5qTMxaL1ZIdkzVdtuDaclWxGCUuONOTlIS+pbIe1onRPaoefeo/DbZdjbodysF7kQbpLufwDaGnVN72gHu7h+eag3slyF74n1b1cHPikBt/ufUfVSBrSueRrj8VqRLncYjAYizpDDQeS+EtuFIDif0rGvCh9akMuaSDF+361Bfa1Aibd/0qxX23ZBOzOJarjff5jMfUgMylyS6B3eDvZI1UlNxfKrtKt0heQJuTqltsNOrkrJYSttTrZ2rwkpSo8eNGqZIu1zkXIXN+fJcmpIKX1OErBHjR88V9s3m7s9no3OW32KbUnteUNFtJSgjn+kKUB9ATUlpyBpIsOKgPNSdQNzzVuuNsy2VKWiVlK5bsKTGjxSZq3O5x5JU2EHZ1wk78arYl2/Mbfenpj2ZrbcEYKenInLUQnvKAhXaSr9Xt9DuqPJu90kuuOyLjKcW46h5alOklS0AhKvyASAfbdbIybIRcP5h/O5/xfp+l63rq7uze+3e/G+fzWPsHO3pWQxDW9/WrDZLHk9ot0G9W3IEWs3BaEo9OaWl9i1lAWrR/TsHf0FQOZt3VnIJDF4nvT5SdEvuLUvvBAIIKvI5rXRfb0iKxFRdZqWGHPVZbDyu1te99wG+Dsk/mta4zplxlrlz5T0qQvXc46sqUdDQ5P2rkbbWFlSo/ftXE462WwlM+tu9a9KUrYrWpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUr/2Q==";
-const RAW={"by_ms":[{"total":1495,"efectivos":1457,"no_efectivos":38,"v1_total":1490,"v1_efect":1456,"v2_total":5,"v2_efect":1,"t_prom":12.75,"mes":"ENERO","semana":"SEMANA 1","mes_num":1,"semana_num":1,"label":"ENE S1"},{"total":4739,"efectivos":4504,"no_efectivos":235,"v1_total":4617,"v1_efect":4501,"v2_total":122,"v2_efect":3,"t_prom":11.72,"mes":"ENERO","semana":"SEMANA 2","mes_num":1,"semana_num":2,"label":"ENE S2"},{"total":4224,"efectivos":4096,"no_efectivos":128,"v1_total":4163,"v1_efect":4088,"v2_total":61,"v2_efect":8,"t_prom":11.08,"mes":"ENERO","semana":"SEMANA 3","mes_num":1,"semana_num":3,"label":"ENE S3"},{"total":4594,"efectivos":4407,"no_efectivos":187,"v1_total":4542,"v1_efect":4402,"v2_total":52,"v2_efect":5,"t_prom":12.71,"mes":"ENERO","semana":"SEMANA 4","mes_num":1,"semana_num":4,"label":"ENE S4"},{"total":4263,"efectivos":4102,"no_efectivos":161,"v1_total":4234,"v1_efect":4098,"v2_total":29,"v2_efect":4,"t_prom":13.57,"mes":"ENERO","semana":"SEMANA 5","mes_num":1,"semana_num":5,"label":"ENE S5"},{"total":3075,"efectivos":2922,"no_efectivos":153,"v1_total":3044,"v1_efect":2921,"v2_total":31,"v2_efect":1,"t_prom":15.12,"mes":"FEBRERO","semana":"SEMANA 1","mes_num":2,"semana_num":1,"label":"FEB S1"},{"total":3513,"efectivos":3383,"no_efectivos":130,"v1_total":3513,"v1_efect":3383,"v2_total":0,"v2_efect":0,"t_prom":14.8,"mes":"FEBRERO","semana":"SEMANA 2","mes_num":2,"semana_num":2,"label":"FEB S2"},{"total":4484,"efectivos":4272,"no_efectivos":212,"v1_total":4480,"v1_efect":4269,"v2_total":4,"v2_efect":3,"t_prom":15.79,"mes":"FEBRERO","semana":"SEMANA 3","mes_num":2,"semana_num":3,"label":"FEB S3"},{"total":4458,"efectivos":4236,"no_efectivos":222,"v1_total":4458,"v1_efect":4236,"v2_total":0,"v2_efect":0,"t_prom":17.67,"mes":"FEBRERO","semana":"SEMANA 4","mes_num":2,"semana_num":4,"label":"FEB S4"},{"total":4289,"efectivos":4116,"no_efectivos":173,"v1_total":4289,"v1_efect":4116,"v2_total":0,"v2_efect":0,"t_prom":15.2,"mes":"MARZO","semana":"SEMANA 1","mes_num":3,"semana_num":1,"label":"MAR S1"},{"total":4326,"efectivos":4150,"no_efectivos":176,"v1_total":4326,"v1_efect":4150,"v2_total":0,"v2_efect":0,"t_prom":15.51,"mes":"MARZO","semana":"SEMANA 2","mes_num":3,"semana_num":2,"label":"MAR S2"}],"by_dept":[{"total":12532,"efectivos":12243,"no_efectivos":289,"v1_total":12442,"v1_efect":12227,"v2_total":90,"v2_efect":16,"t_prom":20.03,"departamento":"ANTIOQUIA"},{"total":7732,"efectivos":7372,"no_efectivos":360,"v1_total":7683,"v1_efect":7370,"v2_total":49,"v2_efect":2,"t_prom":12.63,"departamento":"BOYACA"},{"total":7338,"efectivos":6886,"no_efectivos":452,"v1_total":7314,"v1_efect":6884,"v2_total":24,"v2_efect":2,"t_prom":10.73,"departamento":"BOGOTA"},{"total":6942,"efectivos":6540,"no_efectivos":402,"v1_total":6822,"v1_efect":6535,"v2_total":120,"v2_efect":5,"t_prom":14.32,"departamento":"CUNDINAMARCA"},{"total":3410,"efectivos":3263,"no_efectivos":147,"v1_total":3410,"v1_efect":3263,"v2_total":0,"v2_efect":0,"t_prom":14.15,"departamento":"BOLIVAR"},{"total":2128,"efectivos":2031,"no_efectivos":97,"v1_total":2111,"v1_efect":2031,"v2_total":17,"v2_efect":0,"t_prom":12.61,"departamento":"VALLE DEL CAUCA"},{"total":637,"efectivos":613,"no_efectivos":24,"v1_total":637,"v1_efect":613,"v2_total":0,"v2_efect":0,"t_prom":19.18,"departamento":"QUINDIO"},{"total":627,"efectivos":620,"no_efectivos":7,"v1_total":627,"v1_efect":620,"v2_total":0,"v2_efect":0,"t_prom":0.95,"departamento":"META"},{"total":571,"efectivos":559,"no_efectivos":12,"v1_total":568,"v1_efect":559,"v2_total":3,"v2_efect":0,"t_prom":7.64,"departamento":"RISARALDA"},{"total":471,"efectivos":471,"no_efectivos":0,"v1_total":471,"v1_efect":471,"v2_total":0,"v2_efect":0,"t_prom":0.41,"departamento":"MAGDALENA"},{"total":394,"efectivos":387,"no_efectivos":7,"v1_total":394,"v1_efect":387,"v2_total":0,"v2_efect":0,"t_prom":3.45,"departamento":"ATLANTICO"},{"total":393,"efectivos":376,"no_efectivos":17,"v1_total":392,"v1_efect":376,"v2_total":1,"v2_efect":0,"t_prom":17.28,"departamento":"TOLIMA"},{"total":197,"efectivos":196,"no_efectivos":1,"v1_total":197,"v1_efect":196,"v2_total":0,"v2_efect":0,"t_prom":4.28,"departamento":"SANTANDER"},{"total":88,"efectivos":88,"no_efectivos":0,"v1_total":88,"v1_efect":88,"v2_total":0,"v2_efect":0,"t_prom":0.57,"departamento":"CASANARE"}],"by_ciudad":[{"total":9117,"efectivos":8911,"no_efectivos":206,"v1_total":9040,"v1_efect":8897,"v2_total":77,"v2_efect":14,"t_prom":22.01,"ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":7338,"efectivos":6886,"no_efectivos":452,"v1_total":7314,"v1_efect":6884,"v2_total":24,"v2_efect":2,"t_prom":10.73,"ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":3410,"efectivos":3263,"no_efectivos":147,"v1_total":3410,"v1_efect":3263,"v2_total":0,"v2_efect":0,"t_prom":14.15,"ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":3351,"efectivos":3111,"no_efectivos":240,"v1_total":3333,"v1_efect":3109,"v2_total":18,"v2_efect":2,"t_prom":22.62,"ciudad":"TUNJA","departamento":"BOYACA"},{"total":1664,"efectivos":1524,"no_efectivos":140,"v1_total":1602,"v1_efect":1523,"v2_total":62,"v2_efect":1,"t_prom":29.2,"ciudad":"ZIPAQUIRA","departamento":"CUNDINAMARCA"},{"total":1485,"efectivos":1415,"no_efectivos":70,"v1_total":1469,"v1_efect":1415,"v2_total":16,"v2_efect":0,"t_prom":5.78,"ciudad":"DUITAMA","departamento":"BOYACA"},{"total":1408,"efectivos":1267,"no_efectivos":141,"v1_total":1394,"v1_efect":1263,"v2_total":14,"v2_efect":4,"t_prom":18.24,"ciudad":"CHIA","departamento":"CUNDINAMARCA"},{"total":1324,"efectivos":1277,"no_efectivos":47,"v1_total":1309,"v1_efect":1277,"v2_total":15,"v2_efect":0,"t_prom":7.38,"ciudad":"SOGAMOSO","departamento":"BOYACA"},{"total":1114,"efectivos":1108,"no_efectivos":6,"v1_total":1112,"v1_efect":1107,"v2_total":2,"v2_efect":1,"t_prom":9.06,"ciudad":"RIONEGRO","departamento":"ANTIOQUIA"},{"total":1062,"efectivos":1024,"no_efectivos":38,"v1_total":1059,"v1_efect":1024,"v2_total":3,"v2_efect":0,"t_prom":22.74,"ciudad":"BUGA","departamento":"VALLE DEL CAUCA"},{"total":987,"efectivos":954,"no_efectivos":33,"v1_total":981,"v1_efect":953,"v2_total":6,"v2_efect":1,"t_prom":24.31,"ciudad":"APARTADO","departamento":"ANTIOQUIA"},{"total":927,"efectivos":870,"no_efectivos":57,"v1_total":888,"v1_efect":870,"v2_total":39,"v2_efect":0,"t_prom":16.18,"ciudad":"FUNZA","departamento":"CUNDINAMARCA"},{"total":884,"efectivos":883,"no_efectivos":1,"v1_total":884,"v1_efect":883,"v2_total":0,"v2_efect":0,"t_prom":1.43,"ciudad":"PAIPA","departamento":"BOYACA"},{"total":832,"efectivos":803,"no_efectivos":29,"v1_total":828,"v1_efect":803,"v2_total":4,"v2_efect":0,"t_prom":3.17,"ciudad":"CALI","departamento":"VALLE DEL CAUCA"},{"total":689,"efectivos":683,"no_efectivos":6,"v1_total":689,"v1_efect":683,"v2_total":0,"v2_efect":0,"t_prom":1.44,"ciudad":"GIRARDOT","departamento":"CUNDINAMARCA"},{"total":637,"efectivos":613,"no_efectivos":24,"v1_total":637,"v1_efect":613,"v2_total":0,"v2_efect":0,"t_prom":19.18,"ciudad":"MANIZALES","departamento":"QUINDIO"},{"total":590,"efectivos":583,"no_efectivos":7,"v1_total":590,"v1_efect":583,"v2_total":0,"v2_efect":0,"t_prom":0.86,"ciudad":"VILLAVICENCIO","departamento":"META"},{"total":471,"efectivos":471,"no_efectivos":0,"v1_total":471,"v1_efect":471,"v2_total":0,"v2_efect":0,"t_prom":0.41,"ciudad":"SANTA MARTHA","departamento":"MAGDALENA"},{"total":462,"efectivos":429,"no_efectivos":33,"v1_total":459,"v1_efect":429,"v2_total":3,"v2_efect":0,"t_prom":4.84,"ciudad":"CAJICA","departamento":"CUNDINAMARCA"},{"total":458,"efectivos":453,"no_efectivos":5,"v1_total":456,"v1_efect":453,"v2_total":2,"v2_efect":0,"t_prom":6.41,"ciudad":"MADRID","departamento":"CUNDINAMARCA"},{"total":416,"efectivos":406,"no_efectivos":10,"v1_total":416,"v1_efect":406,"v2_total":0,"v2_efect":0,"t_prom":3.79,"ciudad":"MOSQUERA","departamento":"CUNDINAMARCA"},{"total":394,"efectivos":387,"no_efectivos":7,"v1_total":394,"v1_efect":387,"v2_total":0,"v2_efect":0,"t_prom":3.45,"ciudad":"BARRANQUILLA","departamento":"ATLANTICO"},{"total":393,"efectivos":376,"no_efectivos":17,"v1_total":392,"v1_efect":376,"v2_total":1,"v2_efect":0,"t_prom":17.28,"ciudad":"IBAGUE","departamento":"TOLIMA"},{"total":387,"efectivos":387,"no_efectivos":0,"v1_total":387,"v1_efect":387,"v2_total":0,"v2_efect":0,"t_prom":6.99,"ciudad":"CHIQUINQUIRA","departamento":"BOYACA"},{"total":353,"efectivos":346,"no_efectivos":7,"v1_total":352,"v1_efect":346,"v2_total":1,"v2_efect":0,"t_prom":31.46,"ciudad":"ENVIGADO","departamento":"ANTIOQUIA"},{"total":331,"efectivos":330,"no_efectivos":1,"v1_total":331,"v1_efect":330,"v2_total":0,"v2_efect":0,"t_prom":5.71,"ciudad":"MANIZALES","departamento":"RISARALDA"},{"total":301,"efectivos":299,"no_efectivos":2,"v1_total":301,"v1_efect":299,"v2_total":0,"v2_efect":0,"t_prom":1.05,"ciudad":"VILLA DE LEIVA","departamento":"BOYACA"},{"total":274,"efectivos":272,"no_efectivos":2,"v1_total":274,"v1_efect":272,"v2_total":0,"v2_efect":0,"t_prom":2.75,"ciudad":"FACATATIVA","departamento":"CUNDINAMARCA"},{"total":249,"efectivos":244,"no_efectivos":5,"v1_total":249,"v1_efect":244,"v2_total":0,"v2_efect":0,"t_prom":7.2,"ciudad":"COTA","departamento":"CUNDINAMARCA"},{"total":240,"efectivos":229,"no_efectivos":11,"v1_total":237,"v1_efect":229,"v2_total":3,"v2_efect":0,"t_prom":10.42,"ciudad":"PEREIRA","departamento":"RISARALDA"},{"total":234,"efectivos":204,"no_efectivos":30,"v1_total":224,"v1_efect":204,"v2_total":10,"v2_efect":0,"t_prom":3.71,"ciudad":"PALMIRA","departamento":"VALLE DEL CAUCA"},{"total":209,"efectivos":209,"no_efectivos":0,"v1_total":209,"v1_efect":209,"v2_total":0,"v2_efect":0,"t_prom":15.49,"ciudad":"YARUMAL","departamento":"ANTIOQUIA"},{"total":197,"efectivos":196,"no_efectivos":1,"v1_total":197,"v1_efect":196,"v2_total":0,"v2_efect":0,"t_prom":4.28,"ciudad":"BUCARAMANGA","departamento":"SANTANDER"},{"total":167,"efectivos":140,"no_efectivos":27,"v1_total":167,"v1_efect":140,"v2_total":0,"v2_efect":0,"t_prom":5.68,"ciudad":"ITAGUI","departamento":"ANTIOQUIA"},{"total":160,"efectivos":156,"no_efectivos":4,"v1_total":160,"v1_efect":156,"v2_total":0,"v2_efect":0,"t_prom":10.89,"ciudad":"BELLO","departamento":"ANTIOQUIA"},{"total":145,"efectivos":143,"no_efectivos":2,"v1_total":145,"v1_efect":143,"v2_total":0,"v2_efect":0,"t_prom":0.04,"ciudad":"VILLETA","departamento":"CUNDINAMARCA"},{"total":140,"efectivos":138,"no_efectivos":2,"v1_total":140,"v1_efect":138,"v2_total":0,"v2_efect":0,"t_prom":3.12,"ciudad":"LA UNION","departamento":"ANTIOQUIA"},{"total":139,"efectivos":138,"no_efectivos":1,"v1_total":139,"v1_efect":138,"v2_total":0,"v2_efect":0,"t_prom":8.71,"ciudad":"FUSAGASUGA","departamento":"CUNDINAMARCA"},{"total":111,"efectivos":111,"no_efectivos":0,"v1_total":111,"v1_efect":111,"v2_total":0,"v2_efect":0,"t_prom":0.55,"ciudad":"ANAPOIMA","departamento":"CUNDINAMARCA"},{"total":88,"efectivos":88,"no_efectivos":0,"v1_total":88,"v1_efect":88,"v2_total":0,"v2_efect":0,"t_prom":0.57,"ciudad":"YOPAL","departamento":"CASANARE"},{"total":83,"efectivos":82,"no_efectivos":1,"v1_total":82,"v1_efect":82,"v2_total":1,"v2_efect":0,"t_prom":8.14,"ciudad":"SANTA FE ANTIOQUIA","departamento":"ANTIOQUIA"},{"total":70,"efectivos":70,"no_efectivos":0,"v1_total":70,"v1_efect":70,"v2_total":0,"v2_efect":0,"t_prom":3.63,"ciudad":"EL RETIRO","departamento":"ANTIOQUIA"},{"total":37,"efectivos":37,"no_efectivos":0,"v1_total":37,"v1_efect":37,"v2_total":0,"v2_efect":0,"t_prom":2.51,"ciudad":"ACACIAS","departamento":"META"},{"total":32,"efectivos":29,"no_efectivos":3,"v1_total":29,"v1_efect":29,"v2_total":3,"v2_efect":0,"t_prom":8.7,"ciudad":"MARINILLA","departamento":"ANTIOQUIA"},{"total":30,"efectivos":30,"no_efectivos":0,"v1_total":30,"v1_efect":30,"v2_total":0,"v2_efect":0,"t_prom":14.41,"ciudad":"SANTA ROSA DE OSOS","departamento":"ANTIOQUIA"},{"total":18,"efectivos":18,"no_efectivos":0,"v1_total":18,"v1_efect":18,"v2_total":0,"v2_efect":0,"t_prom":7.79,"ciudad":"CARMEN DE VIBORAL","departamento":"ANTIOQUIA"},{"total":18,"efectivos":18,"no_efectivos":0,"v1_total":18,"v1_efect":18,"v2_total":0,"v2_efect":0,"t_prom":8.0,"ciudad":"GUARNE","departamento":"ANTIOQUIA"},{"total":17,"efectivos":17,"no_efectivos":0,"v1_total":17,"v1_efect":17,"v2_total":0,"v2_efect":0,"t_prom":32.13,"ciudad":"GIRARDOTA","departamento":"ANTIOQUIA"},{"total":16,"efectivos":16,"no_efectivos":0,"v1_total":16,"v1_efect":16,"v2_total":0,"v2_efect":0,"t_prom":24.83,"ciudad":"DON MATIAS","departamento":"ANTIOQUIA"},{"total":1,"efectivos":1,"no_efectivos":0,"v1_total":1,"v1_efect":1,"v2_total":0,"v2_efect":0,"t_prom":2.92,"ciudad":"LA CEJA","departamento":"ANTIOQUIA"}],"by_ts":[{"total":16276,"efectivos":15279,"no_efectivos":997,"v1_total":16034,"v1_efect":15260,"v2_total":242,"v2_efect":19,"t_prom":24.64,"tipo_servicio":"PENDIENTE"},{"total":8800,"efectivos":8678,"no_efectivos":122,"v1_total":8781,"v1_efect":8678,"v2_total":19,"v2_efect":0,"t_prom":2.32,"tipo_servicio":"COMERCIAL"},{"total":5933,"efectivos":5656,"no_efectivos":277,"v1_total":5933,"v1_efect":5656,"v2_total":0,"v2_efect":0,"t_prom":8.18,"tipo_servicio":"TRANSFERENCIA"},{"total":2946,"efectivos":2865,"no_efectivos":81,"v1_total":2941,"v1_efect":2865,"v2_total":5,"v2_efect":0,"t_prom":7.22,"tipo_servicio":"CONVENIOS COMERCIALES"},{"total":1814,"efectivos":1772,"no_efectivos":42,"v1_total":1808,"v1_efect":1769,"v2_total":6,"v2_efect":3,"t_prom":19.66,"tipo_servicio":"POLIZA"},{"total":1761,"efectivos":1704,"no_efectivos":57,"v1_total":1761,"v1_efect":1704,"v2_total":0,"v2_efect":0,"t_prom":3.81,"tipo_servicio":"SALUD EN CASA"},{"total":1662,"efectivos":1642,"no_efectivos":20,"v1_total":1661,"v1_efect":1642,"v2_total":1,"v2_efect":0,"t_prom":7.98,"tipo_servicio":"AVIANCA"},{"total":1333,"efectivos":1261,"no_efectivos":72,"v1_total":1328,"v1_efect":1260,"v2_total":5,"v2_efect":1,"t_prom":29.09,"tipo_servicio":"LANDING"},{"total":864,"efectivos":802,"no_efectivos":62,"v1_total":851,"v1_efect":802,"v2_total":13,"v2_efect":0,"t_prom":21.6,"tipo_servicio":"APP"},{"total":726,"efectivos":713,"no_efectivos":13,"v1_total":719,"v1_efect":711,"v2_total":7,"v2_efect":2,"t_prom":26.16,"tipo_servicio":"PRE AGENDA"},{"total":515,"efectivos":480,"no_efectivos":35,"v1_total":512,"v1_efect":480,"v2_total":3,"v2_efect":0,"t_prom":17.32,"tipo_servicio":"UNISALUD"},{"total":476,"efectivos":449,"no_efectivos":27,"v1_total":475,"v1_efect":449,"v2_total":1,"v2_efect":0,"t_prom":18.85,"tipo_servicio":"SENA"},{"total":179,"efectivos":177,"no_efectivos":2,"v1_total":178,"v1_efect":177,"v2_total":1,"v2_efect":0,"t_prom":20.79,"tipo_servicio":"DESACATO"},{"total":91,"efectivos":90,"no_efectivos":1,"v1_total":90,"v1_efect":90,"v2_total":1,"v2_efect":0,"t_prom":2.58,"tipo_servicio":"PACIENTE HOSPITALIZADO"},{"total":55,"efectivos":54,"no_efectivos":1,"v1_total":55,"v1_efect":54,"v2_total":0,"v2_efect":0,"t_prom":10.34,"tipo_servicio":"TODAS"},{"total":29,"efectivos":23,"no_efectivos":6,"v1_total":29,"v1_efect":23,"v2_total":0,"v2_efect":0,"t_prom":11.99,"tipo_servicio":"WEB"}],"by_tsg":[{"total":28109,"efectivos":26787,"no_efectivos":1322,"v1_total":27837,"v1_efect":26766,"v2_total":272,"v2_efect":21,"t_prom":19.24,"tipo_servicio_grupo":"Institucional "},{"total":14216,"efectivos":13903,"no_efectivos":313,"v1_total":14185,"v1_efect":13899,"v2_total":31,"v2_efect":4,"t_prom":5.49,"tipo_servicio_grupo":"Comercial"},{"total":1135,"efectivos":955,"no_efectivos":180,"v1_total":1134,"v1_efect":955,"v2_total":1,"v2_efect":0,"t_prom":11.41,"tipo_servicio_grupo":"IPS"}],"by_esp":[{"total":1738,"efectivos":1674,"no_efectivos":64,"v1_total":1738,"v1_efect":1674,"v2_total":0,"v2_efect":0,"t_prom":3.72,"especialidad":"COLSUBSIDIO SF OLAYA SURA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":1646,"efectivos":1532,"no_efectivos":114,"v1_total":1646,"v1_efect":1532,"v2_total":0,"v2_efect":0,"t_prom":26.94,"especialidad":"COLSUBSIDIO DROG. MALL CARTAGENA","ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":1417,"efectivos":1378,"no_efectivos":39,"v1_total":1388,"v1_efect":1377,"v2_total":29,"v2_efect":1,"t_prom":36.36,"especialidad":"DROG SAN VICENTE MEDELLIN MIXTA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":1387,"efectivos":1324,"no_efectivos":63,"v1_total":1376,"v1_efect":1324,"v2_total":11,"v2_efect":0,"t_prom":13.25,"especialidad":"DROGUERIA CANAL DIGITAL ANTIOQUIA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":1374,"efectivos":1163,"no_efectivos":211,"v1_total":1374,"v1_efect":1163,"v2_total":0,"v2_efect":0,"t_prom":12.28,"especialidad":"TRASLADOS IPS","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":1366,"efectivos":1212,"no_efectivos":154,"v1_total":1366,"v1_efect":1212,"v2_total":0,"v2_efect":0,"t_prom":31.55,"especialidad":"COLSUBSIDIO DISP. TUNJA","ciudad":"TUNJA","departamento":"BOYACA"},{"total":1162,"efectivos":1144,"no_efectivos":18,"v1_total":1153,"v1_efect":1140,"v2_total":9,"v2_efect":4,"t_prom":33.62,"especialidad":"DROGUERIA MIXTA LAURELES","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":1115,"efectivos":1105,"no_efectivos":10,"v1_total":1115,"v1_efect":1105,"v2_total":0,"v2_efect":0,"t_prom":9.46,"especialidad":"COLSUBSIDIO DROG. EDIFICIO VANGUARDIA - BOGOTA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":1066,"efectivos":1049,"no_efectivos":17,"v1_total":1052,"v1_efect":1040,"v2_total":14,"v2_efect":9,"t_prom":29.87,"especialidad":"DROG UNISALUD MEDELLIN","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":941,"efectivos":907,"no_efectivos":34,"v1_total":941,"v1_efect":907,"v2_total":0,"v2_efect":0,"t_prom":22.96,"especialidad":"COLSUBSIDIO SF. UNIFICADO BUGA","ciudad":"BUGA","departamento":"VALLE DEL CAUCA"},{"total":834,"efectivos":777,"no_efectivos":57,"v1_total":795,"v1_efect":777,"v2_total":39,"v2_efect":0,"t_prom":17.64,"especialidad":"DROGUERIA COLISEO FUNZA","ciudad":"FUNZA","departamento":"CUNDINAMARCA"},{"total":774,"efectivos":768,"no_efectivos":6,"v1_total":774,"v1_efect":768,"v2_total":0,"v2_efect":0,"t_prom":31.6,"especialidad":"COLSUBSIDIO DROG. SAN VICENTE MEDELLIN MIXTA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":766,"efectivos":739,"no_efectivos":27,"v1_total":766,"v1_efect":739,"v2_total":0,"v2_efect":0,"t_prom":26.94,"especialidad":"COLSUBSIDIO SF NEPS APARTADO","ciudad":"APARTADO","departamento":"ANTIOQUIA"},{"total":712,"efectivos":711,"no_efectivos":1,"v1_total":712,"v1_efect":711,"v2_total":0,"v2_efect":0,"t_prom":1.36,"especialidad":"COLSUBSIDIO DROG. PAIPA MIXTA","ciudad":"PAIPA","departamento":"BOYACA"},{"total":662,"efectivos":613,"no_efectivos":49,"v1_total":616,"v1_efect":612,"v2_total":46,"v2_efect":1,"t_prom":29.83,"especialidad":"SF ZIPAQUIRA","ciudad":"ZIPAQUIRA","departamento":"CUNDINAMARCA"},{"total":593,"efectivos":563,"no_efectivos":30,"v1_total":593,"v1_efect":563,"v2_total":0,"v2_efect":0,"t_prom":18.87,"especialidad":"DROGUERIA CALLE 49 MARLY","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":585,"efectivos":581,"no_efectivos":4,"v1_total":585,"v1_efect":581,"v2_total":0,"v2_efect":0,"t_prom":4.94,"especialidad":"COLSUBSIDIO DROG. CAR. PLAZA CTG","ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":531,"efectivos":485,"no_efectivos":46,"v1_total":531,"v1_efect":485,"v2_total":0,"v2_efect":0,"t_prom":32.67,"especialidad":"COLSUBSIDIO DROG. ZIPAQUIRA A.C. - MIXTA","ciudad":"ZIPAQUIRA","departamento":"CUNDINAMARCA"},{"total":525,"efectivos":501,"no_efectivos":24,"v1_total":525,"v1_efect":501,"v2_total":0,"v2_efect":0,"t_prom":19.92,"especialidad":"COLSUBSIDIO SF. UNISALUD MANIZALES","ciudad":"MANIZALES","departamento":"QUINDIO"},{"total":519,"efectivos":491,"no_efectivos":28,"v1_total":519,"v1_efect":491,"v2_total":0,"v2_efect":0,"t_prom":30.81,"especialidad":"COLSUBSIDIO DISP. UNIVERSIDAD NACIONAL - BOGOTA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":494,"efectivos":464,"no_efectivos":30,"v1_total":494,"v1_efect":464,"v2_total":0,"v2_efect":0,"t_prom":14.49,"especialidad":"COLSUBSIDIO DROG. SOGAMOSO A.C. - MIXTA","ciudad":"SOGAMOSO","departamento":"BOYACA"},{"total":473,"efectivos":431,"no_efectivos":42,"v1_total":464,"v1_efect":427,"v2_total":9,"v2_efect":4,"t_prom":28.05,"especialidad":"DROG CC LA LIBERTAD","ciudad":"CHIA","departamento":"CUNDINAMARCA"},{"total":471,"efectivos":471,"no_efectivos":0,"v1_total":471,"v1_efect":471,"v2_total":0,"v2_efect":0,"t_prom":0.41,"especialidad":"COLSUBSIDIO DROG. CC ZAZUE PLAZA","ciudad":"SANTA MARTHA","departamento":"MAGDALENA"},{"total":463,"efectivos":433,"no_efectivos":30,"v1_total":463,"v1_efect":433,"v2_total":0,"v2_efect":0,"t_prom":36.7,"especialidad":"COLSUBSIDIO SF TUNJA","ciudad":"TUNJA","departamento":"BOYACA"},{"total":441,"efectivos":428,"no_efectivos":13,"v1_total":441,"v1_efect":428,"v2_total":0,"v2_efect":0,"t_prom":27.04,"especialidad":"COLSUBSIDIO DISP. UNISALUD MEDELLIN","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":440,"efectivos":439,"no_efectivos":1,"v1_total":440,"v1_efect":439,"v2_total":0,"v2_efect":0,"t_prom":0.67,"especialidad":"COLSUBSIDIO DROG CC SAN FERNANDO","ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":424,"efectivos":390,"no_efectivos":34,"v1_total":422,"v1_efect":390,"v2_total":2,"v2_efect":0,"t_prom":24.72,"especialidad":"DROG MIXTA LAS QUINTAS","ciudad":"TUNJA","departamento":"BOYACA"},{"total":405,"efectivos":404,"no_efectivos":1,"v1_total":405,"v1_efect":404,"v2_total":0,"v2_efect":0,"t_prom":1.9,"especialidad":"COLSUBSIDIO DROG. CENTRO COMERCIAL IWOKA SOGAMOSO","ciudad":"SOGAMOSO","departamento":"BOYACA"},{"total":390,"efectivos":370,"no_efectivos":20,"v1_total":388,"v1_efect":370,"v2_total":2,"v2_efect":0,"t_prom":17.43,"especialidad":"DROG. RESTREPO CRA 19. BOGOTA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":354,"efectivos":351,"no_efectivos":3,"v1_total":354,"v1_efect":351,"v2_total":0,"v2_efect":0,"t_prom":2.17,"especialidad":"COLSUBSIDIO DROG. UNICENTRO TUNJA","ciudad":"TUNJA","departamento":"BOYACA"},{"total":336,"efectivos":265,"no_efectivos":71,"v1_total":336,"v1_efect":265,"v2_total":0,"v2_efect":0,"t_prom":31.03,"especialidad":"COLSUBSIDIO DROG. CC LA LIBERTAD","ciudad":"CHIA","departamento":"CUNDINAMARCA"},{"total":335,"efectivos":318,"no_efectivos":17,"v1_total":335,"v1_efect":318,"v2_total":0,"v2_efect":0,"t_prom":17.24,"especialidad":"COLSUBSIDIO DROG. DUITAMA A.C. - MIXTA","ciudad":"DUITAMA","departamento":"BOYACA"},{"total":324,"efectivos":315,"no_efectivos":9,"v1_total":324,"v1_efect":315,"v2_total":0,"v2_efect":0,"t_prom":5.24,"especialidad":"COLSUBSIDIO DROG. MARLY - MIXTA BOGOTA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":322,"efectivos":316,"no_efectivos":6,"v1_total":322,"v1_efect":316,"v2_total":0,"v2_efect":0,"t_prom":3.86,"especialidad":"DROGUERIA VIA 65","ciudad":"BARRANQUILLA","departamento":"ATLANTICO"},{"total":319,"efectivos":293,"no_efectivos":26,"v1_total":319,"v1_efect":293,"v2_total":0,"v2_efect":0,"t_prom":31.98,"especialidad":"COLSUBSIDIO SF ZIPAQUIRA","ciudad":"ZIPAQUIRA","departamento":"CUNDINAMARCA"},{"total":317,"efectivos":306,"no_efectivos":11,"v1_total":310,"v1_efect":306,"v2_total":7,"v2_efect":0,"t_prom":21.78,"especialidad":"SF ITAGUI LA GLORIA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":282,"efectivos":273,"no_efectivos":9,"v1_total":282,"v1_efect":273,"v2_total":0,"v2_efect":0,"t_prom":1.73,"especialidad":"COLSUBSIDIO DROG. CLINICA SANTA FE - MIXTA BOGOTA","ciudad":"BOGOTA","departamento":"BOGOTA"},{"total":281,"efectivos":276,"no_efectivos":5,"v1_total":281,"v1_efect":276,"v2_total":0,"v2_efect":0,"t_prom":30.85,"especialidad":"DROGUERIA MIXTA ENVIGADO PARQUE","ciudad":"ENVIGADO","departamento":"ANTIOQUIA"},{"total":275,"efectivos":250,"no_efectivos":25,"v1_total":275,"v1_efect":250,"v2_total":0,"v2_efect":0,"t_prom":10.91,"especialidad":"COLSUBSIDIO SF SURA CARTAGENA","ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":261,"efectivos":250,"no_efectivos":11,"v1_total":261,"v1_efect":250,"v2_total":0,"v2_efect":0,"t_prom":2.29,"especialidad":"COLSUBSIDIO DROG. DEP. DUITAMA","ciudad":"DUITAMA","departamento":"BOYACA"},{"total":261,"efectivos":250,"no_efectivos":11,"v1_total":261,"v1_efect":250,"v2_total":0,"v2_efect":0,"t_prom":10.12,"especialidad":"COLSUBSIDIO OPERACION DOMICILIOS ANTIOQUIA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":258,"efectivos":256,"no_efectivos":2,"v1_total":258,"v1_efect":256,"v2_total":0,"v2_efect":0,"t_prom":2.41,"especialidad":"DROGUERIA CALLE 14 DUITAMA","ciudad":"DUITAMA","departamento":"BOYACA"},{"total":257,"efectivos":246,"no_efectivos":11,"v1_total":256,"v1_efect":246,"v2_total":1,"v2_efect":0,"t_prom":0.61,"especialidad":"DROGUERIA VALLE DE LILI CR 98 CALI","ciudad":"CALI","departamento":"VALLE DEL CAUCA"},{"total":256,"efectivos":255,"no_efectivos":1,"v1_total":256,"v1_efect":255,"v2_total":0,"v2_efect":0,"t_prom":1.35,"especialidad":"COLSUBSIDIO DROG. SERENA DEL MAR","ciudad":"CARTAGENA","departamento":"BOLIVAR"},{"total":231,"efectivos":219,"no_efectivos":12,"v1_total":231,"v1_efect":219,"v2_total":0,"v2_efect":0,"t_prom":25.69,"especialidad":"COLSUBSIDIO DISP. IBAGUE CENTRO POS","ciudad":"IBAGUE","departamento":"TOLIMA"},{"total":224,"efectivos":218,"no_efectivos":6,"v1_total":224,"v1_efect":218,"v2_total":0,"v2_efect":0,"t_prom":1.21,"especialidad":"COLSUBSIDIO DROG. CC UNICENTRO GIRARDOT","ciudad":"GIRARDOT","departamento":"CUNDINAMARCA"},{"total":222,"efectivos":220,"no_efectivos":2,"v1_total":221,"v1_efect":220,"v2_total":1,"v2_efect":0,"t_prom":9.69,"especialidad":"DROG C BLANCA MADRID","ciudad":"MADRID","departamento":"CUNDINAMARCA"},{"total":219,"efectivos":217,"no_efectivos":2,"v1_total":219,"v1_efect":217,"v2_total":0,"v2_efect":0,"t_prom":0.53,"especialidad":"COLSUBSIDIO DROG. VILLA DE LEYVA","ciudad":"VILLA DE LEIVA","departamento":"BOYACA"},{"total":217,"efectivos":204,"no_efectivos":13,"v1_total":217,"v1_efect":204,"v2_total":0,"v2_efect":0,"t_prom":1.9,"especialidad":"COLSUBSIDIO DROG. CC INNOVO MIXTA","ciudad":"DUITAMA","departamento":"BOYACA"},{"total":217,"efectivos":205,"no_efectivos":12,"v1_total":205,"v1_efect":205,"v2_total":12,"v2_efect":0,"t_prom":6.81,"especialidad":"DROG SOGAMOSO AC MIXTA","ciudad":"SOGAMOSO","departamento":"BOYACA"},{"total":212,"efectivos":212,"no_efectivos":0,"v1_total":212,"v1_efect":212,"v2_total":0,"v2_efect":0,"t_prom":1.25,"especialidad":"COLSUBSIDIO DROG. GIRARDOT A.C. - MIXTA","ciudad":"GIRARDOT","departamento":"CUNDINAMARCA"},{"total":207,"efectivos":204,"no_efectivos":3,"v1_total":205,"v1_efect":204,"v2_total":2,"v2_efect":0,"t_prom":2.9,"especialidad":"DROG CENTRO COMERCIAL IWOKA SOGAMOSO","ciudad":"SOGAMOSO","departamento":"BOYACA"},{"total":206,"efectivos":201,"no_efectivos":5,"v1_total":203,"v1_efect":201,"v2_total":3,"v2_efect":0,"t_prom":2.84,"especialidad":"DROG CC FONTANAR CHIA","ciudad":"CHIA","departamento":"CUNDINAMARCA"},{"total":203,"efectivos":203,"no_efectivos":0,"v1_total":203,"v1_efect":203,"v2_total":0,"v2_efect":0,"t_prom":5.77,"especialidad":"CANAL MAYORISTA ANTIOQUIA","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"},{"total":198,"efectivos":194,"no_efectivos":4,"v1_total":198,"v1_efect":194,"v2_total":0,"v2_efect":0,"t_prom":0.76,"especialidad":"COLSUBSIDIO DROG. CC LLANOCENTRO","ciudad":"VILLAVICENCIO","departamento":"META"},{"total":196,"efectivos":189,"no_efectivos":7,"v1_total":196,"v1_efect":189,"v2_total":0,"v2_efect":0,"t_prom":10.41,"especialidad":"COLSUBSIDIO DROG. AV CIRCUNVALAR - PEREIRA","ciudad":"PEREIRA","departamento":"RISARALDA"},{"total":194,"efectivos":191,"no_efectivos":3,"v1_total":193,"v1_efect":191,"v2_total":1,"v2_efect":0,"t_prom":0.45,"especialidad":"DROGUERIA VALLE DEL LILI 42","ciudad":"CALI","departamento":"VALLE DEL CAUCA"},{"total":187,"efectivos":187,"no_efectivos":0,"v1_total":186,"v1_efect":186,"v2_total":1,"v2_efect":1,"t_prom":11.25,"especialidad":"SF NEPS RIONEGRO","ciudad":"RIONEGRO","departamento":"ANTIOQUIA"},{"total":186,"efectivos":170,"no_efectivos":16,"v1_total":184,"v1_efect":170,"v2_total":2,"v2_efect":0,"t_prom":4.11,"especialidad":"DROG LAS HUERTAS CAJICA","ciudad":"CAJICA","departamento":"CUNDINAMARCA"},{"total":183,"efectivos":182,"no_efectivos":1,"v1_total":183,"v1_efect":182,"v2_total":0,"v2_efect":0,"t_prom":11.79,"especialidad":"SF ALMACENTRO ALTO COSTO AC","ciudad":"MEDELLIN","departamento":"ANTIOQUIA"}],"by_nov":[{"novedad":"NADIE PARA RECIBIR","cluster":"AUSENCIA","count":589},{"novedad":"DIRECCION ERRADA","cluster":"DIRECCION","count":367},{"novedad":"RECHAZADO POR EL USUARIO","cluster":"RECHAZO","count":334},{"novedad":"CLIENTE NO RESIDE","cluster":"AUSENCIA","count":137},{"novedad":"NO ENTREGADO POR PUNTO DE VENTA","cluster":"OPERATIVO","count":97},{"novedad":"MEDICAMENTOS INCOMPLETOS","cluster":"PRODUCTO","count":68},{"novedad":"CIUDAD INCORRECTA","cluster":"DIRECCION","count":48},{"novedad":"YA RECLAMO EL MEDICAMENTO","cluster":"RECHAZO","count":41},{"novedad":"NO CUENTA CON MEDIO DE PAGO","cluster":"PAGO","count":28},{"novedad":"SIN FORMULA / SIN TIRILLA","cluster":"PRODUCTO","count":20},{"novedad":"ENTREGADO PREVIAMENTE","cluster":"OTRO","count":18},{"novedad":"ZONA ROJA","cluster":"OTRO","count":11}],"by_heatmap":[{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"DROG ZIPAQUIRA AC MIXTA","total":47,"efectivos":32,"eff":68.1,"t_prom":18.59},{"departamento":"VALLE DEL CAUCA","ciudad":"PALMIRA","especialidad":"DROGUERIA UNICENTRO PALMIRA","total":62,"efectivos":44,"eff":71.0,"t_prom":3.17},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"COLSUBSIDIO DROG. CC LA LIBERTAD","total":336,"efectivos":265,"eff":78.9,"t_prom":31.03},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"DROG CRUZ ROJA","total":37,"efectivos":30,"eff":81.1,"t_prom":5.82},{"departamento":"ANTIOQUIA","ciudad":"ITAGUI","especialidad":"COLSUBSIDIO SF ITAGUI LAS ACACIAS","total":145,"efectivos":118,"eff":81.4,"t_prom":4.76},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"COLSUBSIDIO SF CHIA","total":43,"efectivos":35,"eff":81.4,"t_prom":40.98},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"DROG CC INNOVO MIXTA","total":106,"efectivos":87,"eff":82.1,"t_prom":3.98},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"TRASLADOS IPS","total":1374,"efectivos":1163,"eff":84.6,"t_prom":12.28},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"DISP UNIVERSIDAD NACIONAL BOGOTA","total":152,"efectivos":132,"eff":86.8,"t_prom":16.4},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"DISP TUNJA","total":88,"efectivos":77,"eff":87.5,"t_prom":39.16},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"NODO DOMICILIOS KENNEDY","total":106,"efectivos":94,"eff":88.7,"t_prom":10.46},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"COLSUBSIDIO DISP. TUNJA","total":1366,"efectivos":1212,"eff":88.7,"t_prom":31.55},{"departamento":"CUNDINAMARCA","ciudad":"CAJICA","especialidad":"DROG ISLA NATURA","total":103,"efectivos":93,"eff":90.3,"t_prom":5.32},{"departamento":"VALLE DEL CAUCA","ciudad":"CALI","especialidad":"COLSUBSIDIO DROG. LA 66","total":95,"efectivos":86,"eff":90.5,"t_prom":18.45},{"departamento":"BOLIVAR","ciudad":"CARTAGENA","especialidad":"COLSUBSIDIO SF SURA CARTAGENA","total":275,"efectivos":250,"eff":90.9,"t_prom":10.91},{"departamento":"RISARALDA","ciudad":"PEREIRA","especialidad":"DROG AV CIRCUNVALAR PEREIRA","total":44,"efectivos":40,"eff":90.9,"t_prom":10.45},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"DROG CC LA LIBERTAD","total":473,"efectivos":431,"eff":91.1,"t_prom":28.05},{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"COLSUBSIDIO DROG. ZIPAQUIRA A.C. - MIXTA","total":531,"efectivos":485,"eff":91.3,"t_prom":32.67},{"departamento":"CUNDINAMARCA","ciudad":"CAJICA","especialidad":"DROG LAS HUERTAS CAJICA","total":186,"efectivos":170,"eff":91.4,"t_prom":4.11},{"departamento":"CUNDINAMARCA","ciudad":"MOSQUERA","especialidad":"COLSUBSIDIO DROG. CC. ECO PLAZA","total":94,"efectivos":86,"eff":91.5,"t_prom":4.78},{"departamento":"VALLE DEL CAUCA","ciudad":"PALMIRA","especialidad":"COLSUBSIDIO DROG. UNICENTRO PALMIRA","total":129,"efectivos":118,"eff":91.5,"t_prom":3.6},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO SF PLAZA CENTRAL","total":98,"efectivos":90,"eff":91.8,"t_prom":25.63},{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"COLSUBSIDIO SF ZIPAQUIRA","total":319,"efectivos":293,"eff":91.8,"t_prom":31.98},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"DROG MIXTA LAS QUINTAS","total":424,"efectivos":390,"eff":92.0,"t_prom":24.72},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO SF PAC SURA BOGOTA","total":52,"efectivos":48,"eff":92.3,"t_prom":16.35},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"DROGUERIA CC CENTRO NORTE TUNJA","total":54,"efectivos":50,"eff":92.6,"t_prom":18.87},{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"SF ZIPAQUIRA","total":662,"efectivos":613,"eff":92.6,"t_prom":29.83},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"DROG CC BAZZAR CHIA","total":84,"efectivos":78,"eff":92.9,"t_prom":1.48},{"departamento":"BOLIVAR","ciudad":"CARTAGENA","especialidad":"COLSUBSIDIO DROG. MALL CARTAGENA","total":1646,"efectivos":1532,"eff":93.1,"t_prom":26.94},{"departamento":"CUNDINAMARCA","ciudad":"FUNZA","especialidad":"DROGUERIA COLISEO FUNZA","total":834,"efectivos":777,"eff":93.2,"t_prom":17.64},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"SF CHAPINERO","total":76,"efectivos":71,"eff":93.4,"t_prom":11.22},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"COLSUBSIDIO SF TUNJA","total":463,"efectivos":433,"eff":93.5,"t_prom":36.7},{"departamento":"BOYACA","ciudad":"SOGAMOSO","especialidad":"COLSUBSIDIO DROG. SOGAMOSO A.C. - MIXTA","total":494,"efectivos":464,"eff":93.9,"t_prom":14.49},{"departamento":"CUNDINAMARCA","ciudad":"COTA","especialidad":"DROG VIVENZA MIXTA","total":33,"efectivos":31,"eff":93.9,"t_prom":3.12},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"COLSUBSIDIO DROG. CC INNOVO MIXTA","total":217,"efectivos":204,"eff":94.0,"t_prom":1.9},{"departamento":"CUNDINAMARCA","ciudad":"CAJICA","especialidad":"COLSUBSIDIO DROG. LAS HUERTAS CAJICA","total":35,"efectivos":33,"eff":94.3,"t_prom":0.97},{"departamento":"BOYACA","ciudad":"SOGAMOSO","especialidad":"DROG SOGAMOSO AC MIXTA","total":217,"efectivos":205,"eff":94.5,"t_prom":6.81},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO DISP. UNIVERSIDAD NACIONAL - BOGOTA","total":519,"efectivos":491,"eff":94.6,"t_prom":30.81},{"departamento":"TOLIMA","ciudad":"IBAGUE","especialidad":"COLSUBSIDIO DISP. IBAGUE CENTRO POS","total":231,"efectivos":219,"eff":94.8,"t_prom":25.69},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROG AV POBLADO MEDELLIN MIXTA","total":59,"efectivos":56,"eff":94.9,"t_prom":16.84},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"DROG. RESTREPO CRA 19. BOGOTA","total":390,"efectivos":370,"eff":94.9,"t_prom":17.43},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"DROGUERIA CALLE 49 MARLY","total":593,"efectivos":563,"eff":94.9,"t_prom":18.87},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"COLSUBSIDIO DROG. DUITAMA A.C. - MIXTA","total":335,"efectivos":318,"eff":94.9,"t_prom":17.24},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"DROG SABANA NORTE","total":98,"efectivos":93,"eff":94.9,"t_prom":3.63},{"departamento":"QUINDIO","ciudad":"MANIZALES","especialidad":"COLSUBSIDIO SF. UNISALUD MANIZALES","total":525,"efectivos":501,"eff":95.4,"t_prom":19.92},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROGUERIA CANAL DIGITAL ANTIOQUIA","total":1387,"efectivos":1324,"eff":95.5,"t_prom":13.25},{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"DROGUERIA DEPENDIENTE ZIPAQUIRA","total":46,"efectivos":44,"eff":95.7,"t_prom":4.1},{"departamento":"VALLE DEL CAUCA","ciudad":"CALI","especialidad":"DROG. LA 66","total":46,"efectivos":44,"eff":95.7,"t_prom":7.48},{"departamento":"VALLE DEL CAUCA","ciudad":"CALI","especialidad":"DROGUERIA VALLE DE LILI CR 98 CALI","total":257,"efectivos":246,"eff":95.7,"t_prom":0.61},{"departamento":"ANTIOQUIA","ciudad":"APARTADO","especialidad":"SF NEPS APARTADO","total":143,"efectivos":137,"eff":95.8,"t_prom":21.87},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"COLSUBSIDIO OPERACION DOMICILIOS ANTIOQUIA","total":261,"efectivos":250,"eff":95.8,"t_prom":10.12},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"COLSUBSIDIO DROG. DEP. DUITAMA","total":261,"efectivos":250,"eff":95.8,"t_prom":2.29},{"departamento":"ANTIOQUIA","ciudad":"RIONEGRO","especialidad":"COLSUBSIDIO SF NEPS RIONEGRO AC","total":100,"efectivos":96,"eff":96.0,"t_prom":4.99},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"DROG DUITAMA AC MIXTA","total":78,"efectivos":75,"eff":96.2,"t_prom":4.06},{"departamento":"TOLIMA","ciudad":"IBAGUE","especialidad":"COLSUBSIDIO DROG. ACQUA - IBAGUE","total":105,"efectivos":101,"eff":96.2,"t_prom":5.5},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO SF OLAYA SURA","total":1738,"efectivos":1674,"eff":96.3,"t_prom":3.72},{"departamento":"CUNDINAMARCA","ciudad":"CAJICA","especialidad":"DROG CAJICA","total":134,"efectivos":129,"eff":96.3,"t_prom":6.62},{"departamento":"RISARALDA","ciudad":"PEREIRA","especialidad":"COLSUBSIDIO DROG. AV CIRCUNVALAR - PEREIRA","total":196,"efectivos":189,"eff":96.4,"t_prom":10.41},{"departamento":"VALLE DEL CAUCA","ciudad":"BUGA","especialidad":"COLSUBSIDIO SF. UNIFICADO BUGA","total":941,"efectivos":907,"eff":96.4,"t_prom":22.96},{"departamento":"ANTIOQUIA","ciudad":"APARTADO","especialidad":"COLSUBSIDIO SF NEPS APARTADO","total":766,"efectivos":739,"eff":96.5,"t_prom":26.94},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"SF ITAGUI LA GLORIA","total":317,"efectivos":306,"eff":96.5,"t_prom":21.78},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"DROG CENTRO DUITAMA","total":57,"efectivos":55,"eff":96.5,"t_prom":1.65},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO DROG SHAIO","total":176,"efectivos":170,"eff":96.6,"t_prom":1.64},{"departamento":"CUNDINAMARCA","ciudad":"ZIPAQUIRA","especialidad":"DROGUERIA CENTRO HISTORICO ZIPA","total":59,"efectivos":57,"eff":96.6,"t_prom":6.96},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"DROG CENTRO CHIA MIXTA","total":90,"efectivos":87,"eff":96.7,"t_prom":1.63},{"departamento":"VALLE DEL CAUCA","ciudad":"BUGA","especialidad":"CENTRO COMERCIAL BUGA PLAZA","total":121,"efectivos":117,"eff":96.7,"t_prom":19.67},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO DROG. CLINICA SANTA FE - MIXTA BOGOTA","total":282,"efectivos":273,"eff":96.8,"t_prom":1.73},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"COLSUBSIDIO SF ALMACENTRO ALTO COSTO A.C.","total":97,"efectivos":94,"eff":96.9,"t_prom":5.9},{"departamento":"BOYACA","ciudad":"TUNJA","especialidad":"COLSUBSIDIO DROG. TUNJA A.C. - MIXTA","total":64,"efectivos":62,"eff":96.9,"t_prom":3.38},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"COLSUBSIDIO DISP. UNISALUD MEDELLIN","total":441,"efectivos":428,"eff":97.1,"t_prom":27.04},{"departamento":"ANTIOQUIA","ciudad":"ENVIGADO","especialidad":"DROGUERIA ARL VIVA ENVIGADO 2","total":71,"efectivos":69,"eff":97.2,"t_prom":38.94},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROG SAN VICENTE MEDELLIN MIXTA","total":1417,"efectivos":1378,"eff":97.2,"t_prom":36.36},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO DROG. MARLY - MIXTA BOGOTA","total":324,"efectivos":315,"eff":97.2,"t_prom":5.24},{"departamento":"CUNDINAMARCA","ciudad":"GIRARDOT","especialidad":"COLSUBSIDIO DROG. CC UNICENTRO GIRARDOT","total":224,"efectivos":218,"eff":97.3,"t_prom":1.21},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROG CC MOLINOS MEDELLIN","total":83,"efectivos":81,"eff":97.6,"t_prom":4.13},{"departamento":"BOYACA","ciudad":"DUITAMA","especialidad":"COLSUBSIDIO DROG. CENTRO DUITAMA","total":85,"efectivos":83,"eff":97.6,"t_prom":2.98},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"DROG CC FONTANAR CHIA","total":206,"efectivos":201,"eff":97.6,"t_prom":2.84},{"departamento":"ANTIOQUIA","ciudad":"LA UNION","especialidad":"COLSUBSIDIO DROG. CC MACEDONIA","total":43,"efectivos":42,"eff":97.7,"t_prom":0.67},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROGUERIA MIXTA SAN DIEGO","total":136,"efectivos":133,"eff":97.8,"t_prom":13.26},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"SF SURA CENTRO INTERNACIONAL AC BOGOTA","total":93,"efectivos":91,"eff":97.8,"t_prom":30.17},{"departamento":"CUNDINAMARCA","ciudad":"CHIA","especialidad":"SF CHIA","total":51,"efectivos":50,"eff":98.0,"t_prom":9.3},{"departamento":"CUNDINAMARCA","ciudad":"MADRID","especialidad":"COLSUBSIDIO DROG. CASA BLANCA - MADRID","total":49,"efectivos":48,"eff":98.0,"t_prom":5.91},{"departamento":"META","ciudad":"VILLAVICENCIO","especialidad":"COLSUBSIDIO DROG. CC LLANOCENTRO","total":198,"efectivos":194,"eff":98.0,"t_prom":0.76},{"departamento":"TOLIMA","ciudad":"IBAGUE","especialidad":"DROG ACQUA IBAGUE","total":51,"efectivos":50,"eff":98.0,"t_prom":5.39},{"departamento":"ATLANTICO","ciudad":"BARRANQUILLA","especialidad":"DROGUERIA VIA 65","total":322,"efectivos":316,"eff":98.1,"t_prom":3.86},{"departamento":"BOGOTA","ciudad":"BOGOTA","especialidad":"COLSUBSIDIO SF SURA CENTRO INTERNACIONAL A.C. - BOGOTA","total":161,"efectivos":158,"eff":98.1,"t_prom":17.15},{"departamento":"ANTIOQUIA","ciudad":"ENVIGADO","especialidad":"DROGUERIA MIXTA ENVIGADO PARQUE","total":281,"efectivos":276,"eff":98.2,"t_prom":30.85},{"departamento":"CUNDINAMARCA","ciudad":"COTA","especialidad":"DROG ALLEGRO","total":179,"efectivos":176,"eff":98.3,"t_prom":7.58},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROG UNISALUD MEDELLIN","total":1066,"efectivos":1049,"eff":98.4,"t_prom":29.87},{"departamento":"RISARALDA","ciudad":"MANIZALES","especialidad":"COLSUBSIDIO DROG.MANIZALES MIXTA","total":61,"efectivos":60,"eff":98.4,"t_prom":5.33},{"departamento":"SANTANDER","ciudad":"BUCARAMANGA","especialidad":"DROGUERIA MIXTA DE LA CUESTA","total":63,"efectivos":62,"eff":98.4,"t_prom":2.9},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"DROGUERIA MIXTA LAURELES","total":1162,"efectivos":1144,"eff":98.5,"t_prom":33.62},{"departamento":"BOLIVAR","ciudad":"CARTAGENA","especialidad":"COLSUBSIDIO DROG IND SAN MARTIN","total":68,"efectivos":67,"eff":98.5,"t_prom":2.38},{"departamento":"VALLE DEL CAUCA","ciudad":"CALI","especialidad":"DROGUERIA VALLE DEL LILI 42","total":194,"efectivos":191,"eff":98.5,"t_prom":0.45},{"departamento":"BOYACA","ciudad":"SOGAMOSO","especialidad":"DROG CENTRO COMERCIAL IWOKA SOGAMOSO","total":207,"efectivos":204,"eff":98.6,"t_prom":2.9},{"departamento":"CUNDINAMARCA","ciudad":"VILLETA","especialidad":"COLSUBSIDIO DROG. VILLETA - MIXTA","total":145,"efectivos":143,"eff":98.6,"t_prom":0.04},{"departamento":"CUNDINAMARCA","ciudad":"MADRID","especialidad":"DROGUERIA MIXTA MADRID","total":156,"efectivos":154,"eff":98.7,"t_prom":2.82},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"PENDIENTES CANALES DIGITALES MEDELLIN","total":169,"efectivos":167,"eff":98.8,"t_prom":21.7},{"departamento":"ANTIOQUIA","ciudad":"MEDELLIN","especialidad":"SF CRISTO REY","total":172,"efectivos":170,"eff":98.8,"t_prom":29.54},{"departamento":"ANTIOQUIA","ciudad":"RIONEGRO","especialidad":"DROG LLANO GRANDE RIONEGRO","total":169,"efectivos":167,"eff":98.8,"t_prom":5.76}],"totals":{"total":43460,"efectivos":41645,"no_efectivos":1815,"v1_total":43156,"v1_efect":41620,"v2_total":304,"v2_efect":25,"t_prom":14.22,"n_ciudades":49,"n_deptos":14,"n_especialidades":303},"meta":{"departamentos":["ANTIOQUIA","ATLANTICO","BOGOTA","BOLIVAR","BOYACA","CASANARE","CUNDINAMARCA","MAGDALENA","META","QUINDIO","RISARALDA","SANTANDER","TOLIMA","VALLE DEL CAUCA"],"ciudades_by_dept":{"ANTIOQUIA":["APARTADO","BELLO","CARMEN DE VIBORAL","DON MATIAS","EL RETIRO","ENVIGADO","GIRARDOTA","GUARNE","ITAGUI","LA CEJA","LA UNION","MARINILLA","MEDELLIN","RIONEGRO","SANTA FE ANTIOQUIA","SANTA ROSA DE OSOS","YARUMAL"],"ATLANTICO":["BARRANQUILLA"],"BOGOTA":["BOGOTA"],"BOLIVAR":["CARTAGENA"],"BOYACA":["CHIQUINQUIRA","DUITAMA","PAIPA","SOGAMOSO","TUNJA","VILLA DE LEIVA"],"CASANARE":["YOPAL"],"CUNDINAMARCA":["ANAPOIMA","CAJICA","CHIA","COTA","FACATATIVA","FUNZA","FUSAGASUGA","GIRARDOT","MADRID","MOSQUERA","VILLETA","ZIPAQUIRA"],"MAGDALENA":["SANTA MARTHA"],"META":["ACACIAS","VILLAVICENCIO"],"QUINDIO":["MANIZALES"],"RISARALDA":["MANIZALES","PEREIRA"],"SANTANDER":["BUCARAMANGA"],"TOLIMA":["IBAGUE"],"VALLE DEL CAUCA":["BUGA","CALI","PALMIRA"]},"meses":["ENERO","FEBRERO","MARZO"],"semanas":["SEMANA 1","SEMANA 2","SEMANA 3","SEMANA 4","SEMANA 5"]}};
-const MAP_CITIES=[{"name":"MEDELLIN","lat":6.2442,"lon":-75.5812,"total":9117,"eff":97.7,"t_prom":22.01},{"name":"BOGOTA","lat":4.711,"lon":-74.0721,"total":7338,"eff":93.8,"t_prom":10.73},{"name":"CARTAGENA","lat":10.391,"lon":-75.5144,"total":3410,"eff":95.7,"t_prom":14.15},{"name":"TUNJA","lat":5.5353,"lon":-73.3678,"total":3351,"eff":92.8,"t_prom":22.62},{"name":"ZIPAQUIRA","lat":5.0224,"lon":-74.0058,"total":1664,"eff":91.6,"t_prom":29.2},{"name":"DUITAMA","lat":5.8267,"lon":-73.0333,"total":1485,"eff":95.3,"t_prom":5.78},{"name":"CHIA","lat":4.8637,"lon":-74.054,"total":1408,"eff":90.0,"t_prom":18.24},{"name":"SOGAMOSO","lat":5.7145,"lon":-72.9334,"total":1324,"eff":96.5,"t_prom":7.38},{"name":"RIONEGRO","lat":6.1517,"lon":-75.3743,"total":1114,"eff":99.5,"t_prom":9.06},{"name":"BUGA","lat":3.9004,"lon":-76.3033,"total":1062,"eff":96.4,"t_prom":22.74},{"name":"APARTADO","lat":7.883,"lon":-76.6258,"total":987,"eff":96.7,"t_prom":24.31},{"name":"FUNZA","lat":4.7175,"lon":-74.211,"total":927,"eff":93.9,"t_prom":16.18},{"name":"PAIPA","lat":5.7833,"lon":-73.1131,"total":884,"eff":99.9,"t_prom":1.43},{"name":"CALI","lat":3.4516,"lon":-76.532,"total":832,"eff":96.5,"t_prom":3.17},{"name":"GIRARDOT","lat":4.3024,"lon":-74.802,"total":689,"eff":99.1,"t_prom":1.44},{"name":"MANIZALES","lat":5.0689,"lon":-75.5174,"total":637,"eff":96.2,"t_prom":19.18},{"name":"VILLAVICENCIO","lat":4.142,"lon":-73.6266,"total":590,"eff":98.8,"t_prom":0.86},{"name":"SANTA MARTHA","lat":11.2408,"lon":-74.199,"total":471,"eff":100.0,"t_prom":0.41},{"name":"CAJICA","lat":4.9191,"lon":-74.0286,"total":462,"eff":92.9,"t_prom":4.84},{"name":"MADRID","lat":4.7315,"lon":-74.2642,"total":458,"eff":98.9,"t_prom":6.41},{"name":"MOSQUERA","lat":4.7067,"lon":-74.2329,"total":416,"eff":97.6,"t_prom":3.79},{"name":"BARRANQUILLA","lat":10.9685,"lon":-74.7813,"total":394,"eff":98.2,"t_prom":3.45},{"name":"IBAGUE","lat":4.4389,"lon":-75.2322,"total":393,"eff":95.7,"t_prom":17.28},{"name":"CHIQUINQUIRA","lat":5.6165,"lon":-73.8194,"total":387,"eff":100.0,"t_prom":6.99},{"name":"ENVIGADO","lat":6.171,"lon":-75.5907,"total":353,"eff":98.0,"t_prom":31.46},{"name":"MANIZALES","lat":5.0689,"lon":-75.5174,"total":331,"eff":99.7,"t_prom":5.71},{"name":"VILLA DE LEIVA","lat":5.6341,"lon":-73.5248,"total":301,"eff":99.3,"t_prom":1.05},{"name":"FACATATIVA","lat":4.8133,"lon":-74.3556,"total":274,"eff":99.3,"t_prom":2.75},{"name":"COTA","lat":4.8118,"lon":-74.1018,"total":249,"eff":98.0,"t_prom":7.2},{"name":"PEREIRA","lat":4.8133,"lon":-75.6961,"total":240,"eff":95.4,"t_prom":10.42},{"name":"PALMIRA","lat":3.5394,"lon":-76.3036,"total":234,"eff":87.2,"t_prom":3.71},{"name":"YARUMAL","lat":6.9646,"lon":-75.4211,"total":209,"eff":100.0,"t_prom":15.49},{"name":"BUCARAMANGA","lat":7.1254,"lon":-73.1198,"total":197,"eff":99.5,"t_prom":4.28},{"name":"ITAGUI","lat":6.1845,"lon":-75.5994,"total":167,"eff":83.8,"t_prom":5.68},{"name":"BELLO","lat":6.3384,"lon":-75.5546,"total":160,"eff":97.5,"t_prom":10.89},{"name":"VILLETA","lat":5.0147,"lon":-74.4734,"total":145,"eff":98.6,"t_prom":0.04},{"name":"LA UNION","lat":5.972,"lon":-75.3617,"total":140,"eff":98.6,"t_prom":3.12},{"name":"FUSAGASUGA","lat":4.3475,"lon":-74.3634,"total":139,"eff":99.3,"t_prom":8.71},{"name":"ANAPOIMA","lat":4.5516,"lon":-74.5364,"total":111,"eff":100.0,"t_prom":0.55},{"name":"YOPAL","lat":5.3379,"lon":-72.3961,"total":88,"eff":100.0,"t_prom":0.57},{"name":"MARINILLA","lat":6.1757,"lon":-75.3359,"total":32,"eff":90.6,"t_prom":8.7}];
-
-const pct=(n,d)=>d>0?((n/d)*100):0;
-const fmt=v=>typeof v==='number'?(v>=1000?v.toLocaleString('es-CO'):v%1===0?v.toString():v.toFixed(1)):v;
-const effColor=v=>v>=97?'#059669':v>=95?'#0891b2':v>=92?'#d97706':v>=88?'#ea580c':'#dc2626';
-const effBg=v=>v>=97?'#ecfdf5':v>=95?'#ecfeff':v>=92?'#fffbeb':v>=88?'#fff7ed':'#fef2f2';
-const heatBg=v=>{const h=v>=97?145:v>=95?170:v>=92?45:v>=88?25:0;const l=Math.min(92,35+(v-60)*1.4);return`hsl(${h},70%,${l}%)`};
-const CL={green:'#00843D',greenDk:'#005C2A',greenLt:'#e8f5ee',blue:'#003D7A',blueLt:'#e8eff8',orange:'#F7941D',orangeLt:'#fef3e2',red:'#C62828',redLt:'#fef2f2',teal:'#00838F',tealLt:'#e0f7fa',ink:'#1a2332',ink2:'#4a5568',ink3:'#94a3b8',bg:'#f0f4f0',card:'#ffffff',brd:'#e2e8e2',colYellow:'#FFD100'};
-
-const Tip=({active,payload,label})=>{if(!active||!payload?.length)return null;return(<div style={{background:'#fff',border:`1px solid ${CL.brd}`,borderRadius:10,padding:'10px 14px',fontSize:12,boxShadow:'0 4px 16px rgba(0,0,0,.1)'}}><div style={{fontWeight:700,marginBottom:4,color:CL.ink}}>{label}</div>{payload.map((p,i)=><div key={i} style={{color:p.color||CL.ink2}}>{p.name}: <b>{typeof p.value==='number'?(String(p.name).includes('%')||String(p.dataKey).includes('eff')?p.value.toFixed(1)+'%':fmt(p.value)):p.value}</b></div>)}</div>)};
-
-const Card=({children,style})=><div style={{background:CL.card,borderRadius:12,border:`1px solid ${CL.brd}`,padding:20,boxShadow:'0 1px 3px rgba(0,0,0,.04)',...style}}>{children}</div>;
-const KPI=({label,value,sub,color,icon})=>(<Card style={{position:'relative',overflow:'hidden'}}><div style={{position:'absolute',top:0,left:0,width:4,height:'100%',background:color,borderRadius:'4px 0 0 4px'}}/><div style={{fontSize:10,color:CL.ink3,textTransform:'uppercase',letterSpacing:1.2,fontWeight:600,marginBottom:2}}>{icon} {label}</div><div style={{fontSize:26,fontWeight:800,color,lineHeight:1.1}}>{value}</div>{sub&&<div style={{fontSize:11,color:CL.ink2,marginTop:4}}>{sub}</div>}</Card>);
-const Tag=({children,color,bg})=><span style={{display:'inline-block',padding:'2px 10px',borderRadius:20,fontSize:11,fontWeight:700,background:bg,color}}>{children}</span>;
-const Sel=({value,onChange,options,label,width})=>(<div style={{display:'inline-flex',flexDirection:'column',gap:2}}>{label&&<span style={{fontSize:9,fontWeight:700,textTransform:'uppercase',letterSpacing:1,color:'rgba(255,255,255,.5)'}}>{label}</span>}<select value={value} onChange={e=>onChange(e.target.value)} style={{padding:'5px 8px',borderRadius:6,border:'1px solid rgba(255,255,255,.2)',background:'rgba(255,255,255,.1)',color:'#fff',fontSize:12,cursor:'pointer',minWidth:width||100,outline:'none'}}>{options.map(o=><option key={o.v} value={o.v} style={{color:'#000'}}>{o.l}</option>)}</select></div>);
-const STitle=({icon,title,sub})=>(<div style={{marginBottom:16}}><div style={{fontSize:18,fontWeight:700,color:CL.ink}}>{icon} {title}</div>{sub&&<div style={{fontSize:12,color:CL.ink3,marginTop:2}}>{sub}</div>}</div>);
-
-// ═══ COLOMBIA MAP COMPONENT ═══
-const ColombiaMap=({data,selectedDept,selectedCity})=>{
-  const [hover,setHover]=useState(null);
-  const filtered=useMemo(()=>{
-    let d=data;
-    if(selectedDept&&selectedDept!=='TODOS'){
-      const cityList=RAW.meta.ciudades_by_dept[selectedDept]||[];
-      d=d.filter(c=>cityList.includes(c.name));
-    }
-    if(selectedCity&&selectedCity!=='TODAS') d=d.filter(c=>c.name===selectedCity);
-    return d;
-  },[data,selectedDept,selectedCity]);
-  
-  const maxSvcs=Math.max(...filtered.map(c=>c.total),1);
-  const latMin=1.5,latMax=12.5,lonMin=-78,lonMax=-71;
-  const W=440,H=500;
-  const proj=(lat,lon)=>[((lon-lonMin)/(lonMax-lonMin))*W, H-((lat-latMin)/(latMax-latMin))*H];
-  
-  return(
-    <div style={{position:'relative',width:'100%'}}>
-      <svg viewBox={`0 0 ${W} ${H}`} style={{width:'100%',height:'auto',maxHeight:480}}>
-        <defs>
-          <radialGradient id="bggrad"><stop offset="0%" stopColor="#e8f5ee"/><stop offset="100%" stopColor="#d4edda"/></radialGradient>
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        </defs>
-        <rect width={W} height={H} rx="12" fill="url(#bggrad)" stroke={CL.brd} strokeWidth="1"/>
-        <text x="10" y="20" fontSize="10" fill={CL.ink3} fontWeight="600">COLOMBIA</text>
-        
-        {/* Colombia outline simplified */}
-        <path d="M180,30 L220,25 L260,35 L300,20 L340,30 L360,50 L380,45 L400,70 L390,100 L370,120 L350,110 L330,130 L340,160 L320,180 L300,170 L280,190 L260,180 L240,200 L230,230 L220,260 L210,290 L200,320 L190,340 L180,360 L170,380 L160,400 L140,410 L120,400 L100,380 L80,360 L70,330 L80,300 L90,270 L100,240 L110,210 L120,180 L130,150 L140,120 L150,90 L160,60 Z" fill="rgba(0,132,61,0.06)" stroke="rgba(0,132,61,0.2)" strokeWidth="1.5"/>
-        
-        {/* Heat circles */}
-        {filtered.map((c,i)=>{
-          const [x,y]=proj(c.lat,c.lon);
-          const r=Math.max(6, Math.min(30, (c.total/maxSvcs)*30));
-          const opacity=0.15+0.55*(c.total/maxSvcs);
-          const col=effColor(c.eff);
-          return(
-            <g key={i} onMouseEnter={()=>setHover(c)} onMouseLeave={()=>setHover(null)} style={{cursor:'pointer'}}>
-              <circle cx={x} cy={y} r={r*1.8} fill={col} opacity={opacity*0.3} filter="url(#glow)"/>
-              <circle cx={x} cy={y} r={r} fill={col} opacity={opacity} stroke="#fff" strokeWidth="1.5"/>
-              <circle cx={x} cy={y} r={r*0.3} fill="#fff" opacity="0.6"/>
-              {c.total>500&&<text x={x} y={y+r+12} textAnchor="middle" fontSize="8" fill={CL.ink2} fontWeight="600">{c.name}</text>}
-            </g>
-          );
-        })}
-      </svg>
-      {hover&&(
-        <div style={{position:'absolute',top:8,right:8,background:'rgba(255,255,255,.97)',borderRadius:10,padding:'12px 16px',boxShadow:'0 4px 20px rgba(0,0,0,.15)',border:`1px solid ${CL.brd}`,fontSize:12,minWidth:180,zIndex:5}}>
-          <div style={{fontWeight:800,fontSize:14,color:CL.ink,marginBottom:6}}>{hover.name}</div>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'4px 12px'}}>
-            <span style={{color:CL.ink3}}>Servicios:</span><span style={{fontWeight:700}}>{fmt(hover.total)}</span>
-            <span style={{color:CL.ink3}}>Efectividad:</span><span style={{fontWeight:700,color:effColor(hover.eff)}}>{hover.eff.toFixed(1)}%</span>
-            <span style={{color:CL.ink3}}>T. Promedio:</span><span style={{fontWeight:700,color:hover.t_prom>15?CL.red:hover.t_prom>5?CL.orange:CL.green}}>{hover.t_prom}h</span>
-          </div>
-        </div>
-      )}
-      <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:8,fontSize:10,color:CL.ink3}}>
-        <span><span style={{display:'inline-block',width:10,height:10,borderRadius:5,background:'#059669',marginRight:4,verticalAlign:'middle'}}/>≥97%</span>
-        <span><span style={{display:'inline-block',width:10,height:10,borderRadius:5,background:'#0891b2',marginRight:4,verticalAlign:'middle'}}/>95-97%</span>
-        <span><span style={{display:'inline-block',width:10,height:10,borderRadius:5,background:'#d97706',marginRight:4,verticalAlign:'middle'}}/>92-95%</span>
-        <span><span style={{display:'inline-block',width:10,height:10,borderRadius:5,background:'#dc2626',marginRight:4,verticalAlign:'middle'}}/>&lt;92%</span>
-        <span style={{marginLeft:8}}>Tamaño = Volumen</span>
-      </div>
-    </div>
-  );
-};
-
-function Dashboard(){
-  const[tab,setTab]=useState('gerencial');
-  const[dept,setDept]=useState('TODOS');
-  const[ciudad,setCiudad]=useState('TODAS');
-  const[mes,setMes]=useState('TODOS');
-  const[semana,setSemana]=useState('TODAS');
-  const[s2Dept,setS2Dept]=useState('TODOS');
-  const[s2Ciudad,setS2Ciudad]=useState('TODAS');
-  const[espSort,setEspSort]=useState('total');
-
-  const cOpts=useMemo(()=>{if(dept==='TODOS')return Object.values(RAW.meta.ciudades_by_dept).flat().sort();return RAW.meta.ciudades_by_dept[dept]||[]},[dept]);
-  const s2cOpts=useMemo(()=>{if(s2Dept==='TODOS')return Object.values(RAW.meta.ciudades_by_dept).flat().sort();return RAW.meta.ciudades_by_dept[s2Dept]||[]},[s2Dept]);
-
-  const trendData=useMemo(()=>{let d=RAW.by_ms;if(mes!=='TODOS')d=d.filter(r=>r.mes===mes);if(semana!=='TODAS')d=d.filter(r=>r.semana===semana);return d.map(r=>({...r,eff:pct(r.efectivos,r.total),effV1:pct(r.v1_efect,r.v1_total)}))},[mes,semana]);
-
-  const kpis=useMemo(()=>{const t=trendData.reduce((a,r)=>({total:a.total+r.total,ef:a.ef+r.efectivos,ne:a.ne+r.no_efectivos,v1t:a.v1t+r.v1_total,v1e:a.v1e+r.v1_efect,v2t:a.v2t+r.v2_total,v2e:a.v2e+r.v2_efect}),{total:0,ef:0,ne:0,v1t:0,v1e:0,v2t:0,v2e:0});return{...t,effPct:pct(t.ef,t.total),effV1:pct(t.v1e,t.v1t),effV2:pct(t.v2e,t.v2t)}},[trendData]);
-
-  const fCiudades=useMemo(()=>{let d=RAW.by_ciudad;if(dept!=='TODOS')d=d.filter(r=>r.departamento===dept);if(ciudad!=='TODAS')d=d.filter(r=>r.ciudad===ciudad);return d.map(r=>({...r,eff:pct(r.efectivos,r.total)})).sort((a,b)=>b.total-a.total)},[dept,ciudad]);
-  const fDepts=useMemo(()=>{let d=RAW.by_dept;if(dept!=='TODOS')d=d.filter(r=>r.departamento===dept);return d.map(r=>({...r,eff:pct(r.efectivos,r.total)}))},[dept]);
-
-  const s2Heat=useMemo(()=>{let d=RAW.by_heatmap;if(s2Dept!=='TODOS')d=d.filter(r=>r.departamento===s2Dept);if(s2Ciudad!=='TODAS')d=d.filter(r=>r.ciudad===s2Ciudad);return d},[s2Dept,s2Ciudad]);
-  const s2Esp=useMemo(()=>{let d=RAW.by_esp;if(s2Dept!=='TODOS')d=d.filter(r=>r.departamento===s2Dept);if(s2Ciudad!=='TODAS')d=d.filter(r=>r.ciudad===s2Ciudad);return d.map(r=>({...r,eff:pct(r.efectivos,r.total),effV1:pct(r.v1_efect,r.v1_total),effV2:r.v2_total>0?pct(r.v2_efect,r.v2_total):null})).sort((a,b)=>espSort==='eff'?a.eff-b.eff:b.total-a.total)},[s2Dept,s2Ciudad,espSort]);
-
-  const s3Cities=useMemo(()=>RAW.by_ciudad.filter(r=>r.total>=200).map(r=>({...r,eff:pct(r.efectivos,r.total),effV1:pct(r.v1_efect,r.v1_total),effV2:r.v2_total>0?pct(r.v2_efect,r.v2_total):null})).sort((a,b)=>b.total-a.total),[]);
-
-  const tabs=[{id:'gerencial',label:'Vision Gerencial',icon:'📊'},{id:'detalle',label:'Analisis Detallado',icon:'🔍'},{id:'versus',label:'Comparativo',icon:'⚖'}];
-
-  return(
-  <div style={{background:CL.bg,minHeight:'100vh',fontFamily:"'Segoe UI',sans-serif"}}>
-    {/* HEADER WITH LOGO */}
-    <div style={{background:`linear-gradient(135deg,${CL.blue} 0%,${CL.green} 100%)`,padding:'14px 28px',color:'#fff'}}>
-      <div style={{maxWidth:1280,margin:'0 auto'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',flexWrap:'wrap',gap:12}}>
-          <div style={{display:'flex',alignItems:'center',gap:16}}>
-            <img src={LOGO} alt="Colsubsidio" style={{height:36,borderRadius:4}}/>
-            <div>
-              <div style={{fontSize:20,fontWeight:700}}>Dashboard Last Mile — Operacion Domicilios</div>
-              <div style={{fontSize:11,opacity:.65}}>{fmt(RAW.totals.total)} servicios · {RAW.totals.n_ciudades} ciudades · {RAW.totals.n_deptos} departamentos · Ene-Mar 2026</div>
-            </div>
-          </div>
-          {tab==='gerencial'&&(<div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-end'}}>
-            <Sel label="Departamento" value={dept} onChange={v=>{setDept(v);setCiudad('TODAS')}} options={[{v:'TODOS',l:'Todos'},...RAW.meta.departamentos.map(d=>({v:d,l:d}))]} width={130}/>
-            <Sel label="Ciudad" value={ciudad} onChange={setCiudad} options={[{v:'TODAS',l:'Todas'},...cOpts.map(c=>({v:c,l:c}))]} width={120}/>
-            <Sel label="Mes" value={mes} onChange={setMes} options={[{v:'TODOS',l:'Todos'},...RAW.meta.meses.map(m=>({v:m,l:m}))]} width={95}/>
-            <Sel label="Semana" value={semana} onChange={setSemana} options={[{v:'TODAS',l:'Todas'},...RAW.meta.semanas.map(s=>({v:s,l:s}))]} width={100}/>
-          </div>)}
-          {tab==='detalle'&&(<div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-end'}}>
-            <Sel label="Departamento" value={s2Dept} onChange={v=>{setS2Dept(v);setS2Ciudad('TODAS')}} options={[{v:'TODOS',l:'Todos'},...RAW.meta.departamentos.map(d=>({v:d,l:d}))]} width={130}/>
-            <Sel label="Ciudad" value={s2Ciudad} onChange={setS2Ciudad} options={[{v:'TODAS',l:'Todas'},...s2cOpts.map(c=>({v:c,l:c}))]} width={120}/>
-          </div>)}
-        </div>
-      </div>
-    </div>
-
-    {/* TABS */}
-    <div style={{background:CL.card,borderBottom:`1px solid ${CL.brd}`,position:'sticky',top:0,zIndex:20}}>
-      <div style={{display:'flex',maxWidth:1280,margin:'0 auto',padding:'0 28px'}}>
-        {tabs.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:'12px 18px',fontSize:13,fontWeight:tab===t.id?700:500,color:tab===t.id?CL.green:CL.ink3,background:'transparent',border:'none',borderBottom:`3px solid ${tab===t.id?CL.green:'transparent'}`,cursor:'pointer'}}>{t.icon} {t.label}</button>)}
-      </div>
-    </div>
-
-    <div style={{maxWidth:1280,margin:'0 auto',padding:'20px 28px'}}>
-
-    {/* ═══ SECCION 1: GERENCIAL ═══ */}
-    {tab==='gerencial'&&(<>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(175px,1fr))',gap:10,marginBottom:20}}>
-        <KPI label="Efectividad Total" value={kpis.effPct.toFixed(1)+'%'} sub={`${fmt(kpis.ef)} de ${fmt(kpis.total)}`} color={effColor(kpis.effPct)} icon="✅"/>
-        <KPI label="Total Servicios" value={fmt(kpis.total)} sub={`${fmt(kpis.ne)} no efectivos`} color={CL.blue} icon="📦"/>
-        <KPI label="Efectividad V1" value={kpis.effV1.toFixed(1)+'%'} sub={`${fmt(kpis.v1e)} de ${fmt(kpis.v1t)}`} color={CL.teal} icon="🏍"/>
-        <KPI label="Efectividad V2" value={kpis.v2t>0?kpis.effV2.toFixed(1)+'%':'N/A'} sub={`${fmt(kpis.v2e)} de ${fmt(kpis.v2t)} reprocesos`} color={CL.red} icon="🔄"/>
-        <KPI label="Tiempo Promedio" value={RAW.totals.t_prom+'h'} sub="Creacion → Aceptacion" color={CL.orange} icon="⏱"/>
-      </div>
-
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:20}}>
-        <Card><STitle icon="📈" title="Tendencia de Efectividad" sub="% Efectividad Total y V1 por semana"/>
-          <ResponsiveContainer width="100%" height={240}><ComposedChart data={trendData}><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis dataKey="label" tick={{fontSize:10}}/><YAxis domain={[92,100]} tick={{fontSize:10}} tickFormatter={v=>v+'%'}/><Tooltip content={<Tip/>}/><Legend wrapperStyle={{fontSize:11}}/><Area dataKey="eff" name="% Efectividad" fill={CL.greenLt} stroke={CL.green} strokeWidth={2.5} dot={{r:4,fill:CL.green}}/><Line dataKey="effV1" name="% V1" stroke={CL.teal} strokeWidth={2} strokeDasharray="4 2" dot={{r:3}}/></ComposedChart></ResponsiveContainer>
-        </Card>
-        <Card><STitle icon="📦" title="Volumen de Servicios" sub="Efectivos vs No Efectivos por semana"/>
-          <ResponsiveContainer width="100%" height={240}><BarChart data={trendData}><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis dataKey="label" tick={{fontSize:10}}/><YAxis tick={{fontSize:10}}/><Tooltip content={<Tip/>}/><Legend wrapperStyle={{fontSize:11}}/><Bar dataKey="efectivos" name="Efectivos" stackId="a" fill={CL.green} barSize={22}/><Bar dataKey="no_efectivos" name="No Efectivos" stackId="a" fill={CL.red} radius={[3,3,0,0]} barSize={22}/></BarChart></ResponsiveContainer>
-        </Card>
-      </div>
-
-      {/* MAP + Geography */}
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:20}}>
-        <Card><STitle icon="🗺" title="Mapa de Calor Geografico" sub="Concentracion de servicios — Color = Efectividad, Tamano = Volumen"/>
-          <ColombiaMap data={MAP_CITIES} selectedDept={dept} selectedCity={ciudad}/>
-        </Card>
-        <div style={{display:'flex',flexDirection:'column',gap:16}}>
-          <Card><STitle icon="📍" title="Por Departamento"/>
-            <ResponsiveContainer width="100%" height={Math.max(200,fDepts.length*28)}><BarChart data={fDepts} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis type="number" domain={[80,101]} tick={{fontSize:10}} tickFormatter={v=>v+'%'}/><YAxis dataKey="departamento" type="category" tick={{fontSize:8}} width={105}/><Tooltip content={<Tip/>}/><Bar dataKey="eff" name="% Efectividad" radius={[0,4,4,0]} barSize={13}>{fDepts.map((d,i)=><Cell key={i} fill={effColor(d.eff)}/>)}</Bar></BarChart></ResponsiveContainer>
-          </Card>
-          <Card><STitle icon="🏙" title="Por Ciudad" sub={dept!=='TODOS'?`Filtrado: ${dept}`:'Top por volumen'}/>
-            <ResponsiveContainer width="100%" height={Math.max(200,Math.min(fCiudades.length,12)*24)}><BarChart data={fCiudades.slice(0,12)} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis type="number" domain={[70,101]} tick={{fontSize:10}} tickFormatter={v=>v+'%'}/><YAxis dataKey="ciudad" type="category" tick={{fontSize:8}} width={85}/><Tooltip content={<Tip/>}/><Bar dataKey="eff" name="% Efectividad" radius={[0,4,4,0]} barSize={13}>{fCiudades.slice(0,12).map((d,i)=><Cell key={i} fill={effColor(d.eff)}/>)}</Bar></BarChart></ResponsiveContainer>
-          </Card>
-        </div>
-      </div>
-
-      {/* Tipo Servicio */}
-      <div style={{display:'grid',gridTemplateColumns:'2fr 1fr',gap:16}}>
-        <Card><STitle icon="🏷" title="Por Tipo de Servicio" sub="Participacion, cantidad y efectividad"/>
-          <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}><thead><tr style={{borderBottom:`2px solid ${CL.brd}`}}>{['Tipo Servicio','Cantidad','Part.','% Efect.','% V1','T.Prom(h)'].map(h=><th key={h} style={{padding:'8px 10px',textAlign:h==='Tipo Servicio'?'left':'center',fontSize:10,color:CL.ink3,textTransform:'uppercase'}}>{h}</th>)}</tr></thead><tbody>{RAW.by_ts.filter(r=>r.total>=50).map(r=>{const e=pct(r.efectivos,r.total);return(<tr key={r.tipo_servicio} style={{borderBottom:`1px solid ${CL.brd}`}}><td style={{padding:'8px 10px',fontWeight:600}}>{r.tipo_servicio}</td><td style={{padding:'8px 10px',textAlign:'center'}}>{fmt(r.total)}</td><td style={{padding:'8px 10px',textAlign:'center'}}>{pct(r.total,RAW.totals.total).toFixed(1)}%</td><td style={{padding:'8px 10px',textAlign:'center'}}><Tag color={effColor(e)} bg={effBg(e)}>{e.toFixed(1)}%</Tag></td><td style={{padding:'8px 10px',textAlign:'center'}}>{pct(r.v1_efect,r.v1_total).toFixed(1)}%</td><td style={{padding:'8px 10px',textAlign:'center',color:r.t_prom>15?CL.red:r.t_prom>5?CL.orange:CL.ink2}}>{r.t_prom!=null?r.t_prom+'h':'—'}</td></tr>)})}</tbody></table></div>
-        </Card>
-        <Card><STitle icon="📊" title="Canal (Grupo)" sub="Distribucion"/>
-          <ResponsiveContainer width="100%" height={190}><PieChart><Pie data={RAW.by_tsg.map(r=>({name:r.tipo_servicio_grupo.trim(),value:r.total}))} cx="50%" cy="50%" innerRadius={40} outerRadius={75} paddingAngle={3} dataKey="value" label={({name,percent})=>`${name} ${(percent*100).toFixed(0)}%`} labelLine={false}><Cell fill={CL.blue}/><Cell fill={CL.green}/><Cell fill={CL.orange}/></Pie><Tooltip/></PieChart></ResponsiveContainer>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:6,marginTop:6}}>{RAW.by_tsg.map((r,i)=>{const e=pct(r.efectivos,r.total);return(<div key={i} style={{textAlign:'center',padding:6,background:effBg(e),borderRadius:8}}><div style={{fontSize:15,fontWeight:800,color:effColor(e)}}>{e.toFixed(1)}%</div><div style={{fontSize:9,color:CL.ink3}}>{r.tipo_servicio_grupo.trim()}</div></div>)})}</div>
-        </Card>
-      </div>
-    </>)}
-
-    {/* ═══ SECCION 2: DETALLE ═══ */}
-    {tab==='detalle'&&(<>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:12,marginBottom:20}}>
-        <KPI label="Tiempo Promedio Creacion → Aceptacion" value={RAW.totals.t_prom+'h'} sub="Promedio general de toda la operacion" color={CL.blue} icon="⏱"/>
-        <KPI label="No Efectivos Totales" value={fmt(RAW.totals.no_efectivos)} sub={`${pct(RAW.totals.no_efectivos,RAW.totals.total).toFixed(1)}% del total de servicios`} color={CL.red} icon="⚠"/>
-      </div>
-
-      <Card style={{marginBottom:20}}><STitle icon="🔥" title="Mapa de Calor: PdV x Ciudad" sub="Especialidades ordenadas por efectividad (menor a mayor) — solo con 30+ servicios"/>
-        <div style={{overflowX:'auto',maxHeight:450,overflowY:'auto'}}><table style={{width:'100%',borderCollapse:'separate',borderSpacing:2,fontSize:11}}><thead style={{position:'sticky',top:0,zIndex:1}}><tr style={{background:CL.bg}}>{['Punto de Venta','Ciudad','Depto','Svcs','% Efect.','T.Prom(h)'].map(h=><th key={h} style={{padding:'8px 10px',textAlign:h==='Punto de Venta'?'left':'center',fontSize:10,color:CL.ink3,textTransform:'uppercase',background:CL.bg}}>{h}</th>)}</tr></thead><tbody>{s2Heat.map((r,i)=>(<tr key={i}><td style={{padding:'6px 10px',fontWeight:600,maxWidth:280,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{r.especialidad}</td><td style={{padding:'6px 10px',textAlign:'center',color:CL.ink2}}>{r.ciudad}</td><td style={{padding:'6px 10px',textAlign:'center',color:CL.ink3,fontSize:10}}>{r.departamento}</td><td style={{padding:'6px 10px',textAlign:'center'}}>{r.total}</td><td style={{padding:'6px 10px',textAlign:'center',borderRadius:6,fontWeight:700,background:heatBg(r.eff),color:r.eff<85?'#fff':CL.ink}}>{r.eff.toFixed(1)}%</td><td style={{padding:'6px 10px',textAlign:'center',color:r.t_prom>20?CL.red:r.t_prom>10?CL.orange:CL.ink2}}>{r.t_prom!=null?r.t_prom+'h':'—'}</td></tr>))}</tbody></table></div>
-      </Card>
-
-      <Card style={{marginBottom:20}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
-          <STitle icon="🏪" title="Detalle por Punto de Venta" sub="Metricas completas por especialidad"/>
-          <div style={{display:'flex',gap:6}}><button onClick={()=>setEspSort('total')} style={{padding:'4px 10px',borderRadius:6,border:`1px solid ${CL.brd}`,background:espSort==='total'?CL.green:CL.card,color:espSort==='total'?'#fff':CL.ink2,fontSize:11,cursor:'pointer',fontWeight:600}}>Por Volumen</button><button onClick={()=>setEspSort('eff')} style={{padding:'4px 10px',borderRadius:6,border:`1px solid ${CL.brd}`,background:espSort==='eff'?CL.red:CL.card,color:espSort==='eff'?'#fff':CL.ink2,fontSize:11,cursor:'pointer',fontWeight:600}}>Por Riesgo</button></div>
-        </div>
-        <div style={{overflowX:'auto',maxHeight:420,overflowY:'auto'}}><table style={{width:'100%',borderCollapse:'collapse',fontSize:11}}><thead style={{position:'sticky',top:0,zIndex:1}}><tr style={{background:CL.bg,borderBottom:`2px solid ${CL.brd}`}}>{['Especialidad','Ciudad','Total','Efect.','No Ef.','%Efect.','%V1','V2','%V2','T.Prom(h)'].map(h=><th key={h} style={{padding:'7px 6px',textAlign:h==='Especialidad'?'left':'center',fontSize:9,color:CL.ink3,textTransform:'uppercase',background:CL.bg,whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>{s2Esp.map((r,i)=>(<tr key={i} style={{borderBottom:`1px solid ${CL.brd}`,background:r.eff<90?CL.redLt:'transparent'}}><td style={{padding:'6px 6px',fontWeight:600,maxWidth:230,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{r.especialidad}</td><td style={{padding:'6px 6px',textAlign:'center',color:CL.ink2,fontSize:10}}>{r.ciudad}</td><td style={{padding:'6px 6px',textAlign:'center',fontWeight:700}}>{r.total}</td><td style={{padding:'6px 6px',textAlign:'center',color:CL.green}}>{r.efectivos}</td><td style={{padding:'6px 6px',textAlign:'center',color:CL.red,fontWeight:600}}>{r.no_efectivos}</td><td style={{padding:'6px 6px',textAlign:'center'}}><Tag color={effColor(r.eff)} bg={effBg(r.eff)}>{r.eff.toFixed(1)}%</Tag></td><td style={{padding:'6px 6px',textAlign:'center'}}>{r.effV1.toFixed(1)}%</td><td style={{padding:'6px 6px',textAlign:'center'}}>{r.v2_total}</td><td style={{padding:'6px 6px',textAlign:'center',color:r.effV2!=null&&r.effV2<50?CL.red:CL.ink2}}>{r.effV2!=null?r.effV2.toFixed(0)+'%':'—'}</td><td style={{padding:'6px 6px',textAlign:'center',color:r.t_prom>20?CL.red:r.t_prom>5?CL.orange:CL.ink2}}>{r.t_prom!=null?r.t_prom+'h':'—'}</td></tr>))}</tbody></table></div>
-      </Card>
-
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
-        <Card><STitle icon="📋" title="Novedades (Fallos)" sub="Top motivos de no efectividad"/>
-          <ResponsiveContainer width="100%" height={270}><BarChart data={RAW.by_nov} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis type="number" tick={{fontSize:10}}/><YAxis dataKey="novedad" type="category" tick={{fontSize:8}} width={150}/><Tooltip content={<Tip/>}/><Bar dataKey="count" name="Fallos" radius={[0,4,4,0]} barSize={14}>{RAW.by_nov.map((d,i)=><Cell key={i} fill={d.cluster==='AUSENCIA'?CL.orange:d.cluster==='DIRECCION'?CL.blue:d.cluster==='RECHAZO'?CL.red:d.cluster==='OPERATIVO'?'#7c3aed':CL.teal}/>)}</Bar></BarChart></ResponsiveContainer>
-        </Card>
-        <Card><STitle icon="⏳" title="Tiempo Promedio por Ciudad" sub="Creacion → Aceptacion (horas)"/>
-          <ResponsiveContainer width="100%" height={270}><BarChart data={RAW.by_ciudad.filter(r=>r.total>=200&&r.t_prom!=null).sort((a,b)=>b.t_prom-a.t_prom).slice(0,12)} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis type="number" tick={{fontSize:10}} tickFormatter={v=>v+'h'}/><YAxis dataKey="ciudad" type="category" tick={{fontSize:9}} width={90}/><Tooltip content={<Tip/>}/><Bar dataKey="t_prom" name="Promedio(hrs)" radius={[0,4,4,0]} barSize={14}>{RAW.by_ciudad.filter(r=>r.total>=200&&r.t_prom!=null).sort((a,b)=>b.t_prom-a.t_prom).slice(0,12).map((d,i)=><Cell key={i} fill={d.t_prom>15?CL.red:d.t_prom>5?CL.orange:CL.green}/>)}</Bar></BarChart></ResponsiveContainer>
-        </Card>
-      </div>
-    </>)}
-
-    {/* ═══ SECCION 3: VERSUS ═══ */}
-    {tab==='versus'&&(<>
-      <Card style={{marginBottom:20}}><STitle icon="⚖" title="Comparativo General por Ciudad" sub="Todas las metricas — min. 200 servicios — Tiempo = Promedio Creacion a Aceptacion"/>
-        <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse',fontSize:11}}><thead><tr style={{background:CL.bg,borderBottom:`2px solid ${CL.brd}`}}>{['Ciudad','Depto','Svcs','Efect.','No Ef.','%Efect.','%V1','V2','%V2','T.Prom(h)'].map(h=><th key={h} style={{padding:'8px 6px',textAlign:h==='Ciudad'||h==='Depto'?'left':'center',fontSize:9,color:CL.ink3,textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead><tbody>{s3Cities.map((r,i)=>(<tr key={i} style={{borderBottom:`1px solid ${CL.brd}`}}><td style={{padding:'7px 6px',fontWeight:700}}>{r.ciudad}</td><td style={{padding:'7px 6px',color:CL.ink3,fontSize:10}}>{r.departamento}</td><td style={{padding:'7px 6px',textAlign:'center',fontWeight:600}}>{fmt(r.total)}</td><td style={{padding:'7px 6px',textAlign:'center',color:CL.green}}>{fmt(r.efectivos)}</td><td style={{padding:'7px 6px',textAlign:'center',color:CL.red,fontWeight:600}}>{r.no_efectivos}</td><td style={{padding:'7px 6px',textAlign:'center'}}><Tag color={effColor(r.eff)} bg={effBg(r.eff)}>{r.eff.toFixed(1)}%</Tag></td><td style={{padding:'7px 6px',textAlign:'center'}}>{r.effV1.toFixed(1)}%</td><td style={{padding:'7px 6px',textAlign:'center'}}>{r.v2_total}</td><td style={{padding:'7px 6px',textAlign:'center',color:r.effV2!=null&&r.effV2<50?CL.red:CL.ink2}}>{r.effV2!=null?r.effV2.toFixed(0)+'%':'—'}</td><td style={{padding:'7px 6px',textAlign:'center',color:r.t_prom>15?CL.red:r.t_prom>5?CL.orange:CL.ink2}}>{r.t_prom||'—'}</td></tr>))}</tbody></table></div>
-      </Card>
-
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:20}}>
-        <Card><STitle icon="📊" title="Efectividad por Ciudad" sub="Top 15"/>
-          <ResponsiveContainer width="100%" height={340}><BarChart data={s3Cities.slice(0,15)}><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis dataKey="ciudad" tick={{fontSize:8}} angle={-35} textAnchor="end" height={55}/><YAxis domain={[80,101]} tick={{fontSize:10}} tickFormatter={v=>v+'%'}/><Tooltip content={<Tip/>}/><Bar dataKey="eff" name="% Efectividad" radius={[4,4,0,0]} barSize={20}>{s3Cities.slice(0,15).map((d,i)=><Cell key={i} fill={effColor(d.eff)}/>)}</Bar></BarChart></ResponsiveContainer>
-        </Card>
-        <Card><STitle icon="🏷" title="Por Tipo de Servicio" sub="Cantidad y efectividad"/>
-          <ResponsiveContainer width="100%" height={340}><ComposedChart data={RAW.by_ts.filter(r=>r.total>=100).map(r=>({...r,eff:pct(r.efectivos,r.total)}))}><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis dataKey="tipo_servicio" tick={{fontSize:7}} angle={-30} textAnchor="end" height={60}/><YAxis yAxisId="left" tick={{fontSize:10}}/><YAxis yAxisId="right" orientation="right" domain={[80,101]} tick={{fontSize:10}} tickFormatter={v=>v+'%'}/><Tooltip content={<Tip/>}/><Legend wrapperStyle={{fontSize:10}}/><Bar yAxisId="left" dataKey="total" name="Cantidad" fill={CL.blueLt} radius={[3,3,0,0]} barSize={16}/><Line yAxisId="right" dataKey="eff" name="%Efect." stroke={CL.green} strokeWidth={2.5} dot={{r:4,fill:CL.green}}/></ComposedChart></ResponsiveContainer>
-        </Card>
-      </div>
-
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
-        <Card><STitle icon="🔄" title="V1 vs V2 por Ciudad" sub="Solo ciudades con reprocesos"/>
-          <div style={{overflowX:'auto'}}><table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}><thead><tr style={{borderBottom:`2px solid ${CL.brd}`}}>{['Ciudad','Svcs V1','%V1','Svcs V2','%V2'].map(h=><th key={h} style={{padding:'8px 10px',textAlign:h==='Ciudad'?'left':'center',fontSize:10,color:CL.ink3,textTransform:'uppercase'}}>{h}</th>)}</tr></thead><tbody>{s3Cities.filter(r=>r.v2_total>0).map((r,i)=>(<tr key={i} style={{borderBottom:`1px solid ${CL.brd}`}}><td style={{padding:'7px 10px',fontWeight:700}}>{r.ciudad}</td><td style={{padding:'7px 10px',textAlign:'center'}}>{fmt(r.v1_total)}</td><td style={{padding:'7px 10px',textAlign:'center'}}><Tag color={effColor(r.effV1)} bg={effBg(r.effV1)}>{r.effV1.toFixed(1)}%</Tag></td><td style={{padding:'7px 10px',textAlign:'center'}}>{r.v2_total}</td><td style={{padding:'7px 10px',textAlign:'center'}}><Tag color={r.effV2!=null&&r.effV2<50?CL.red:CL.orange} bg={r.effV2!=null&&r.effV2<50?CL.redLt:CL.orangeLt}>{r.effV2!=null?r.effV2.toFixed(0)+'%':'—'}</Tag></td></tr>))}</tbody></table></div>
-        </Card>
-        <Card><STitle icon="⏱" title="Tiempo Promedio por Ciudad" sub="Creacion → Aceptacion (horas)"/>
-          <ResponsiveContainer width="100%" height={300}><BarChart data={[...s3Cities].filter(r=>r.t_prom!=null).sort((a,b)=>b.t_prom-a.t_prom).slice(0,12)}><CartesianGrid strokeDasharray="3 3" stroke={CL.brd}/><XAxis dataKey="ciudad" tick={{fontSize:8}} angle={-30} textAnchor="end" height={50}/><YAxis tick={{fontSize:10}} tickFormatter={v=>v+'h'}/><Tooltip content={<Tip/>}/><Bar dataKey="t_prom" name="Promedio(h)" radius={[4,4,0,0]} barSize={18}>{[...s3Cities].filter(r=>r.t_prom!=null).sort((a,b)=>b.t_prom-a.t_prom).slice(0,12).map((d,i)=><Cell key={i} fill={d.t_prom>15?CL.red:d.t_prom>5?CL.orange:CL.green}/>)}</Bar></BarChart></ResponsiveContainer>
-        </Card>
-      </div>
-    </>)}
-
-    </div>
-    <div style={{textAlign:'center',padding:'16px 28px',fontSize:10,color:CL.ink3,borderTop:`1px solid ${CL.brd}`,marginTop:20}}>
-      <img src={LOGO} alt="Colsubsidio" style={{height:20,marginRight:8,verticalAlign:'middle',opacity:0.7}}/>
-      Droguerias Colsubsidio x Quick Help SAS · Dashboard Last Mile · Ene-Mar 2026
-    </div>
-  </div>);
+:root {
+  --purina-red: #ED1C24;
+  --purina-dark-red: #C41018;
+  --purina-yellow: #FFD100;
+  --purina-dark: #1A1A2E;
+  --purina-gray: #2D2D3F;
+  --purina-light-gray: #F5F5F7;
+  --purina-white: #FFFFFF;
+  --purina-text: #333340;
+  --purina-muted: #7A7A8E;
+  --accent-green: #27AE60;
+  --accent-orange: #F39C12;
+  --accent-blue: #2980B9;
 }
 
-ReactDOM.createRoot(document.getElementById('colsubsidio-root')).render(<Dashboard/>);
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #0D0D1A;
+  color: var(--purina-text);
+  overflow-x: hidden;
+}
 
-    </script>
-  </body>
+.nav-bar {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(26,26,46,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--purina-red);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 24px; height: 56px;
+}
+.nav-bar .brand { display: flex; align-items: center; gap: 12px; }
+.nav-bar .brand-logo {
+  background: var(--purina-red); color: white;
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  padding: 4px 12px; font-size: 14px; letter-spacing: 1px;
+}
+.nav-bar .brand-title {
+  color: white; font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: .5px;
+}
+.nav-controls { display: flex; align-items: center; gap: 12px; }
+.nav-btn {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: white; padding: 6px 16px; border-radius: 6px; cursor: pointer;
+  font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 600;
+  transition: all .2s;
+}
+.nav-btn:hover { background: var(--purina-red); border-color: var(--purina-red); }
+.slide-counter {
+  color: rgba(255,255,255,.7); font-size: 13px;
+  font-family: 'Montserrat', sans-serif; min-width: 80px; text-align: center;
+}
+.week-badge {
+  background: var(--purina-yellow); color: var(--purina-dark);
+  padding: 4px 10px; border-radius: 4px; font-size: 11px;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+}
+
+.slides-wrapper {
+  margin-top: 72px; padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  padding-bottom: 60px;
+}
+
+.slide {
+  width: 1200px; min-height: 675px;
+  background: var(--purina-white);
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  position: relative;
+  display: none;
+  flex-direction: column;
+}
+.slide.active { display: flex; }
+
+.slide-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 28px;
+  background: var(--purina-white);
+  border-bottom: 1px solid #eee;
+}
+.slide-header .tag {
+  font-family: 'Montserrat', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 2px; color: var(--purina-muted);
+  text-transform: uppercase;
+}
+.slide-header .purina-badge {
+  background: var(--purina-red); color: white;
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  padding: 4px 14px; font-size: 12px; letter-spacing: 1px;
+}
+
+.slide-footer {
+  margin-top: auto;
+  padding: 8px 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 3px solid var(--purina-red);
+  background: linear-gradient(90deg, var(--purina-red) 0%, var(--purina-red) 60%, var(--purina-yellow) 60%, var(--purina-yellow) 100%);
+}
+.slide-footer .src { font-size: 9px; color: rgba(255,255,255,.9); }
+.slide-footer .hashtag { font-size: 10px; color: var(--purina-dark); font-family: 'Montserrat', sans-serif; font-weight: 700; }
+
+.slide-body { padding: 20px 28px; flex: 1; }
+
+.title-slide .slide-body {
+  background: var(--purina-white);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 40px 48px;
+}
+.title-slide h1 {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 42px; color: var(--purina-dark); line-height: 1.1;
+}
+.title-slide h1 span { color: var(--purina-red); }
+.title-slide .subtitle {
+  font-size: 14px; color: var(--purina-muted); margin-top: 16px;
+  border-left: 3px solid var(--purina-red); padding-left: 12px;
+}
+.title-slide .meeting-label {
+  font-family: 'Montserrat', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 2px; color: var(--purina-muted);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+
+.kpi-title-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.kpi-title-row h2 {
+  font-family: 'Montserrat', sans-serif; font-size: 22px;
+  font-weight: 800; color: var(--purina-dark);
+}
+.kpi-subtitle { font-size: 12px; color: var(--purina-muted); margin-bottom: 16px; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+.data-table th {
+  background: var(--purina-dark); color: white;
+  padding: 7px 6px; text-align: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 10px; letter-spacing: .5px;
+}
+.data-table td {
+  padding: 5px 5px; text-align: center;
+  border-bottom: 1px solid #eee; font-size: 11px;
+}
+.data-table tr:nth-child(even) { background: #f9f9fb; }
+.data-table input {
+  width: 62px; border: 1px solid #ddd; border-radius: 4px;
+  padding: 4px 4px; text-align: center; font-size: 11px;
+  font-family: 'Open Sans', sans-serif; transition: border-color .2s;
+}
+.data-table input:focus {
+  outline: none; border-color: var(--purina-red);
+  box-shadow: 0 0 0 2px rgba(237,28,36,.15);
+}
+.data-table .row-label {
+  text-align: left; font-weight: 700; color: var(--purina-dark);
+  background: #f0f0f5; white-space: nowrap; padding-left: 8px;
+}
+
+.chart-container { position: relative; width: 100%; margin: 8px 0; }
+
+.kpi-cards { display: flex; gap: 12px; margin: 12px 0; }
+.kpi-card {
+  flex: 1; padding: 12px 16px; border-radius: 8px;
+  background: var(--purina-light-gray); border-left: 4px solid var(--purina-red);
+}
+.kpi-card.green { border-left-color: var(--accent-green); }
+.kpi-card.orange { border-left-color: var(--accent-orange); }
+.kpi-card.blue { border-left-color: var(--accent-blue); }
+.kpi-card .kpi-card-label {
+  font-size: 10px; font-weight: 700; color: var(--purina-muted);
+  text-transform: uppercase; letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+.kpi-card .kpi-card-value {
+  font-size: 26px; font-weight: 900; color: var(--purina-dark);
+  font-family: 'Montserrat', sans-serif; margin-top: 2px;
+}
+.kpi-card .kpi-card-value.red { color: var(--purina-red); }
+.kpi-card .kpi-card-value.green { color: var(--accent-green); }
+.kpi-card .kpi-card-sub { font-size: 10px; color: var(--purina-muted); margin-top: 2px; }
+
+.row { display: flex; gap: 20px; }
+.col-6 { flex: 1; }
+.col-7 { flex: 1.4; }
+.col-5 { flex: 0.8; }
+
+.chart-legend { display: flex; gap: 16px; align-items: center; font-size: 11px; margin: 6px 0; }
+.chart-legend .legend-item { display: flex; align-items: center; gap: 5px; }
+.chart-legend .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+
+.insight-box {
+  background: #FFF8E1; border-left: 4px solid var(--purina-yellow);
+  padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0;
+  font-size: 11px; color: var(--purina-text);
+}
+.insight-box.red { background: #FFF0F0; border-left-color: var(--purina-red); }
+.insight-box strong { color: var(--purina-dark); }
+
+.edit-hint {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; color: var(--accent-blue); font-weight: 600; margin-left: 8px;
+}
+.edit-hint::before { content: '✎'; font-size: 12px; }
+
+.action-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.action-col h4 {
+  font-family: 'Montserrat', sans-serif; font-size: 12px;
+  font-weight: 800; margin-bottom: 8px; padding: 6px 10px; border-radius: 4px;
+}
+.action-item {
+  padding: 8px 10px; background: #f9f9fb; border-radius: 6px;
+  font-size: 11px; margin-bottom: 6px; border-left: 3px solid #ddd;
+}
+.action-item.high { border-left-color: var(--purina-red); }
+.action-item.med { border-left-color: var(--accent-orange); }
+.action-item .priority { font-size: 9px; font-weight: 700; color: var(--purina-red); text-transform: uppercase; }
+.status-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif;
+}
+.status-badge.done { background: #E8F5E9; color: #2E7D32; }
+.status-badge.progress { background: #FFF3E0; color: #E65100; }
+
+.thumb-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(26,26,46,0.95); backdrop-filter: blur(12px);
+  display: flex; gap: 4px; padding: 8px 16px;
+  overflow-x: auto; z-index: 100;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.thumb-btn {
+  min-width: 80px; padding: 4px 10px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px; color: rgba(255,255,255,0.6);
+  font-size: 10px; font-family: 'Montserrat', sans-serif;
+  cursor: pointer; white-space: nowrap; transition: all .2s;
+}
+.thumb-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+.thumb-btn.active { background: var(--purina-red); color: white; border-color: var(--purina-red); }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <div class="brand">
+    <div class="brand-logo">✦ PURINA</div>
+    <div class="brand-title">INDICADORES OPERATIVOS 2025–2026 | Dashboard Interactivo</div>
+  </div>
+  <div class="nav-controls">
+    <div class="week-badge">SEMANA 12 — MARZO 2026</div>
+    <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
+    <span class="slide-counter" id="slideCounter">1 / 14</span>
+    <button class="nav-btn" onclick="nextSlide()">Siguiente ▸</button>
+  </div>
+</div>
+
+<div class="slides-wrapper" id="slidesWrapper">
+
+<!-- ===== SLIDE 1: PORTADA ===== -->
+<div class="slide title-slide active" data-slide="1">
+  <div class="slide-header">
+    <div class="tag">REUNIÓN EJECUTIVA DE LOGÍSTICA</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="meeting-label">REUNIÓN EJECUTIVA DE LOGÍSTICA</div>
+    <h1>INDICADORES<br>OPERATIVOS<br><span>2025 — 2026</span></h1>
+    <div class="subtitle">
+      <strong>KPI: Efectividad de Entregas</strong><br>
+      Análisis de Tendencias y Desempeño<br>
+      <strong style="color:var(--purina-red);">Corte: Semana 12 — Marzo 2026</strong>
+    </div>
+    <div style="margin-top:24px; font-size:13px; color:var(--purina-red); font-weight:700; font-family:'Montserrat',sans-serif;">
+      #YosoySupplyChainTeam
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Dashboard Interactivo — Datos Editables — Corte Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: TENDENCIA MENSUAL ===== -->
+<div class="slide" data-slide="2">
+  <div class="slide-header">
+    <div class="tag">ANÁLISIS DE DESEMPEÑO</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>TENDENCIA MENSUAL 2025–2026</h2>
+      <span class="edit-hint">Edita los valores para actualizar</span>
+    </div>
+    <div class="kpi-subtitle">KPI: Efectividad de Entregas vs Objetivo (98.5%) — Datos hasta Marzo 2026</div>
+
+    <div class="row">
+      <div class="col-7">
+        <div class="chart-container" style="height:270px;"><canvas id="chart_tendencia"></canvas></div>
+      </div>
+      <div class="col-5">
+        <div class="kpi-cards" style="flex-direction:column;">
+          <div class="kpi-card">
+            <div class="kpi-card-label">GAP VS OBJETIVO</div>
+            <div class="kpi-card-value red" id="kpi_gap_tend">—</div>
+            <div class="kpi-card-sub">Cierre Mar: <span id="kpi_cierre_tend">—</span> (Meta: 98.5%)</div>
+          </div>
+          <div class="kpi-card green">
+            <div class="kpi-card-label">RECUPERACIÓN YTD</div>
+            <div class="kpi-card-value green" id="kpi_recup_tend">—</div>
+            <div class="kpi-card-sub">Mejora Ene → Mar 2026</div>
+          </div>
+        </div>
+        <div class="insight-box">
+          <strong>IMPACTO Q4 2025:</strong> Fuerte desaceleración, cayendo desde 90.4% en Oct hasta 81.0% en Dic.
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table" id="table_tendencia">
+      <thead><tr><th></th><th>ENE</th><th>FEB</th><th>MAR</th><th>ABR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AGO</th><th>SEP</th><th>OCT</th><th>NOV</th><th>DIC</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>96.24</td><td>96.65</td><td>96.70</td><td>95.72</td><td>95.96</td><td>96.24</td><td>95.30</td><td>93.50</td><td>93.13</td><td>90.40</td><td>86.20</td><td>81.00</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="0.01" value="81.56" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="89.81" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="MAR" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateTendencia()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#B0BEC5;"></div> 2025 (Histórico)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ED1C24;"></div> 2026 (Actual)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFD100; border:1px dashed #999;"></div> Objetivo (98.5%)</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Fuente: Reporte Operativo Interno — Datos a Semana 12 (Marzo 2026)</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: NOVEDADES OPERATIVAS ===== -->
+<div class="slide" data-slide="3">
+  <div class="slide-header">
+    <div class="tag">GESTIÓN DE INCIDENCIAS</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>ANÁLISIS DE NOVEDADES OPERATIVAS</h2>
+      <span class="edit-hint">Edita los valores</span>
+    </div>
+    <div class="kpi-subtitle">Desglose por Categoría y Pareto (Ene - Mar 2026)</div>
+
+    <div class="row">
+      <div class="col-6">
+        <div style="font-size:12px; font-weight:700; color:var(--purina-dark); margin-bottom:8px;">DETALLE POR CATEGORÍA — Total: <span id="novedades_total">—</span> casos</div>
+        <table class="data-table" id="table_novedades">
+          <thead><tr><th>CATEGORÍA</th><th>ENE</th><th>FEB</th><th>MAR</th><th>TOTAL</th></tr></thead>
+          <tbody>
+            <tr><td class="row-label">CONSECUCIÓN</td><td><input type="number" value="429" onchange="updateNovedades()"></td><td><input type="number" value="190" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t1">619</td></tr>
+            <tr><td class="row-label">NOV. RECIBO</td><td><input type="number" value="153" onchange="updateNovedades()"></td><td><input type="number" value="134" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t2">287</td></tr>
+            <tr><td class="row-label">NOV. CARGUE</td><td><input type="number" value="234" onchange="updateNovedades()"></td><td><input type="number" value="5" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t3">239</td></tr>
+            <tr><td class="row-label">TRÁFICO</td><td><input type="number" value="88" onchange="updateNovedades()"></td><td><input type="number" value="118" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t4">206</td></tr>
+            <tr><td class="row-label">PROGRAMACIÓN</td><td><input type="number" value="140" onchange="updateNovedades()"></td><td><input type="number" value="2" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t5">142</td></tr>
+            <tr><td class="row-label">DRIVER</td><td><input type="number" value="115" onchange="updateNovedades()"></td><td><input type="number" value="18" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t6">133</td></tr>
+            <tr><td class="row-label">NOV. VEHICULAR</td><td><input type="number" value="21" onchange="updateNovedades()"></td><td><input type="number" value="31" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t7">52</td></tr>
+            <tr><td class="row-label">CLIMA</td><td><input type="number" value="23" onchange="updateNovedades()"></td><td><input type="number" value="0" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t8">23</td></tr>
+            <tr><td class="row-label">NOV. FACTURA</td><td><input type="number" value="18" onchange="updateNovedades()"></td><td><input type="number" value="3" onchange="updateNovedades()"></td><td><input type="number" value="" placeholder="MAR" onchange="updateNovedades()"></td><td id="nov_t9">21</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-6">
+        <div style="font-size:12px; font-weight:700; color:var(--purina-dark); margin-bottom:8px;">CONCENTRACIÓN DE NOVEDADES (PARETO)</div>
+        <div class="chart-container" style="height:250px;"><canvas id="chart_novedades"></canvas></div>
+        <div class="insight-box red">
+          <strong>Foco de Acción:</strong> Top 3 categorías representan el <strong id="pareto_pct">66%</strong> del total. Gestionar estos rubros impactaría 2/3 de incidencias.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Fuente: Base de Datos de Novedades Operativas 2026 — Corte Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4: EFECTIVIDAD SEMANAL (S1-S12) ===== -->
+<div class="slide" data-slide="4">
+  <div class="slide-header">
+    <div class="tag">ANÁLISIS COMPARATIVO</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>EFECTIVIDAD DE ENTREGAS SEMANAL</h2>
+      <span class="edit-hint">Edita los valores</span>
+    </div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 98.50%</div>
+
+    <div class="chart-container" style="height:260px;"><canvas id="chart_efect_sem"></canvas></div>
+
+    <table class="data-table" id="table_efect_sem">
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>95.57</td><td>96.69</td><td>98.01</td><td>98.09</td><td>98.62</td><td>98.91</td><td>99.15</td><td>97.87</td><td>95.09</td><td>95.87</td><td>96.12</td><td>97.03</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="89.00" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="67.73" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="87.94" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="92.00" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="88.03" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="85.25" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="93.94" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S9" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S10" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S11" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S12" onchange="updateEfectSem()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box red">
+      <strong>Gap Promedio Semanal:</strong> <span id="gap_sem_label">—</span>
+    </div>
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#B0BEC5;"></div> 2025</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ED1C24;"></div> 2026</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#FFD100; border:1px dashed #999;"></div> Target 98.50%</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Datos Operativos — Logística Primaria — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 5: TIEMPOS PROGRAMACIÓN ===== -->
+<div class="slide" data-slide="5">
+  <div class="slide-header">
+    <div class="tag">KPI: TIEMPOS</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>TIEMPOS DE PROGRAMACIÓN Y RUTEO — MES</h2>
+      <span class="edit-hint">Edita horas (HH:MM)</span>
+    </div>
+    <div class="kpi-subtitle">Hora promedio de finalización del ruteo por mes — Datos hasta Marzo 2026</div>
+
+    <div class="chart-container" style="height:300px;"><canvas id="chart_tiempos"></canvas></div>
+
+    <table class="data-table" id="table_tiempos">
+      <thead><tr><th></th><th>ENE</th><th>FEB</th><th>MAR</th><th>ABR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AGO</th><th>SEP</th><th>OCT</th><th>NOV</th><th>DIC</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>18:10</td><td>18:19</td><td>18:32</td><td>18:28</td><td>18:40</td><td>18:42</td><td>18:35</td><td>18:58</td><td>18:57</td><td>19:22</td><td>19:25</td><td>19:10</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="text" value="19:59" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="19:23" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="18:53" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+          <td><input type="text" value="" placeholder="—" style="width:52px;" onchange="updateTiempos()"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Fuente: Reporte de Operaciones Logísticas — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 6: POSICIONAMIENTO VEHICULAR MES ===== -->
+<div class="slide" data-slide="6">
+  <div class="slide-header">
+    <div class="tag">KPI: POSICIONAMIENTO VEHICULAR</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>POSICIONAMIENTO VEHICULAR — MES 2025 vs 2026</h2>
+      <span class="edit-hint">Edita valores</span>
+    </div>
+    <div class="kpi-subtitle">Comparativa Mensual (Enero - Diciembre) — Target: 100%</div>
+
+    <div class="chart-container" style="height:280px;"><canvas id="chart_posic_mes"></canvas></div>
+
+    <table class="data-table" id="table_posic_mes">
+      <thead><tr><th></th><th>ENE</th><th>FEB</th><th>MAR</th><th>ABR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AGO</th><th>SEP</th><th>OCT</th><th>NOV</th><th>DIC</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>100</td><td>100</td><td>100</td><td>100</td><td>99</td><td>98</td><td>99</td><td>96</td><td>96</td><td>99</td><td>98</td><td>97</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="1" value="96" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="99" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="100" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicMes()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <strong>Estado Actual:</strong> <span id="posic_mes_insight">Marzo 2026 alcanza el 100%. Promedio YTD: 98.3%</span>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Datos Operativos — Logística Primaria — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 7: POSICIONAMIENTO SEMANAL (S1-S12) ===== -->
+<div class="slide" data-slide="7">
+  <div class="slide-header">
+    <div class="tag">KPI: RASTREO SATELITAL</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>POSICIONAMIENTO VEHICULAR SEMANAL</h2>
+      <span class="edit-hint">Edita valores</span>
+    </div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 100%</div>
+
+    <div class="chart-container" style="height:270px;"><canvas id="chart_posic_sem"></canvas></div>
+
+    <table class="data-table" id="table_posic_sem">
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>99</td><td>100</td><td>100</td><td>100</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="100" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="85" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="100" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="100" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="99" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="98" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="99" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S9" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S10" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S11" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S12" onchange="updatePosicSem()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box red">
+      <strong>Análisis:</strong> Desviación crítica en Semana 3 (85%). Resto con alta adherencia al objetivo. Completa S9-S12 con datos de Marzo.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Datos Operativos — Logística Primaria — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (S2-S12) ===== -->
+<div class="slide" data-slide="8">
+  <div class="slide-header">
+    <div class="tag">KPI: DETALLE POSICIONAMIENTO</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>DETALLE DE POSICIONAMIENTO VEHICULAR</h2>
+    </div>
+    <div class="kpi-subtitle">Análisis Diario — Semanas 2 a 12 (2026)</div>
+
+    <div class="kpi-cards">
+      <div class="kpi-card"><div class="kpi-card-label">DÍAS ANALIZADOS</div><div class="kpi-card-value">41</div><div class="kpi-card-sub">S2-S8 (actualiza con S9-S12)</div></div>
+      <div class="kpi-card"><div class="kpi-card-label">GAP ACUMULADO</div><div class="kpi-card-value red">-25 vehs</div></div>
+      <div class="kpi-card orange"><div class="kpi-card-label">PEOR REGISTRO</div><div class="kpi-card-value red">63%</div><div class="kpi-card-sub">13/1/2026</div></div>
+      <div class="kpi-card green"><div class="kpi-card-label">CUMPLIMIENTO PROM.</div><div class="kpi-card-value green">97.7%</div></div>
+      <div class="kpi-card"><div class="kpi-card-label">DÍAS CRÍTICOS (&lt;95%)</div><div class="kpi-card-value">5 (12%)</div></div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="chart-container" style="height:200px;"><canvas id="chart_detalle_posic"></canvas></div>
+      </div>
+      <div class="col-6">
+        <div style="font-size:11px; font-weight:700; color:var(--purina-dark); margin-bottom:6px;">LOYALTY</div>
+        <div class="kpi-cards">
+          <div class="kpi-card orange"><div class="kpi-card-label">ENE</div><div class="kpi-card-value">72.9%</div></div>
+          <div class="kpi-card"><div class="kpi-card-label">FEB</div><div class="kpi-card-value">68.1%</div></div>
+          <div class="kpi-card blue"><div class="kpi-card-label">MAR</div><div class="kpi-card-value" style="color:var(--accent-blue);">—</div><div class="kpi-card-sub">Ingresa dato</div></div>
+        </div>
+        <div class="insight-box">
+          <strong>Mejora significativa en S2.</strong> Focos rojos en S3 (Ene). Semanas 4-8 estables (99-100%). Gap reducido a 25 unidades.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Fuente: Reporte de Tráfico Diario 2026 — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 9: CANT. VEHÍCULOS (S2-S12) ===== -->
+<div class="slide" data-slide="9">
+  <div class="slide-header">
+    <div class="tag">KPI: FLOTA</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>CANTIDAD VEHÍCULOS POSICIONADOS 2026</h2>
+    </div>
+    <div class="kpi-subtitle">Evolución Semanal de Flota (S2-S12) y Participación</div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="chart-container" style="height:260px;"><canvas id="chart_vehiculos"></canvas></div>
+      </div>
+      <div class="col-6">
+        <div style="font-size:12px; font-weight:700; color:var(--purina-dark); margin-bottom:8px;">PARTICIPACIÓN POR FLOTA</div>
+        <div class="chart-container" style="height:180px;"><canvas id="chart_flota_donut"></canvas></div>
+        <div class="insight-box red" style="margin-top:8px;">
+          <strong>⚠ HALLAZGO CRÍTICO:</strong> El 43% de las veces se utiliza +20% de la flota base. Umbral mínimo: <strong>29 vehículos</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Fuente: Control de Tráfico 2026 — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 10: ARQUEO MES ===== -->
+<div class="slide" data-slide="10">
+  <div class="slide-header">
+    <div class="tag">ANÁLISIS COMPARATIVO</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>ARQUEO MES 2025 vs 2026</h2>
+      <span class="edit-hint">Edita valores</span>
+    </div>
+    <div class="kpi-subtitle">Comparativa Mensual (Enero - Diciembre) — Target: 95%</div>
+
+    <div class="chart-container" style="height:280px;"><canvas id="chart_arqueo_mes"></canvas></div>
+
+    <table class="data-table" id="table_arqueo_mes">
+      <thead><tr><th></th><th>ENE</th><th>FEB</th><th>MAR</th><th>ABR</th><th>MAY</th><th>JUN</th><th>JUL</th><th>AGO</th><th>SEP</th><th>OCT</th><th>NOV</th><th>DIC</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>95</td><td>95</td><td>95</td><td>95</td><td>95</td><td>92</td><td>90</td><td>93</td><td>73</td><td>96</td><td>93</td><td>97</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="1" value="93" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="96" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="MAR" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+          <td><input type="number" step="1" value="" placeholder="—" onchange="updateArqueoMes()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <strong>Insight:</strong> <span id="arqueo_mes_insight">Feb 2026 supera el objetivo (96% vs 95%). Completa Marzo.</span>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Datos Operativos — Logística Primaria — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 11: ARQUEO SEMANAL (S1-S12) ===== -->
+<div class="slide" data-slide="11">
+  <div class="slide-header">
+    <div class="tag">ANÁLISIS COMPARATIVO</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>ARQUEO SEMANAL</h2>
+      <span class="edit-hint">Edita valores</span>
+    </div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 95%</div>
+
+    <div class="chart-container" style="height:270px;"><canvas id="chart_arqueo_sem"></canvas></div>
+
+    <table class="data-table" id="table_arqueo_sem">
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td class="row-label">2025</td><td>100</td><td>92</td><td>93</td><td>95</td><td>94</td><td>96</td><td>95</td><td>95</td><td>95</td><td>96</td><td>95</td><td>94</td></tr>
+        <tr><td class="row-label">2026</td>
+          <td><input type="number" step="1" value="100" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="97" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="78" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="95" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="96" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="95" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="95" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="95" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S9" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S10" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S11" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S12" onchange="updateArqueoSem()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box red">
+      <strong>Insight:</strong> Caída crítica en Semana 3 (78%). Completa S9-S12 con datos de Marzo.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Datos Operativos — Control y Finanzas — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 12: ROTACIÓN ===== -->
+<div class="slide" data-slide="12">
+  <div class="slide-header">
+    <div class="tag">RECURSOS HUMANOS</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>ANÁLISIS DE ROTACIÓN DE PERSONAL</h2>
+      <span class="edit-hint">Edita valores</span>
+    </div>
+    <div class="kpi-subtitle">Indicador de Retención y Detalle de Salidas (Dic 2025 - Mar 2026) — Meta: &lt;5%</div>
+
+    <div class="row">
+      <div class="col-6">
+        <div style="font-size:12px; font-weight:700; margin-bottom:8px;">EVOLUCIÓN KPI ROTACIÓN (%)</div>
+        <div class="chart-container" style="height:220px;"><canvas id="chart_rotacion"></canvas></div>
+        <table class="data-table" id="table_rotacion" style="margin-top:8px;">
+          <thead><tr><th>MES</th><th>NÓMINA</th><th>RETIRADOS</th><th>KPI %</th><th>META</th></tr></thead>
+          <tbody>
+            <tr><td>Diciembre</td><td>19</td><td>2</td><td>10.5%</td><td>&lt;5%</td></tr>
+            <tr><td>Enero</td><td>19</td><td>4</td><td>21.1%</td><td>&lt;5%</td></tr>
+            <tr><td>Febrero</td><td>19</td><td><input type="number" value="2" style="width:50px;" onchange="updateRotacion()"></td><td id="rot_feb_kpi">10.5%</td><td>&lt;5%</td></tr>
+            <tr><td style="font-weight:700; color:var(--purina-red);">Marzo</td><td>19</td><td><input type="number" value="" placeholder="MAR" style="width:50px;" onchange="updateRotacion()"></td><td id="rot_mar_kpi">—</td><td>&lt;5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-6">
+        <div style="font-size:12px; font-weight:700; margin-bottom:8px;">DETALLE DE SALIDAS (RENUNCIAS) — Total: 7+ Casos</div>
+        <table class="data-table">
+          <thead><tr><th>MES</th><th>CARGO</th><th>NOMBRE</th><th>CAUSA</th></tr></thead>
+          <tbody>
+            <tr><td>Enero</td><td>LÍDER</td><td>HUGO</td><td>RENUNCIA</td></tr>
+            <tr><td>Enero</td><td>COORDINADORA</td><td>ADRIANA</td><td>RENUNCIA</td></tr>
+            <tr><td>Enero</td><td>COORDINADOR</td><td>VICTOR</td><td>RENUNCIA</td></tr>
+            <tr><td>Enero</td><td>AUX. NOCTURNO</td><td>DONILSON</td><td>RENUNCIA</td></tr>
+            <tr><td>Enero</td><td>CONDUCTOR</td><td>N/E</td><td>RENUNCIA</td></tr>
+            <tr><td>Febrero</td><td>HSEQ</td><td>CAREN</td><td>RENUNCIA</td></tr>
+            <tr style="background:#FFF8E1;"><td style="font-weight:700; color:var(--purina-red);">Marzo</td><td colspan="3" style="color:var(--purina-muted); font-style:italic;">Completa con datos del mes</td></tr>
+          </tbody>
+        </table>
+        <div class="insight-box red" style="margin-top:10px;">
+          <strong>Enero: Mes crítico</strong> con 4 renuncias en posiciones clave. Febrero se estabiliza. <strong>Marzo pendiente de cierre.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Gestión de Talento Humano — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 13: PLAN DE ACCIÓN ===== -->
+<div class="slide" data-slide="13">
+  <div class="slide-header">
+    <div class="tag">ESTRATEGIA OPERATIVA</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-title-row">
+      <h2>PLAN DE ACCIÓN ESTRATÉGICO</h2>
+    </div>
+    <div class="kpi-subtitle">Hoja de Ruta Q1 2026 — Iniciativas Clave | META MARZO 2026: <strong style="color:var(--purina-red); font-size:16px;">95%</strong></div>
+
+    <div style="text-align:center; margin:8px 0; font-size:13px; font-weight:700; color:var(--accent-green);">
+      PUNTO DE INFLECCIÓN (ENE 2026): +8.25pp (81.56% → 89.81%)
+    </div>
+
+    <div class="action-grid">
+      <div class="action-col">
+        <h4 style="background:#FDEAEA; color:var(--purina-dark);">EJE 1: EFECTIVIDAD DE ENTREGAS</h4>
+        <div class="action-item high"><strong>Planeación de rutas optimizada</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Limitar las paradas</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Construcción diaria indicador</strong> <span class="status-badge done">COMPLETADA</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item med"><strong>Precisión red de uso</strong><div class="priority">Muy Alto</div></div>
+        <div class="action-item med"><strong>Información en nube y rutas</strong><div class="priority">Medio</div></div>
+        <div class="action-item med"><strong>Cargar según programación</strong> <span class="status-badge progress">EN PROCESO</span></div>
+        <div class="action-item high"><strong>Salidas tempranas (5:00-8:00 am)</strong> <span class="status-badge progress">EN PROCESO</span></div>
+      </div>
+      <div class="action-col">
+        <h4 style="background:#FFF3E0; color:var(--purina-dark);">EJE 2: POSICIONAMIENTO</h4>
+        <div class="action-item high"><strong>Autorizar incremento límite mínimo a 28 vehículos</strong> <span class="status-badge progress">EN PROCESO</span><div class="priority">Muy Alto</div></div>
+        <div class="action-item med"><strong>Cronograma inspecciones</strong><div class="priority">Medio</div></div>
+        <div class="action-item high"><strong>Plataforma Smart Quick</strong> <span class="status-badge progress">EN PROCESO</span><div class="priority">Muy Alto</div></div>
+      </div>
+      <div class="action-col">
+        <h4 style="background:#E8F5E9; color:var(--purina-dark);">EJE 3: PERSONAL</h4>
+        <div class="action-item high"><strong>Contratación y recursos</strong><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Cubrimiento vacantes HSEQ</strong><div class="priority">Muy Alto</div></div>
+        <div class="action-item med"><strong>Capacitación logística optimizada</strong><div class="priority">Muy Alto</div></div>
+        <div class="action-item high"><strong>Equipo completo y operativo</strong> <span class="status-badge progress">EN PROCESO</span><div class="priority">Muy Alto</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px; background:var(--purina-dark); color:white; padding:10px 16px; border-radius:6px; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-size:10px; letter-spacing:1px; opacity:.7; font-family:'Montserrat',sans-serif;">INICIATIVA TRANSVERSAL ESTRATÉGICA</div>
+        <div style="font-size:14px; font-weight:700; font-family:'Montserrat',sans-serif;">Nivelación de tarifas y fletes</div>
+        <div style="font-size:11px; opacity:.8; margin-top:2px;">Estrategia clave para mejorar loyalty y reducir rotación</div>
+      </div>
+      <div style="background:var(--purina-red); padding:6px 14px; border-radius:4px; font-size:11px; font-weight:700;">IMPACTO CRÍTICO</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Gestión Estratégica 2026 — Semana 12</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 14: CARTERA ===== -->
+<div class="slide" data-slide="14">
+  <div class="slide-header">
+    <div class="tag">CARTERA</div>
+    <div class="purina-badge">✦ PURINA</div>
+  </div>
+  <div class="slide-body" style="display:flex; align-items:center; justify-content:center; min-height:500px;">
+    <div style="text-align:center; color:var(--purina-muted);">
+      <div style="font-size:48px; opacity:.3;">📊</div>
+      <h2 style="font-family:'Montserrat',sans-serif; font-size:24px; color:var(--purina-dark); margin:12px 0;">CARTERA</h2>
+      <p style="font-size:13px;">Slide pendiente de datos. Agrega contenido según sea necesario.</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="src">Gestión Estratégica 2026</span>
+    <span class="hashtag">#YosoySupplyChainTeam</span>
+  </div>
+</div>
+
+</div>
+
+<div class="thumb-nav" id="thumbNav"></div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 14;
+const slideNames = [
+  '1. Portada','2. Tendencia','3. Novedades','4. Efect. Sem.',
+  '5. Tiempos','6. Posic. Mes','7. Posic. Sem.',
+  '8. Detalle Posic.','9. Vehículos','10. Arqueo Mes',
+  '11. Arqueo Sem.','12. Rotación','13. Plan Acción','14. Cartera'
+];
+const charts = {};
+
+function initThumbNav() {
+  const nav = document.getElementById('thumbNav');
+  slideNames.forEach((name, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'thumb-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = name;
+    btn.onclick = () => goToSlide(i + 1);
+    nav.appendChild(btn);
+  });
+}
+
+function goToSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+  currentSlide = n;
+  document.querySelector(`.slide[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.thumb-btn')[n-1].classList.add('active');
+  document.getElementById('slideCounter').textContent = `${n} / ${totalSlides}`;
+  renderChartsForSlide(n);
+}
+
+function nextSlide() { if(currentSlide < totalSlides) goToSlide(currentSlide + 1); }
+function prevSlide() { if(currentSlide > 1) goToSlide(currentSlide - 1); }
+document.addEventListener('keydown', e => { if(e.key==='ArrowRight') nextSlide(); if(e.key==='ArrowLeft') prevSlide(); });
+
+function getInputValues(tableId, rowIdx) {
+  const row = document.getElementById(tableId).querySelectorAll('tbody tr')[rowIdx];
+  const vals = [];
+  row.querySelectorAll('td').forEach((cell, i) => {
+    if(i === 0) return;
+    const inp = cell.querySelector('input');
+    if(inp) { const v = parseFloat(inp.value); vals.push(isNaN(v)?null:v); }
+    else { const v = parseFloat(cell.textContent); vals.push(isNaN(v)?null:v); }
+  });
+  return vals;
+}
+
+function timeToDecimal(t) {
+  if(!t||t.trim()==='') return null;
+  const p=t.split(':'); return parseFloat(p[0])+(parseFloat(p[1]||0))/60;
+}
+
+// ===== TENDENCIA =====
+function updateTendencia() {
+  const d26 = getInputValues('table_tendencia',1);
+  const valid = d26.filter(v=>v!==null);
+  if(valid.length>0){
+    const last=valid[valid.length-1]; const gap=(last-98.5).toFixed(1);
+    document.getElementById('kpi_gap_tend').textContent = gap+'%';
+    document.getElementById('kpi_cierre_tend').textContent = last.toFixed(2)+'%';
+    if(valid.length>=2){ const r=(valid[valid.length-1]-valid[0]).toFixed(2); document.getElementById('kpi_recup_tend').textContent=(r>0?'+':'')+r+' pts'; }
+  }
+  if(charts.tendencia){ charts.tendencia.data.datasets[1].data=d26; charts.tendencia.update(); }
+}
+function renderTendencia() {
+  const ctx=document.getElementById('chart_tendencia'); if(!ctx) return;
+  const m=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  const d25=[96.24,96.65,96.70,95.72,95.96,96.24,95.30,93.50,93.13,90.40,86.20,81.00];
+  const d26=getInputValues('table_tendencia',1);
+  if(charts.tendencia) charts.tendencia.destroy();
+  charts.tendencia=new Chart(ctx,{type:'line',data:{labels:m,datasets:[
+    {label:'2025',data:d25,borderColor:'#B0BEC5',backgroundColor:'rgba(176,190,197,.1)',borderWidth:2,pointRadius:3,tension:.3,fill:true},
+    {label:'2026',data:d26,borderColor:'#ED1C24',backgroundColor:'rgba(237,28,36,.08)',borderWidth:3,pointRadius:5,pointBackgroundColor:'#ED1C24',tension:.3,fill:true,spanGaps:false},
+    {label:'Objetivo',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[8,4],pointRadius:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:75,max:100,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  updateTendencia();
+}
+
+// ===== NOVEDADES =====
+function updateNovedades() {
+  const rows=document.getElementById('table_novedades').querySelectorAll('tbody tr');
+  let grand=0; const tots=[];
+  rows.forEach((row,idx)=>{
+    let rt=0; row.querySelectorAll('input').forEach(inp=>{const v=parseFloat(inp.value);if(!isNaN(v))rt+=v;});
+    row.querySelector(`td[id="nov_t${idx+1}"]`).textContent=rt; tots.push(rt); grand+=rt;
+  });
+  document.getElementById('novedades_total').textContent=grand.toLocaleString();
+  const sorted=[...tots].sort((a,b)=>b-a); const top3=sorted.slice(0,3).reduce((a,b)=>a+b,0);
+  document.getElementById('pareto_pct').textContent=(grand>0?Math.round(top3/grand*100):0)+'%';
+  if(charts.novedades){
+    const labels=['CONSEC.','RECIBO','CARGUE','TRÁFICO','PROG.','DRIVER','VEHIC.','CLIMA','FACTURA'];
+    const sd=labels.map((l,i)=>({label:l,val:tots[i]})).sort((a,b)=>b.val-a.val);
+    let cum=0; const cd=sd.map(d=>{cum+=grand>0?d.val/grand*100:0;return cum;});
+    charts.novedades.data.labels=sd.map(d=>d.label);
+    charts.novedades.data.datasets[0].data=sd.map(d=>d.val);
+    charts.novedades.data.datasets[1].data=cd;
+    charts.novedades.update();
+  }
+}
+function renderNovedades() {
+  const ctx=document.getElementById('chart_novedades'); if(!ctx) return;
+  const labels=['CONSEC.','RECIBO','CARGUE','TRÁFICO','PROG.','DRIVER','VEHIC.','CLIMA','FACTURA'];
+  const tots=[619,287,239,206,142,133,52,23,21];
+  const sd=labels.map((l,i)=>({label:l,val:tots[i]})).sort((a,b)=>b.val-a.val);
+  let cum=0;const total=tots.reduce((a,b)=>a+b,0);
+  const cd=sd.map(d=>{cum+=d.val/total*100;return cum;});
+  if(charts.novedades) charts.novedades.destroy();
+  charts.novedades=new Chart(ctx,{data:{labels:sd.map(d=>d.label),datasets:[
+    {type:'bar',label:'Casos',data:sd.map(d=>d.val),backgroundColor:'#ED1C24',borderRadius:4,yAxisID:'y'},
+    {type:'line',label:'% Acum.',data:cd,borderColor:'#1A1A2E',borderWidth:2,pointRadius:3,yAxisID:'y1',tension:.3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,position:'left',ticks:{font:{size:9}}},y1:{min:0,max:100,position:'right',grid:{display:false},ticks:{callback:v=>v+'%',font:{size:9}}},x:{ticks:{font:{size:8},maxRotation:45}}}}});
+  updateNovedades();
+}
+
+// ===== EFECTIVIDAD SEMANAL (S1-S12) =====
+function updateEfectSem() {
+  const d26=getInputValues('table_efect_sem',1);
+  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03];
+  let gs=0,gc=0;
+  d26.forEach((v,i)=>{if(v!==null&&d25[i]){gs+=v-d25[i];gc++;}});
+  document.getElementById('gap_sem_label').textContent=gc>0?(gs/gc).toFixed(1)+' pp vs Año Anterior (semanas con datos)':'—';
+  if(charts.efectSem){charts.efectSem.data.datasets[1].data=d26;charts.efectSem.update();}
+}
+function renderEfectSem() {
+  const ctx=document.getElementById('chart_efect_sem'); if(!ctx) return;
+  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03];
+  const d26=getInputValues('table_efect_sem',1);
+  if(charts.efectSem) charts.efectSem.destroy();
+  charts.efectSem=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
+    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
+    {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3},
+    {type:'line',label:'Target',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:105,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  updateEfectSem();
+}
+
+// ===== TIEMPOS =====
+function updateTiempos(){renderTiempos();}
+function renderTiempos() {
+  const ctx=document.getElementById('chart_tiempos'); if(!ctx) return;
+  const m=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  const d25=[18.175,18.32,18.54,18.47,18.68,18.71,18.59,18.97,18.96,19.38,19.42,19.17];
+  const inputs=document.getElementById('table_tiempos').querySelectorAll('tbody tr:nth-child(2) input');
+  const d26=[]; inputs.forEach(inp=>d26.push(timeToDecimal(inp.value)));
+  if(charts.tiempos) charts.tiempos.destroy();
+  charts.tiempos=new Chart(ctx,{type:'bar',data:{labels:m,datasets:[
+    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
+    {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{min:17.5,max:20.5,ticks:{callback:v=>{const h=Math.floor(v);const mn=Math.round((v-h)*60);return h+':'+(mn<10?'0':'')+mn;},font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+}
+
+// ===== GENERIC BAR COMPARISON =====
+function renderBarComp(key,canvasId,tableId,labels,d25,target,yMin,yMax) {
+  const ctx=document.getElementById(canvasId); if(!ctx) return;
+  const d26=getInputValues(tableId,1);
+  if(charts[key]) charts[key].destroy();
+  charts[key]=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[
+    {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
+    {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3},
+    {type:'line',label:'Target',data:Array(labels.length).fill(target),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:yMin,max:yMax,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+}
+
+// Posic Mes (12 meses)
+function updatePosicMes(){renderPosicMes();}
+function renderPosicMes(){
+  renderBarComp('posicMes','chart_posic_mes','table_posic_mes',
+    ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+    [100,100,100,100,99,98,99,96,96,99,98,97],100,80,102);
+}
+
+// Posic Sem (S1-S12)
+function updatePosicSem(){renderPosicSem();}
+function renderPosicSem(){
+  renderBarComp('posicSem','chart_posic_sem','table_posic_sem',
+    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
+    [100,100,100,100,100,100,100,100,99,100,100,100],100,75,102);
+}
+
+// Arqueo Mes
+function updateArqueoMes(){renderArqueoMes();}
+function renderArqueoMes(){
+  renderBarComp('arqueoMes','chart_arqueo_mes','table_arqueo_mes',
+    ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+    [95,95,95,95,95,92,90,93,73,96,93,97],95,65,102);
+}
+
+// Arqueo Sem (S1-S12)
+function updateArqueoSem(){renderArqueoSem();}
+function renderArqueoSem(){
+  renderBarComp('arqueoSem','chart_arqueo_sem','table_arqueo_sem',
+    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
+    [100,92,93,95,94,96,95,95,95,96,95,94],95,70,102);
+}
+
+// ===== DETALLE POSIC =====
+function renderDetallePosic() {
+  const ctx=document.getElementById('chart_detalle_posic'); if(!ctx) return;
+  const w=['S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const prom=[16.8,27.4,26.7,28.2,26.0,27.8,29.2,null,null,null,null];
+  const max=[20,34,29,32,34,32,32,null,null,null,null];
+  if(charts.detallePosic) charts.detallePosic.destroy();
+  charts.detallePosic=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
+    {label:'Prom. Solicitados',data:prom,backgroundColor:'#ED1C24',borderRadius:3},
+    {label:'Máx. Solicitados',data:max,backgroundColor:'rgba(26,26,46,.2)',borderRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{beginAtZero:true,ticks:{font:{size:9}}},x:{ticks:{font:{size:10}}}}}});
+}
+
+// ===== VEHICULOS + DONUT =====
+function renderVehiculos() {
+  const ctx=document.getElementById('chart_vehiculos'); if(!ctx) return;
+  const w=['S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const prom=[16.8,27.4,26.7,28.2,26.0,27.8,29.2,null,null,null,null];
+  const max=[20,34,29,32,34,32,32,null,null,null,null];
+  if(charts.vehiculos) charts.vehiculos.destroy();
+  charts.vehiculos=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
+    {label:'Prom. Target',data:prom,backgroundColor:'#ED1C24',borderRadius:4},
+    {label:'Máx. Target',data:max,backgroundColor:'#B0BEC5',borderRadius:4}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{beginAtZero:true},x:{ticks:{font:{size:10}}}}}});
+
+  const ctxD=document.getElementById('chart_flota_donut'); if(!ctxD) return;
+  if(charts.flotaDonut) charts.flotaDonut.destroy();
+  charts.flotaDonut=new Chart(ctxD,{type:'doughnut',data:{
+    labels:['Estándar (49%)','30% más (22%)','20% más (17%)','10% más (7%)','Otros (5%)'],
+    datasets:[{data:[49,22,17,7,5],backgroundColor:['#ED1C24','#F39C12','#FFD100','#B0BEC5','#E0E0E0'],borderWidth:0}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:12}}}}});
+}
+
+// ===== ROTACIÓN =====
+function updateRotacion() {
+  const table=document.getElementById('table_rotacion');
+  const febInp=table.querySelectorAll('tbody tr:nth-child(3) input')[0];
+  const marInp=table.querySelectorAll('tbody tr:nth-child(4) input')[0];
+  const fv=parseFloat(febInp.value), mv=parseFloat(marInp.value);
+  document.getElementById('rot_feb_kpi').textContent=!isNaN(fv)?(fv/19*100).toFixed(1)+'%':'—';
+  document.getElementById('rot_mar_kpi').textContent=!isNaN(mv)?(mv/19*100).toFixed(1)+'%':'—';
+  renderRotacion();
+}
+function renderRotacion() {
+  const ctx=document.getElementById('chart_rotacion'); if(!ctx) return;
+  const table=document.getElementById('table_rotacion');
+  const fv=parseFloat(table.querySelectorAll('tbody tr:nth-child(3) input')[0].value);
+  const mv=parseFloat(table.querySelectorAll('tbody tr:nth-child(4) input')[0].value);
+  const data=[10.5,21.1,!isNaN(fv)?fv/19*100:null,!isNaN(mv)?mv/19*100:null];
+  const colors=data.map(v=>v!==null&&v>5?'#ED1C24':(v!==null?'#27AE60':'#ddd'));
+  if(charts.rotacion) charts.rotacion.destroy();
+  charts.rotacion=new Chart(ctx,{type:'bar',data:{labels:['DIC','ENE','FEB','MAR'],datasets:[
+    {label:'KPI %',data:data,backgroundColor:colors,borderRadius:4},
+    {type:'line',label:'Meta 5%',data:[5,5,5,5],borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:25,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+}
+
+// ===== RENDER ROUTER =====
+function renderChartsForSlide(n) {
+  setTimeout(()=>{
+    switch(n){
+      case 2:renderTendencia();break; case 3:renderNovedades();break;
+      case 4:renderEfectSem();break; case 5:renderTiempos();break;
+      case 6:renderPosicMes();break; case 7:renderPosicSem();break;
+      case 8:renderDetallePosic();break; case 9:renderVehiculos();break;
+      case 10:renderArqueoMes();break; case 11:renderArqueoSem();break;
+      case 12:renderRotacion();break;
+    }
+  },50);
+}
+
+initThumbNav();
+</script>
+</body>
 </html>
