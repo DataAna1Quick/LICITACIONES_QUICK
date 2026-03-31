@@ -1,33 +1,3 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirigiendo al dashboard principal...</title>
-  <meta http-equiv="refresh" content="0; url=./nestle_purina_dashboard_s12.html" />
-  <script>
-    window.location.replace("./nestle_purina_dashboard_s12.html");
-  </script>
-</head>
-<body>
-  <p>Abriendo dashboard principal...</p>
-</body>
-</html>
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirigiendo al dashboard principal...</title>
-  <meta http-equiv="refresh" content="0; url=./nestle_purina_dashboard_s12.html" />
-  <script>
-    window.location.replace("./nestle_purina_dashboard_s12.html");
-  </script>
-</head>
-<body>
-  <p>Abriendo dashboard principal...</p>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -563,7 +533,7 @@ body.readonly-mode .btn-clear { display: none !important; }
   </div>
 </div>
 
-<!-- ===== SLIDE 4: EFECTIVIDAD SEMANAL (S1-S12) ===== -->
+<!-- ===== SLIDE 4: EFECTIVIDAD SEMANAL (S1-S20) ===== -->
 <div class="slide" data-slide="4">
   <div class="slide-header">
     <div class="tag">ANÁLISIS COMPARATIVO</div>
@@ -574,14 +544,14 @@ body.readonly-mode .btn-clear { display: none !important; }
       <h2>EFECTIVIDAD DE ENTREGAS SEMANAL</h2>
       <span class="edit-hint">Edita los valores</span>
     </div>
-    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 98.50%</div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-20) — Target: 98.50%</div>
 
     <div class="chart-container" style="height:260px;"><canvas id="chart_efect_sem"></canvas></div>
 
     <table class="data-table" id="table_efect_sem">
-      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr></thead>
       <tbody>
-        <tr><td class="row-label">2025</td><td>95.57</td><td>96.69</td><td>98.01</td><td>98.09</td><td>98.62</td><td>98.91</td><td>99.15</td><td>97.87</td><td>95.09</td><td>95.87</td><td>96.12</td><td>97.03</td></tr>
+        <tr><td class="row-label">2025</td><td>95.57</td><td>96.69</td><td>98.01</td><td>98.09</td><td>98.62</td><td>98.91</td><td>99.15</td><td>97.87</td><td>95.09</td><td>95.87</td><td>96.12</td><td>97.03</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td class="row-label">2026</td>
           <td><input type="number" step="0.01" value="" placeholder="—" onchange="updateEfectSem()"></td>
           <td><input type="number" step="0.01" value="89.00" onchange="updateEfectSem()"></td>
@@ -595,6 +565,14 @@ body.readonly-mode .btn-clear { display: none !important; }
           <td><input type="number" step="0.01" value="" placeholder="S10" onchange="updateEfectSem()"></td>
           <td><input type="number" step="0.01" value="" placeholder="S11" onchange="updateEfectSem()"></td>
           <td><input type="number" step="0.01" value="" placeholder="S12" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S13" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S14" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S15" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S16" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S17" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S18" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S19" onchange="updateEfectSem()"></td>
+          <td><input type="number" step="0.01" value="" placeholder="S20" onchange="updateEfectSem()"></td>
         </tr>
       </tbody>
     </table>
@@ -700,7 +678,7 @@ body.readonly-mode .btn-clear { display: none !important; }
   </div>
 </div>
 
-<!-- ===== SLIDE 7: POSICIONAMIENTO SEMANAL (S1-S12) ===== -->
+<!-- ===== SLIDE 7: POSICIONAMIENTO SEMANAL (S1-S20) ===== -->
 <div class="slide" data-slide="7">
   <div class="slide-header">
     <div class="tag">KPI: RASTREO SATELITAL</div>
@@ -711,14 +689,14 @@ body.readonly-mode .btn-clear { display: none !important; }
       <h2>POSICIONAMIENTO VEHICULAR SEMANAL</h2>
       <span class="edit-hint">Edita valores</span>
     </div>
-    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 100%</div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-20) — Target: 100%</div>
 
     <div class="chart-container" style="height:270px;"><canvas id="chart_posic_sem"></canvas></div>
 
     <table class="data-table" id="table_posic_sem">
-      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr></thead>
       <tbody>
-        <tr><td class="row-label">2025</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>99</td><td>100</td><td>100</td><td>100</td></tr>
+        <tr><td class="row-label">2025</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>99</td><td>100</td><td>100</td><td>100</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td class="row-label">2026</td>
           <td><input type="number" step="1" value="" placeholder="—" onchange="updatePosicSem()"></td>
           <td><input type="number" step="1" value="100" onchange="updatePosicSem()"></td>
@@ -732,11 +710,19 @@ body.readonly-mode .btn-clear { display: none !important; }
           <td><input type="number" step="1" value="" placeholder="S10" onchange="updatePosicSem()"></td>
           <td><input type="number" step="1" value="" placeholder="S11" onchange="updatePosicSem()"></td>
           <td><input type="number" step="1" value="" placeholder="S12" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S13" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S14" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S15" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S16" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S17" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S18" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S19" onchange="updatePosicSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S20" onchange="updatePosicSem()"></td>
         </tr>
       </tbody>
     </table>
     <div class="insight-box red">
-      <strong>Análisis:</strong> Desviación crítica en Semana 3 (85%). Resto con alta adherencia al objetivo. Completa S9-S12 con datos de Marzo.
+      <strong>Análisis:</strong> Desviación crítica en Semana 3 (85%). Resto con alta adherencia al objetivo. Completa S9-S20 con datos de Marzo.
     </div>
   </div>
   <div class="slide-footer">
@@ -745,7 +731,7 @@ body.readonly-mode .btn-clear { display: none !important; }
   </div>
 </div>
 
-<!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (S1-S12) ===== -->
+<!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (S1-S20) ===== -->
 <div class="slide" data-slide="8">
   <div class="slide-header">
     <div class="tag">KPI: DETALLE POSICIONAMIENTO</div>
@@ -772,7 +758,7 @@ body.readonly-mode .btn-clear { display: none !important; }
       <div class="col-6">
         <div style="font-size:11px; font-weight:700; color:var(--purina-dark); margin-bottom:6px;">COMPARATIVA 2025 vs 2026</div>
         <div class="kpi-cards">
-          <div class="kpi-card"><div class="kpi-card-label">PROM. 2025 (S1-S12)</div><div class="kpi-card-value" id="dp_prom25">—</div></div>
+          <div class="kpi-card"><div class="kpi-card-label">PROM. 2025 (S1-S20)</div><div class="kpi-card-value" id="dp_prom25">—</div></div>
           <div class="kpi-card"><div class="kpi-card-label">PROM. 2026 (con datos)</div><div class="kpi-card-value" id="dp_prom26">—</div></div>
           <div class="kpi-card blue"><div class="kpi-card-label">DIFERENCIA</div><div class="kpi-card-value" id="dp_diff" style="color:var(--accent-blue);">—</div></div>
         </div>
@@ -788,7 +774,7 @@ body.readonly-mode .btn-clear { display: none !important; }
   </div>
 </div>
 
-<!-- ===== SLIDE 9: CANT. VEHÍCULOS (S1-S12) ===== -->
+<!-- ===== SLIDE 9: CANT. VEHÍCULOS (S1-S20) ===== -->
 <div class="slide" data-slide="9">
   <div class="slide-header">
     <div class="tag">KPI: FLOTA</div>
@@ -799,7 +785,7 @@ body.readonly-mode .btn-clear { display: none !important; }
       <h2>CANTIDAD VEHÍCULOS POSICIONADOS 2026</h2>
       <span class="edit-hint">Edita valores</span>
     </div>
-    <div class="kpi-subtitle">Evolución Semanal de Flota (S1-S12) — Datos editables, análisis dinámico</div>
+    <div class="kpi-subtitle">Evolución Semanal de Flota (S1-S20) — Datos editables, análisis dinámico</div>
 
     <div class="kpi-cards">
       <div class="kpi-card"><div class="kpi-card-label">PROM. SEMANAL</div><div class="kpi-card-value" id="vh_prom">—</div><div class="kpi-card-sub">Vehículos promedio</div></div>
@@ -819,7 +805,7 @@ body.readonly-mode .btn-clear { display: none !important; }
     </div>
 
     <table class="data-table" id="table_vehiculos">
-      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr></thead>
       <tbody>
         <tr><td class="row-label">PROM.</td>
           <td><input type="number" step="0.1" value="" placeholder="—" onchange="updateVehiculos()"></td>
@@ -834,6 +820,14 @@ body.readonly-mode .btn-clear { display: none !important; }
           <td><input type="number" step="0.1" value="" placeholder="S10" onchange="updateVehiculos()"></td>
           <td><input type="number" step="0.1" value="" placeholder="S11" onchange="updateVehiculos()"></td>
           <td><input type="number" step="0.1" value="" placeholder="S12" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S13" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S14" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S15" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S16" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S17" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S18" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S19" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="0.1" value="" placeholder="S20" onchange="updateVehiculos()"></td>
         </tr>
         <tr><td class="row-label">MÁX.</td>
           <td><input type="number" step="1" value="" placeholder="—" onchange="updateVehiculos()"></td>
@@ -848,6 +842,14 @@ body.readonly-mode .btn-clear { display: none !important; }
           <td><input type="number" step="1" value="" placeholder="S10" onchange="updateVehiculos()"></td>
           <td><input type="number" step="1" value="" placeholder="S11" onchange="updateVehiculos()"></td>
           <td><input type="number" step="1" value="" placeholder="S12" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S13" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S14" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S15" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S16" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S17" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S18" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S19" onchange="updateVehiculos()"></td>
+          <td><input type="number" step="1" value="" placeholder="S20" onchange="updateVehiculos()"></td>
         </tr>
       </tbody>
     </table>
@@ -906,7 +908,7 @@ body.readonly-mode .btn-clear { display: none !important; }
   </div>
 </div>
 
-<!-- ===== SLIDE 11: ARQUEO SEMANAL (S1-S12) ===== -->
+<!-- ===== SLIDE 11: ARQUEO SEMANAL (S1-S20) ===== -->
 <div class="slide" data-slide="11">
   <div class="slide-header">
     <div class="tag">ANÁLISIS COMPARATIVO</div>
@@ -917,14 +919,14 @@ body.readonly-mode .btn-clear { display: none !important; }
       <h2>ARQUEO SEMANAL</h2>
       <span class="edit-hint">Edita valores</span>
     </div>
-    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 95%</div>
+    <div class="kpi-subtitle">Comparativa 2025 vs 2026 (Semanas 1-20) — Target: 95%</div>
 
     <div class="chart-container" style="height:270px;"><canvas id="chart_arqueo_sem"></canvas></div>
 
     <table class="data-table" id="table_arqueo_sem">
-      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <thead><tr><th>SEM</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr></thead>
       <tbody>
-        <tr><td class="row-label">2025</td><td>100</td><td>92</td><td>93</td><td>95</td><td>94</td><td>96</td><td>95</td><td>95</td><td>95</td><td>96</td><td>95</td><td>94</td></tr>
+        <tr><td class="row-label">2025</td><td>100</td><td>92</td><td>93</td><td>95</td><td>94</td><td>96</td><td>95</td><td>95</td><td>95</td><td>96</td><td>95</td><td>94</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
         <tr><td class="row-label">2026</td>
           <td><input type="number" step="1" value="100" onchange="updateArqueoSem()"></td>
           <td><input type="number" step="1" value="97" onchange="updateArqueoSem()"></td>
@@ -938,11 +940,19 @@ body.readonly-mode .btn-clear { display: none !important; }
           <td><input type="number" step="1" value="" placeholder="S10" onchange="updateArqueoSem()"></td>
           <td><input type="number" step="1" value="" placeholder="S11" onchange="updateArqueoSem()"></td>
           <td><input type="number" step="1" value="" placeholder="S12" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S13" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S14" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S15" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S16" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S17" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S18" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S19" onchange="updateArqueoSem()"></td>
+          <td><input type="number" step="1" value="" placeholder="S20" onchange="updateArqueoSem()"></td>
         </tr>
       </tbody>
     </table>
     <div class="insight-box red">
-      <strong>Insight:</strong> Caída crítica en Semana 3 (78%). Completa S9-S12 con datos de Marzo.
+      <strong>Insight:</strong> Caída crítica en Semana 3 (78%). Completa S9-S20 con datos de Marzo.
     </div>
   </div>
   <div class="slide-footer">
@@ -1330,10 +1340,10 @@ function renderNovedades() {
   updateNovedades();
 }
 
-// ===== EFECTIVIDAD SEMANAL (S1-S12) =====
+// ===== EFECTIVIDAD SEMANAL (S1-S20) =====
 function updateEfectSem() {
   const d26=getInputValues('table_efect_sem',1);
-  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03];
+  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03,null,null,null,null,null,null,null,null];
   let gs=0,gc=0;
   d26.forEach((v,i)=>{if(v!==null&&d25[i]){gs+=v-d25[i];gc++;}});
   document.getElementById('gap_sem_label').textContent=gc>0?(gs/gc).toFixed(1)+' pp vs Año Anterior (semanas con datos)':'—';
@@ -1342,14 +1352,14 @@ function updateEfectSem() {
 }
 function renderEfectSem() {
   const ctx=document.getElementById('chart_efect_sem'); if(!ctx) return;
-  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
-  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03];
+  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12','S13','S14','S15','S16','S17','S18','S19','S20'];
+  const d25=[95.57,96.69,98.01,98.09,98.62,98.91,99.15,97.87,95.09,95.87,96.12,97.03,null,null,null,null,null,null,null,null];
   const d26=getInputValues('table_efect_sem',1);
   if(charts.efectSem) charts.efectSem.destroy();
   charts.efectSem=new Chart(ctx,{type:'bar',data:{labels:w,datasets:[
     {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
     {label:'2026',data:d26,backgroundColor:'#ED1C24',borderRadius:3},
-    {type:'line',label:'Target',data:Array(12).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
+    {type:'line',label:'Target',data:Array(20).fill(98.5),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:105,ticks:{callback:v=>v+'%',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
   updateEfectSem();
 }
@@ -1391,12 +1401,12 @@ function renderPosicMes(){
     [100,100,100,100,99,98,99,96,96,99,98,97],100,80,102);
 }
 
-// Posic Sem (S1-S12)
+// Posic Sem (S1-S20)
 function updatePosicSem(){renderPosicSem();renderDetallePosic();saveAllData();}
 function renderPosicSem(){
   renderBarComp('posicSem','chart_posic_sem','table_posic_sem',
-    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
-    [100,100,100,100,100,100,100,100,99,100,100,100],100,75,102);
+    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12','S13','S14','S15','S16','S17','S18','S19','S20'],
+    [100,100,100,100,100,100,100,100,99,100,100,100,null,null,null,null,null,null,null,null],100,75,102);
 }
 
 // Arqueo Mes
@@ -1407,19 +1417,19 @@ function renderArqueoMes(){
     [95,95,95,95,95,92,90,93,73,96,93,97],95,65,102);
 }
 
-// Arqueo Sem (S1-S12)
+// Arqueo Sem (S1-S20)
 function updateArqueoSem(){renderArqueoSem();saveAllData();}
 function renderArqueoSem(){
   renderBarComp('arqueoSem','chart_arqueo_sem','table_arqueo_sem',
-    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'],
-    [100,92,93,95,94,96,95,95,95,96,95,94],95,70,102);
+    ['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12','S13','S14','S15','S16','S17','S18','S19','S20'],
+    [100,92,93,95,94,96,95,95,95,96,95,94,null,null,null,null,null,null,null,null],95,70,102);
 }
 
 // ===== DETALLE POSIC (DINÁMICO desde Posic. Semanal) =====
 function renderDetallePosic() {
-  const d25=[100,100,100,100,100,100,100,100,99,100,100,100];
+  const d25=[100,100,100,100,100,100,100,100,99,100,100,100,null,null,null,null,null,null,null,null];
   const d26=getInputValues('table_posic_sem',1);
-  const weeks=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const weeks=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12','S13','S14','S15','S16','S17','S18','S19','S20'];
   const valid26=d26.map((v,i)=>({v:v,i:i})).filter(x=>x.v!==null);
   const count=valid26.length;
   const avg=count>0?(valid26.reduce((s,x)=>s+x.v,0)/count):0;
@@ -1452,14 +1462,14 @@ function renderDetallePosic() {
   charts.detallePosic=new Chart(ctx,{type:'bar',data:{labels:weeks,datasets:[
     {label:'2025',data:d25,backgroundColor:'#B0BEC5',borderRadius:3},
     {label:'2026',data:d26,backgroundColor:d26.map(v=>v!==null&&v<95?'#ED1C24':v!==null?'#27AE60':'#ddd'),borderRadius:3},
-    {type:'line',label:'Target 100%',data:Array(12).fill(100),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
+    {type:'line',label:'Target 100%',data:Array(20).fill(100),borderColor:'#FFD100',borderWidth:2,borderDash:[6,3],pointRadius:0,datalabels:{display:false}}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9}}}},scales:{y:{min:75,max:105,ticks:{callback:v=>v+'%',font:{size:9}}},x:{ticks:{font:{size:10}}}}}});
 }
 
 // ===== VEHICULOS + DONUT (DINÁMICO desde tabla editable) =====
 function updateVehiculos(){renderVehiculos();saveAllData();}
 function renderVehiculos() {
-  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12'];
+  const w=['S1','S2','S3','S4','S5','S6','S7','S8','S9','S10','S11','S12','S13','S14','S15','S16','S17','S18','S19','S20'];
   const prom=getInputValues('table_vehiculos',0);
   const max=getInputValues('table_vehiculos',1);
   const validP=prom.filter(v=>v!==null);
