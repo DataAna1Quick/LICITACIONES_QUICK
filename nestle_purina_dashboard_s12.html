@@ -1,0 +1,3944 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nestlé Purina - KPIs Operativos 2025-2026 — Semana 20</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap");
+      :root {
+        --pr: #ed1c24;
+        --pdr: #c41018;
+        --py: #ffd100;
+        --dk: #1a1a2e;
+        --gr: #2d2d3f;
+        --lg: #f5f5f7;
+        --wh: #ffffff;
+        --tx: #333340;
+        --mt: #7a7a8e;
+        --gn: #27ae60;
+        --or: #f39c12;
+        --bl: #2980b9;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Open Sans", sans-serif;
+        background: #0d0d1a;
+        color: var(--tx);
+        overflow-x: hidden;
+      }
+
+      .nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(26, 26, 46, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 2px solid var(--pr);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 24px;
+        height: 56px;
+      }
+      .nav-bar .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-logo {
+        background: var(--pr);
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 900;
+        padding: 4px 12px;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+      .brand-title {
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .nav-btn:hover {
+        background: var(--pr);
+        border-color: var(--pr);
+      }
+      .slide-counter {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+        font-family: "Montserrat", sans-serif;
+        min-width: 80px;
+        text-align: center;
+      }
+      .week-badge {
+        background: var(--py);
+        color: var(--dk);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 800;
+      }
+
+      .slides-wrapper {
+        margin-top: 72px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 60px;
+      }
+      .slide {
+        width: 1200px;
+        min-height: 675px;
+        background: var(--wh);
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        position: relative;
+        display: none;
+        flex-direction: column;
+      }
+      .slide.active {
+        display: flex;
+      }
+
+      .slide-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 28px;
+        background: var(--wh);
+        border-bottom: 1px solid #eee;
+      }
+      .slide-header .tag {
+        font-family: "Montserrat", sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--mt);
+        text-transform: uppercase;
+      }
+      .purina-badge {
+        background: var(--pr);
+        color: white;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 900;
+        padding: 4px 14px;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      .slide-footer {
+        margin-top: auto;
+        padding: 8px 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 3px solid var(--pr);
+        background: linear-gradient(
+          90deg,
+          var(--pr) 0%,
+          var(--pr) 60%,
+          var(--py) 60%,
+          var(--py) 100%
+        );
+      }
+      .slide-footer .src {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .slide-footer .hashtag {
+        font-size: 10px;
+        color: var(--dk);
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+
+      .slide-body {
+        padding: 20px 28px;
+        flex: 1;
+      }
+
+      .title-slide .slide-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px 48px;
+      }
+      .title-slide h1 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 900;
+        font-size: 42px;
+        color: var(--dk);
+        line-height: 1.1;
+      }
+      .title-slide h1 span {
+        color: var(--pr);
+      }
+      .title-slide .subtitle {
+        font-size: 14px;
+        color: var(--mt);
+        margin-top: 16px;
+        border-left: 3px solid var(--pr);
+        padding-left: 12px;
+      }
+      .meeting-label {
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--mt);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .kpi-title-row {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 4px;
+      }
+      .kpi-title-row h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--dk);
+      }
+      .kpi-subtitle {
+        font-size: 12px;
+        color: var(--mt);
+        margin-bottom: 14px;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+        margin: 8px 0;
+      }
+      .data-table th {
+        background: var(--dk);
+        color: white;
+        padding: 6px 5px;
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
+      .data-table td {
+        padding: 5px 4px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        font-size: 11px;
+      }
+      .data-table tr:nth-child(even) {
+        background: #f9f9fb;
+      }
+      .data-table input {
+        width: 58px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 3px 3px;
+        text-align: center;
+        font-size: 11px;
+        font-family: "Open Sans", sans-serif;
+        transition: border-color 0.2s;
+      }
+      .data-table input:focus {
+        outline: none;
+        border-color: var(--pr);
+        box-shadow: 0 0 0 2px rgba(237, 28, 36, 0.15);
+      }
+      .data-table .row-label {
+        text-align: left;
+        font-weight: 700;
+        color: var(--dk);
+        background: #f0f0f5;
+        white-space: nowrap;
+        padding-left: 8px;
+      }
+
+      .chart-container {
+        position: relative;
+        width: 100%;
+        margin: 8px 0;
+      }
+
+      .kpi-cards {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .kpi-card {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--lg);
+        border-left: 4px solid var(--pr);
+      }
+      .kpi-card.green {
+        border-left-color: var(--gn);
+      }
+      .kpi-card.orange {
+        border-left-color: var(--or);
+      }
+      .kpi-card.blue {
+        border-left-color: var(--bl);
+      }
+      .kpi-card .kpi-card-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--mt);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: "Montserrat", sans-serif;
+      }
+      .kpi-card .kpi-card-value {
+        font-size: 24px;
+        font-weight: 900;
+        color: var(--dk);
+        font-family: "Montserrat", sans-serif;
+        margin-top: 2px;
+      }
+      .kpi-card .kpi-card-value.red {
+        color: var(--pr);
+      }
+      .kpi-card .kpi-card-value.green {
+        color: var(--gn);
+      }
+      .kpi-card .kpi-card-sub {
+        font-size: 9px;
+        color: var(--mt);
+        margin-top: 2px;
+      }
+
+      .row {
+        display: flex;
+        gap: 20px;
+      }
+      .col-6 {
+        flex: 1;
+      }
+      .col-7 {
+        flex: 1.4;
+      }
+      .col-5 {
+        flex: 0.8;
+      }
+
+      .chart-legend {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        font-size: 11px;
+        margin: 6px 0;
+      }
+      .chart-legend .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .chart-legend .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+      }
+
+      .insight-box {
+        background: #fff8e1;
+        border-left: 4px solid var(--py);
+        padding: 10px 14px;
+        border-radius: 0 6px 6px 0;
+        margin: 10px 0;
+        font-size: 11px;
+        color: var(--tx);
+      }
+      .insight-box.red {
+        background: #fff0f0;
+        border-left-color: var(--pr);
+      }
+      .insight-box strong {
+        color: var(--dk);
+      }
+
+      .edit-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        color: var(--bl);
+        font-weight: 600;
+        margin-left: 8px;
+      }
+      .edit-hint::before {
+        content: "✎";
+        font-size: 12px;
+      }
+
+      .action-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+      }
+      .action-col h4 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        padding: 6px 10px;
+        border-radius: 4px;
+      }
+      .action-item {
+        padding: 8px 10px;
+        background: #f9f9fb;
+        border-radius: 6px;
+        font-size: 11px;
+        margin-bottom: 6px;
+        border-left: 3px solid #ddd;
+      }
+      .action-item.high {
+        border-left-color: var(--pr);
+      }
+      .action-item.med {
+        border-left-color: var(--or);
+      }
+      .action-item .priority {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--pr);
+        text-transform: uppercase;
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 9px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+      }
+      .status-badge.done {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .status-badge.progress {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .thumb-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 46, 0.95);
+        backdrop-filter: blur(12px);
+        display: flex;
+        gap: 4px;
+        padding: 8px 16px;
+        overflow-x: auto;
+        z-index: 100;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .thumb-btn {
+        min-width: 80px;
+        padding: 4px 10px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 10px;
+        font-family: "Montserrat", sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+      .thumb-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+      }
+      .thumb-btn.active {
+        background: var(--pr);
+        color: white;
+        border-color: var(--pr);
+      }
+
+      .sync-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #e3f2fd;
+        color: #1565c0;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 9px;
+        font-weight: 700;
+        font-family: "Montserrat", sans-serif;
+      }
+      .sync-badge::before {
+        content: "⟳";
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <div class="brand">
+        <div class="brand-logo">✦ PURINA</div>
+        <div class="brand-title">
+          INDICADORES OPERATIVOS 2025–2026 | Dashboard Interactivo
+        </div>
+      </div>
+      <div class="nav-controls">
+        <div class="week-badge">SEMANA 20 — MARZO 2026</div>
+        <button class="nav-btn" onclick="prevSlide()">◂ Anterior</button>
+        <span class="slide-counter" id="slideCounter">1 / 14</span>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente ▸</button>
+      </div>
+    </div>
+
+    <div class="slides-wrapper" id="slidesWrapper">
+      <!-- ===== SLIDE 1: PORTADA ===== -->
+      <div class="slide title-slide active" data-slide="1">
+        <div class="slide-header">
+          <div class="tag">REUNIÓN EJECUTIVA DE LOGÍSTICA</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="meeting-label">REUNIÓN EJECUTIVA DE LOGÍSTICA</div>
+          <h1>INDICADORES<br />OPERATIVOS<br /><span>2025 — 2026</span></h1>
+          <div class="subtitle">
+            <strong>KPI: Efectividad de Entregas</strong><br />Análisis de
+            Tendencias y Desempeño<br /><strong style="color: var(--pr)"
+              >Corte: Semana 20 — Marzo 2026</strong
+            >
+          </div>
+          <div
+            style="
+              margin-top: 24px;
+              font-size: 13px;
+              color: var(--pr);
+              font-weight: 700;
+              font-family: &quot;Montserrat&quot;, sans-serif;
+            "
+          >
+            #YosoySupplyChainTeam
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Dashboard Interactivo — Datos Editables — Corte Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 2: TENDENCIA MENSUAL ===== -->
+      <div class="slide" data-slide="2">
+        <div class="slide-header">
+          <div class="tag">ANÁLISIS DE DESEMPEÑO</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>TENDENCIA MENSUAL 2025–2026</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            KPI: Efectividad de Entregas vs Objetivo (98.5%) — Datos hasta Marzo
+            2026
+          </div>
+          <div class="row">
+            <div class="col-7">
+              <div class="chart-container" style="height: 270px">
+                <canvas id="chart_tendencia"></canvas>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="kpi-cards" style="flex-direction: column">
+                <div class="kpi-card">
+                  <div class="kpi-card-label">GAP VS OBJETIVO</div>
+                  <div class="kpi-card-value red" id="kpi_gap_tend">—</div>
+                  <div class="kpi-card-sub">
+                    Cierre: <span id="kpi_cierre_tend">—</span> (Meta: 98.5%)
+                  </div>
+                </div>
+                <div class="kpi-card green">
+                  <div class="kpi-card-label">RECUPERACIÓN YTD</div>
+                  <div class="kpi-card-value green" id="kpi_recup_tend">—</div>
+                  <div class="kpi-card-sub">Mejora Ene → último dato 2026</div>
+                </div>
+              </div>
+              <div class="insight-box">
+                <strong>IMPACTO Q4 2025:</strong> Desaceleración desde 90.4%
+                (Oct) hasta 81.0% (Dic).
+              </div>
+            </div>
+          </div>
+          <table class="data-table" id="table_tendencia">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ENE</th>
+                <th>FEB</th>
+                <th>MAR</th>
+                <th>ABR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AGO</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>96.24</td>
+                <td>96.65</td>
+                <td>96.70</td>
+                <td>95.72</td>
+                <td>95.96</td>
+                <td>96.24</td>
+                <td>95.30</td>
+                <td>93.50</td>
+                <td>93.13</td>
+                <td>90.40</td>
+                <td>86.20</td>
+                <td>81.00</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="81.56"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="89.81"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="MAR"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateTendencia()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #b0bec5"></div>
+              2025
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--pr)"></div>
+              2026
+            </div>
+            <div class="legend-item">
+              <div
+                class="legend-dot"
+                style="background: var(--py); border: 1px dashed #999"
+              ></div>
+              Objetivo 98.5%
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Fuente: Reporte Operativo Interno — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 3: NOVEDADES ===== -->
+      <div class="slide" data-slide="3">
+        <div class="slide-header">
+          <div class="tag">GESTIÓN DE INCIDENCIAS</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>ANÁLISIS DE NOVEDADES OPERATIVAS</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            Desglose por Categoría y Pareto (Ene - Mar 2026)
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div
+                style="
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: var(--dk);
+                  margin-bottom: 8px;
+                "
+              >
+                DETALLE POR CATEGORÍA — Total:
+                <span id="novedades_total">—</span> casos
+              </div>
+              <table class="data-table" id="table_novedades">
+                <thead>
+                  <tr>
+                    <th>CATEGORÍA</th>
+                    <th>ENE</th>
+                    <th>FEB</th>
+                    <th>MAR</th>
+                    <th>TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="row-label">CONSECUCIÓN</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="429"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="190"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t1">619</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">NOV. RECIBO</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="153"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="134"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t2">287</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">NOV. CARGUE</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="234"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="5"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t3">239</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">TRÁFICO</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="88"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="118"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t4">206</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">PROGRAMACIÓN</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="140"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="2"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t5">142</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">DRIVER</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="115"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="18"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t6">133</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">NOV. VEHICULAR</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="21"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="31"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t7">52</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">CLIMA</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="23"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="0"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t8">23</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label">NOV. FACTURA</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="18"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value="3"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        onchange="updateNovedades()"
+                      />
+                    </td>
+                    <td id="nov_t9">21</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-6">
+              <div
+                style="
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: var(--dk);
+                  margin-bottom: 8px;
+                "
+              >
+                CONCENTRACIÓN (PARETO) — Top 3 =
+                <strong id="pareto_pct">66%</strong>
+              </div>
+              <div class="chart-container" style="height: 250px">
+                <canvas id="chart_novedades"></canvas>
+              </div>
+              <div class="insight-box red">
+                <strong>Foco de Acción:</strong> Top 3 categorías = volumen
+                crítico. Gestionar estos rubros impactaría 2/3 de incidencias.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Fuente: Base de Datos de Novedades — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 4: EFECTIVIDAD SEMANAL S1-S12 ===== -->
+      <div class="slide" data-slide="4">
+        <div class="slide-header">
+          <div class="tag">ANÁLISIS COMPARATIVO</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>EFECTIVIDAD DE ENTREGAS SEMANAL</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            Comparativa 2025 vs 2026 (Semanas 1-12) — Target: 98.50%
+          </div>
+          <div class="chart-container" style="height: 260px">
+            <canvas id="chart_efect_sem"></canvas>
+          </div>
+          <table class="data-table" id="table_efect_sem">
+            <thead>
+              <tr>
+                <th>SEM</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>95.57</td>
+                <td>96.69</td>
+                <td>98.01</td>
+                <td>98.09</td>
+                <td>98.62</td>
+                <td>98.91</td>
+                <td>99.15</td>
+                <td>97.87</td>
+                <td>95.09</td>
+                <td>95.87</td>
+                <td>96.12</td>
+                <td>97.03</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="—"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="89.00"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="67.73"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="87.94"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="92.00"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="88.03"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="85.25"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value="93.94"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="S9"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="S10"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="S11"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value=""
+                    placeholder="S12"
+                    onchange="updateEfectSem()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box red">
+            <strong>Gap Promedio:</strong> <span id="gap_sem_label">—</span>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Datos Operativos — Logística Primaria — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 5: TIEMPOS ===== -->
+      <div class="slide" data-slide="5">
+        <div class="slide-header">
+          <div class="tag">KPI: TIEMPOS</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>TIEMPOS DE PROGRAMACIÓN Y RUTEO — MES</h2>
+            <span class="edit-hint">HH:MM</span>
+          </div>
+          <div class="kpi-subtitle">
+            Hora promedio de finalización del ruteo — Hasta Marzo 2026
+          </div>
+          <div class="chart-container" style="height: 300px">
+            <canvas id="chart_tiempos"></canvas>
+          </div>
+          <table class="data-table" id="table_tiempos">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ENE</th>
+                <th>FEB</th>
+                <th>MAR</th>
+                <th>ABR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AGO</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>18:10</td>
+                <td>18:19</td>
+                <td>18:32</td>
+                <td>18:28</td>
+                <td>18:40</td>
+                <td>18:42</td>
+                <td>18:35</td>
+                <td>18:58</td>
+                <td>18:57</td>
+                <td>19:22</td>
+                <td>19:25</td>
+                <td>19:10</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="text"
+                    value="19:59"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value="19:23"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value="18:53"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value=""
+                    placeholder="—"
+                    style="width: 50px"
+                    onchange="updateTiempos()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Fuente: Reporte de Operaciones — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 6: POSIC. VEHICULAR MES ===== -->
+      <div class="slide" data-slide="6">
+        <div class="slide-header">
+          <div class="tag">KPI: POSICIONAMIENTO VEHICULAR</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>POSICIONAMIENTO VEHICULAR — MES</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            Comparativa 2025 vs 2026 — Target: 100%
+          </div>
+          <div class="chart-container" style="height: 280px">
+            <canvas id="chart_posic_mes"></canvas>
+          </div>
+          <table class="data-table" id="table_posic_mes">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ENE</th>
+                <th>FEB</th>
+                <th>MAR</th>
+                <th>ABR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AGO</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>100</td>
+                <td>100</td>
+                <td>100</td>
+                <td>100</td>
+                <td>99</td>
+                <td>98</td>
+                <td>99</td>
+                <td>96</td>
+                <td>96</td>
+                <td>99</td>
+                <td>98</td>
+                <td>97</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="96"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="99"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="100"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updatePosicMes()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <strong>Estado:</strong>
+            <span id="posic_mes_insight"
+              >Marzo 2026 alcanza el 100%. Promedio YTD: 98.3%</span
+            >
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Datos Operativos — Logística Primaria — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 7: POSIC. VEHICULAR SEMANAL (FUENTE MAESTRA) ===== -->
+      <div class="slide" data-slide="7">
+        <div class="slide-header">
+          <div class="tag">
+            KPI: RASTREO SATELITAL —
+            <span class="sync-badge">Datos compartidos con Slides 8 y 9</span>
+          </div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>POSICIONAMIENTO VEHICULAR SEMANAL</h2>
+            <span class="edit-hint"
+              >Fuente maestra → alimenta Slides 8 y 9</span
+            >
+          </div>
+          <div class="kpi-subtitle">
+            Comparativa 2025 vs 2026 (S1-S12) — Target: 100% | Ingresa
+            Solicitados y Posicionados por semana
+          </div>
+
+          <div class="chart-container" style="height: 220px">
+            <canvas id="chart_posic_sem"></canvas>
+          </div>
+
+          <table class="data-table" id="table_vehic_master">
+            <thead>
+              <tr>
+                <th>SEM</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">Solicitados</td>
+                <td>
+                  <input
+                    type="number"
+                    value="101"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="137"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="160"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="169"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="156"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="167"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="175"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S9"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S10"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S11"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S12"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="row-label">Posicionados</td>
+                <td>
+                  <input
+                    type="number"
+                    value="101"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="117"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="160"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="169"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="155"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="164"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="175"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S9"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S10"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S11"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S12"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="row-label">% Cumplim.</td>
+                <td id="vc2">100%</td>
+                <td id="vc3">85%</td>
+                <td id="vc4">100%</td>
+                <td id="vc5">100%</td>
+                <td id="vc6">99%</td>
+                <td id="vc7">98%</td>
+                <td id="vc8">100%</td>
+                <td id="vc9">—</td>
+                <td id="vc10">—</td>
+                <td id="vc11">—</td>
+                <td id="vc12">—</td>
+              </tr>
+              <tr>
+                <td class="row-label">Máx. diario</td>
+                <td>
+                  <input
+                    type="number"
+                    value="20"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="34"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="29"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="32"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="34"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="32"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value="32"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S9"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S10"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S11"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S12"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td class="row-label">Días oper.</td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="5" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input type="number" value="6" onchange="syncVehicleData()" />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S9"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S10"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S11"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    value=""
+                    placeholder="S12"
+                    onchange="syncVehicleData()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #b0bec5"></div>
+              2025
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--pr)"></div>
+              2026 (% Cumplimiento)
+            </div>
+            <div class="legend-item">
+              <div
+                class="legend-dot"
+                style="background: var(--py); border: 1px dashed #999"
+              ></div>
+              Target 100%
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Datos Operativos — Logística Primaria — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 8: DETALLE POSICIONAMIENTO (DINÁMICO) ===== -->
+      <div class="slide" data-slide="8">
+        <div class="slide-header">
+          <div class="tag">
+            KPI: DETALLE POSICIONAMIENTO —
+            <span class="sync-badge">Datos desde Slide 7</span>
+          </div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>DETALLE DE POSICIONAMIENTO VEHICULAR</h2>
+          </div>
+          <div class="kpi-subtitle">
+            Análisis Dinámico — Semanas 2 a 12 (2026) — Se actualiza con datos
+            de Slide 7
+          </div>
+
+          <div class="kpi-cards" id="kpi_cards_detalle">
+            <div class="kpi-card">
+              <div class="kpi-card-label">TOTAL SOLICITADOS</div>
+              <div class="kpi-card-value" id="kd_sol">—</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-card-label">TOTAL POSICIONADOS</div>
+              <div class="kpi-card-value green" id="kd_pos">—</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-card-label">GAP ACUMULADO</div>
+              <div class="kpi-card-value red" id="kd_gap">—</div>
+            </div>
+            <div class="kpi-card orange">
+              <div class="kpi-card-label">CUMPLIMIENTO PROM.</div>
+              <div class="kpi-card-value" id="kd_cump">—</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-card-label">DÍAS OPERATIVOS</div>
+              <div class="kpi-card-value" id="kd_dias">—</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div
+                style="font-size: 11px; font-weight: 700; margin-bottom: 6px"
+              >
+                SOLICITADOS vs POSICIONADOS POR SEMANA
+              </div>
+              <div class="chart-container" style="height: 220px">
+                <canvas id="chart_detalle_posic"></canvas>
+              </div>
+            </div>
+            <div class="col-6">
+              <div
+                style="font-size: 11px; font-weight: 700; margin-bottom: 6px"
+              >
+                % CUMPLIMIENTO SEMANAL
+              </div>
+              <div class="chart-container" style="height: 220px">
+                <canvas id="chart_detalle_cump"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col-6">
+              <div
+                style="font-size: 11px; font-weight: 700; margin-bottom: 6px"
+              >
+                LOYALTY
+              </div>
+              <div class="kpi-cards">
+                <div class="kpi-card orange">
+                  <div class="kpi-card-label">ENE</div>
+                  <div class="kpi-card-value">72.9%</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-card-label">FEB</div>
+                  <div class="kpi-card-value">68.1%</div>
+                </div>
+                <div class="kpi-card blue">
+                  <div class="kpi-card-label">MAR</div>
+                  <div
+                    class="kpi-card-value"
+                    id="kd_loyalty_mar"
+                    style="color: var(--bl)"
+                  >
+                    —
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="insight-box" id="insight_detalle">
+                <strong>Análisis dinámico:</strong> Actualiza los datos en Slide
+                7 para ver cambios aquí.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Fuente: Reporte de Tráfico Diario 2026 — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 9: CANT. VEHÍCULOS (DINÁMICO) ===== -->
+      <div class="slide" data-slide="9">
+        <div class="slide-header">
+          <div class="tag">
+            KPI: FLOTA — <span class="sync-badge">Datos desde Slide 7</span>
+          </div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>CANTIDAD VEHÍCULOS POSICIONADOS 2026</h2>
+          </div>
+          <div class="kpi-subtitle">
+            Evolución Semanal de Flota (S2-S12) — Dinámico desde Slide 7
+          </div>
+
+          <div class="row">
+            <div class="col-7">
+              <div
+                style="font-size: 11px; font-weight: 700; margin-bottom: 6px"
+              >
+                PROMEDIO DIARIO vs MÁXIMO DIARIO POR SEMANA
+              </div>
+              <div class="chart-container" style="height: 260px">
+                <canvas id="chart_vehiculos"></canvas>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="kpi-cards" style="flex-direction: column">
+                <div class="kpi-card">
+                  <div class="kpi-card-label">PROM. DIARIO GLOBAL</div>
+                  <div class="kpi-card-value" id="kv_prom">—</div>
+                </div>
+                <div class="kpi-card">
+                  <div class="kpi-card-label">MÁX. HISTÓRICO</div>
+                  <div class="kpi-card-value red" id="kv_max">—</div>
+                  <div class="kpi-card-sub" id="kv_max_sem">—</div>
+                </div>
+                <div class="kpi-card green">
+                  <div class="kpi-card-label">SEMANAS CON DATOS</div>
+                  <div class="kpi-card-value green" id="kv_semanas">—</div>
+                </div>
+              </div>
+
+              <div
+                style="font-size: 11px; font-weight: 700; margin: 12px 0 6px"
+              >
+                PARTICIPACIÓN POR FLOTA
+              </div>
+              <div class="chart-container" style="height: 150px">
+                <canvas id="chart_flota_donut"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-box red" style="margin-top: 8px">
+            <strong>⚠ HALLAZGO CRÍTICO:</strong>
+            <span id="kv_hallazgo"
+              >El 43% de las veces se utiliza +20% de la flota base. Umbral
+              mínimo recomendado: <strong>29 vehículos</strong>.</span
+            >
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Fuente: Control de Tráfico 2026 — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 10: ARQUEO MES ===== -->
+      <div class="slide" data-slide="10">
+        <div class="slide-header">
+          <div class="tag">ANÁLISIS COMPARATIVO</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>ARQUEO MES 2025 vs 2026</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">Comparativa Mensual — Target: 95%</div>
+          <div class="chart-container" style="height: 280px">
+            <canvas id="chart_arqueo_mes"></canvas>
+          </div>
+          <table class="data-table" id="table_arqueo_mes">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ENE</th>
+                <th>FEB</th>
+                <th>MAR</th>
+                <th>ABR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AGO</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>95</td>
+                <td>95</td>
+                <td>95</td>
+                <td>95</td>
+                <td>95</td>
+                <td>92</td>
+                <td>90</td>
+                <td>93</td>
+                <td>73</td>
+                <td>96</td>
+                <td>93</td>
+                <td>97</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="93"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="96"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="MAR"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="—"
+                    onchange="updateArqueoMes()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <strong>Insight:</strong>
+            <span id="arqueo_mes_insight"
+              >Feb 2026 supera objetivo (96% vs 95%).</span
+            >
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Datos Operativos — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 11: ARQUEO SEMANAL S1-S12 ===== -->
+      <div class="slide" data-slide="11">
+        <div class="slide-header">
+          <div class="tag">ANÁLISIS COMPARATIVO</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>ARQUEO SEMANAL</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            Comparativa 2025 vs 2026 (S1-S12) — Target: 95%
+          </div>
+          <div class="chart-container" style="height: 270px">
+            <canvas id="chart_arqueo_sem"></canvas>
+          </div>
+          <table class="data-table" id="table_arqueo_sem">
+            <thead>
+              <tr>
+                <th>SEM</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">2025</td>
+                <td>100</td>
+                <td>92</td>
+                <td>93</td>
+                <td>95</td>
+                <td>94</td>
+                <td>96</td>
+                <td>95</td>
+                <td>95</td>
+                <td>95</td>
+                <td>96</td>
+                <td>95</td>
+                <td>94</td>
+              </tr>
+              <tr>
+                <td class="row-label">2026</td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="100"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="97"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="78"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="95"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="96"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="95"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="95"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value="95"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="S9"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="S10"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="S11"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="1"
+                    value=""
+                    placeholder="S12"
+                    onchange="updateArqueoSem()"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="insight-box red">
+            <strong>Insight:</strong> Caída crítica S3 (78%). Completa S9-S12.
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src"
+            >Datos Operativos — Control y Finanzas — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 12: ROTACIÓN ===== -->
+      <div class="slide" data-slide="12">
+        <div class="slide-header">
+          <div class="tag">RECURSOS HUMANOS</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row">
+            <h2>ANÁLISIS DE ROTACIÓN DE PERSONAL</h2>
+            <span class="edit-hint">Edita valores</span>
+          </div>
+          <div class="kpi-subtitle">
+            Indicador de Retención (Dic 2025 - Mar 2026) — Meta: &lt;5%
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div
+                style="font-size: 12px; font-weight: 700; margin-bottom: 8px"
+              >
+                EVOLUCIÓN KPI ROTACIÓN (%)
+              </div>
+              <div class="chart-container" style="height: 220px">
+                <canvas id="chart_rotacion"></canvas>
+              </div>
+              <table
+                class="data-table"
+                id="table_rotacion"
+                style="margin-top: 8px"
+              >
+                <thead>
+                  <tr>
+                    <th>MES</th>
+                    <th>NÓMINA</th>
+                    <th>RETIRADOS</th>
+                    <th>KPI %</th>
+                    <th>META</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Diciembre</td>
+                    <td>19</td>
+                    <td>2</td>
+                    <td>10.5%</td>
+                    <td>&lt;5%</td>
+                  </tr>
+                  <tr>
+                    <td>Enero</td>
+                    <td>19</td>
+                    <td>4</td>
+                    <td>21.1%</td>
+                    <td>&lt;5%</td>
+                  </tr>
+                  <tr>
+                    <td>Febrero</td>
+                    <td>19</td>
+                    <td>
+                      <input
+                        type="number"
+                        value="2"
+                        style="width: 50px"
+                        onchange="updateRotacion()"
+                      />
+                    </td>
+                    <td id="rot_feb_kpi">10.5%</td>
+                    <td>&lt;5%</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 700; color: var(--pr)">Marzo</td>
+                    <td>19</td>
+                    <td>
+                      <input
+                        type="number"
+                        value=""
+                        placeholder="MAR"
+                        style="width: 50px"
+                        onchange="updateRotacion()"
+                      />
+                    </td>
+                    <td id="rot_mar_kpi">—</td>
+                    <td>&lt;5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-6">
+              <div
+                style="font-size: 12px; font-weight: 700; margin-bottom: 8px"
+              >
+                DETALLE DE SALIDAS
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>MES</th>
+                    <th>CARGO</th>
+                    <th>NOMBRE</th>
+                    <th>CAUSA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Enero</td>
+                    <td>LÍDER</td>
+                    <td>HUGO</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr>
+                    <td>Enero</td>
+                    <td>COORDINADORA</td>
+                    <td>ADRIANA</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr>
+                    <td>Enero</td>
+                    <td>COORDINADOR</td>
+                    <td>VICTOR</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr>
+                    <td>Enero</td>
+                    <td>AUX. NOCTURNO</td>
+                    <td>DONILSON</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr>
+                    <td>Enero</td>
+                    <td>CONDUCTOR</td>
+                    <td>N/E</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr>
+                    <td>Febrero</td>
+                    <td>HSEQ</td>
+                    <td>CAREN</td>
+                    <td>RENUNCIA</td>
+                  </tr>
+                  <tr style="background: #fff8e1">
+                    <td style="font-weight: 700; color: var(--pr)">Marzo</td>
+                    <td
+                      colspan="3"
+                      style="color: var(--mt); font-style: italic"
+                    >
+                      Completa con datos del mes
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="insight-box red" style="margin-top: 10px">
+                <strong>Enero crítico:</strong> 4 renuncias clave. Feb
+                estabilizado. <strong>Mar pendiente.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Gestión de Talento Humano — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 13: PLAN DE ACCIÓN ===== -->
+      <div class="slide" data-slide="13">
+        <div class="slide-header">
+          <div class="tag">ESTRATEGIA OPERATIVA</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div class="slide-body">
+          <div class="kpi-title-row"><h2>PLAN DE ACCIÓN ESTRATÉGICO</h2></div>
+          <div class="kpi-subtitle">
+            Hoja de Ruta Q1 2026 | META MARZO:
+            <strong style="color: var(--pr); font-size: 16px">95%</strong>
+          </div>
+          <div
+            style="
+              text-align: center;
+              margin: 8px 0;
+              font-size: 13px;
+              font-weight: 700;
+              color: var(--gn);
+            "
+          >
+            PUNTO DE INFLECCIÓN (ENE 2026): +8.25pp (81.56% → 89.81%)
+          </div>
+          <div class="action-grid">
+            <div class="action-col">
+              <h4 style="background: #fdeaea; color: var(--dk)">
+                EJE 1: EFECTIVIDAD DE ENTREGAS
+              </h4>
+              <div class="action-item high">
+                <strong>Planeación de rutas optimizada</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item high">
+                <strong>Limitar las paradas</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item high">
+                <strong>Construcción diaria indicador</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item med">
+                <strong>Precisión red de uso</strong>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item med">
+                <strong>Información en nube y rutas</strong>
+                <div class="priority">Medio</div>
+              </div>
+              <div class="action-item med">
+                <strong>Cargar según programación</strong>
+                <span class="status-badge progress">EN PROCESO</span>
+              </div>
+              <div class="action-item high">
+                <strong>Salidas tempranas (5:00-8:00 am)</strong>
+                <span class="status-badge progress">EN PROCESO</span>
+              </div>
+            </div>
+            <div class="action-col">
+              <h4 style="background: #fff3e0; color: var(--dk)">
+                EJE 2: POSICIONAMIENTO
+              </h4>
+              <div class="action-item high">
+                <strong>Incremento límite a 28 vehículos</strong>
+                <span class="status-badge progress">EN PROCESO</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item med">
+                <strong>Cronograma inspecciones</strong>
+                <div class="priority">Medio</div>
+              </div>
+              <div class="action-item high">
+                <strong>Plataforma Drivi.in</strong>
+                <span class="status-badge progress">EN PROCESO</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+            </div>
+            <div class="action-col">
+              <h4 style="background: #e8f5e9; color: var(--dk)">
+                EJE 3: PERSONAL
+              </h4>
+              <div class="action-item high">
+                <strong>Contratación y recursos</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item high">
+                <strong>Cubrimiento vacantes HSEQ</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item med">
+                <strong>Capacitación logística</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+              <div class="action-item high">
+                <strong>Equipo completo y operativo</strong>
+                <span class="status-badge done">COMPLETADA</span>
+                <div class="priority">Muy Alto</div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              margin-top: 12px;
+              background: var(--dk);
+              color: white;
+              padding: 10px 16px;
+              border-radius: 6px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div>
+              <div
+                style="
+                  font-size: 10px;
+                  letter-spacing: 1px;
+                  opacity: 0.7;
+                  font-family: &quot;Montserrat&quot;, sans-serif;
+                "
+              >
+                INICIATIVA TRANSVERSAL ESTRATÉGICA
+              </div>
+              <div
+                style="
+                  font-size: 14px;
+                  font-weight: 700;
+                  font-family: &quot;Montserrat&quot;, sans-serif;
+                "
+              >
+                Nivelación de tarifas y fletes
+              </div>
+              <div style="font-size: 11px; opacity: 0.8; margin-top: 2px">
+                Estrategia clave para mejorar loyalty y reducir rotación
+              </div>
+            </div>
+            <div
+              style="
+                background: var(--pr);
+                padding: 6px 14px;
+                border-radius: 4px;
+                font-size: 11px;
+                font-weight: 700;
+              "
+            >
+              IMPACTO CRÍTICO
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Gestión Estratégica 2026 — Semana 20</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+
+      <!-- ===== SLIDE 14: CARTERA ===== -->
+      <div class="slide" data-slide="14">
+        <div class="slide-header">
+          <div class="tag">CARTERA</div>
+          <div class="purina-badge">✦ PURINA</div>
+        </div>
+        <div
+          class="slide-body"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+          "
+        >
+          <div style="text-align: center; color: var(--mt)">
+            <div style="font-size: 48px; opacity: 0.3">📊</div>
+            <h2
+              style="
+                font-family: &quot;Montserrat&quot;, sans-serif;
+                font-size: 24px;
+                color: var(--dk);
+                margin: 12px 0;
+              "
+            >
+              CARTERA
+            </h2>
+            <p style="font-size: 13px">Slide pendiente de datos.</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <span class="src">Gestión Estratégica 2026</span
+          ><span class="hashtag">#YosoySupplyChainTeam</span>
+        </div>
+      </div>
+    </div>
+    <div class="thumb-nav" id="thumbNav"></div>
+
+    <script>
+      let currentSlide = 1;
+      const totalSlides = 14;
+      const charts = {};
+      const slideNames = [
+        "1. Portada",
+        "2. Tendencia",
+        "3. Novedades",
+        "4. Efect. Sem.",
+        "5. Tiempos",
+        "6. Posic. Mes",
+        "7. Posic. Sem. ★",
+        "8. Detalle ⟳",
+        "9. Vehículos ⟳",
+        "10. Arqueo Mes",
+        "11. Arqueo Sem.",
+        "12. Rotación",
+        "13. Plan Acción",
+        "14. Cartera",
+      ];
+
+      function initThumbNav() {
+        const nav = document.getElementById("thumbNav");
+        slideNames.forEach((n, i) => {
+          const b = document.createElement("button");
+          b.className = "thumb-btn" + (i === 0 ? " active" : "");
+          b.textContent = n;
+          b.onclick = () => goToSlide(i + 1);
+          nav.appendChild(b);
+        });
+      }
+      function goToSlide(n) {
+        document
+          .querySelectorAll(".slide")
+          .forEach((s) => s.classList.remove("active"));
+        document
+          .querySelectorAll(".thumb-btn")
+          .forEach((b) => b.classList.remove("active"));
+        currentSlide = n;
+        document
+          .querySelector(`.slide[data-slide="${n}"]`)
+          .classList.add("active");
+        document.querySelectorAll(".thumb-btn")[n - 1].classList.add("active");
+        document.getElementById("slideCounter").textContent =
+          `${n} / ${totalSlides}`;
+        renderChartsForSlide(n);
+      }
+      function nextSlide() {
+        if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+      }
+      function prevSlide() {
+        if (currentSlide > 1) goToSlide(currentSlide - 1);
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") nextSlide();
+        if (e.key === "ArrowLeft") prevSlide();
+      });
+
+      function getInputValues(tid, ri) {
+        const row = document.getElementById(tid).querySelectorAll("tbody tr")[
+          ri
+        ];
+        const v = [];
+        row.querySelectorAll("td").forEach((c, i) => {
+          if (i === 0) return;
+          const inp = c.querySelector("input");
+          if (inp) {
+            const x = parseFloat(inp.value);
+            v.push(isNaN(x) ? null : x);
+          } else {
+            const x = parseFloat(c.textContent);
+            v.push(isNaN(x) ? null : x);
+          }
+        });
+        return v;
+      }
+      function timeToDecimal(t) {
+        if (!t || t.trim() === "") return null;
+        const p = t.split(":");
+        return parseFloat(p[0]) + parseFloat(p[1] || 0) / 60;
+      }
+
+      // ===== TENDENCIA =====
+      function updateTendencia() {
+        const d = getInputValues("table_tendencia", 1);
+        const v = d.filter((x) => x !== null);
+        if (v.length > 0) {
+          const l = v[v.length - 1];
+          document.getElementById("kpi_gap_tend").textContent =
+            (l - 98.5).toFixed(1) + "%";
+          document.getElementById("kpi_cierre_tend").textContent =
+            l.toFixed(2) + "%";
+          if (v.length >= 2)
+            document.getElementById("kpi_recup_tend").textContent =
+              (v[v.length - 1] - v[0] > 0 ? "+" : "") +
+              (v[v.length - 1] - v[0]).toFixed(2) +
+              " pts";
+        }
+        if (charts.tendencia) {
+          charts.tendencia.data.datasets[1].data = d;
+          charts.tendencia.update();
+        }
+      }
+      function renderTendencia() {
+        const ctx = document.getElementById("chart_tendencia");
+        if (!ctx) return;
+        const m = [
+          "ENE",
+          "FEB",
+          "MAR",
+          "ABR",
+          "MAY",
+          "JUN",
+          "JUL",
+          "AGO",
+          "SEP",
+          "OCT",
+          "NOV",
+          "DIC",
+        ];
+        const d25 = [
+          96.24, 96.65, 96.7, 95.72, 95.96, 96.24, 95.3, 93.5, 93.13, 90.4,
+          86.2, 81.0,
+        ];
+        const d26 = getInputValues("table_tendencia", 1);
+        if (charts.tendencia) charts.tendencia.destroy();
+        charts.tendencia = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: m,
+            datasets: [
+              {
+                label: "2025",
+                data: d25,
+                borderColor: "#B0BEC5",
+                backgroundColor: "rgba(176,190,197,.1)",
+                borderWidth: 2,
+                pointRadius: 3,
+                tension: 0.3,
+                fill: true,
+              },
+              {
+                label: "2026",
+                data: d26,
+                borderColor: "#ED1C24",
+                backgroundColor: "rgba(237,28,36,.08)",
+                borderWidth: 3,
+                pointRadius: 5,
+                pointBackgroundColor: "#ED1C24",
+                tension: 0.3,
+                fill: true,
+                spanGaps: false,
+              },
+              {
+                label: "Obj",
+                data: Array(12).fill(98.5),
+                borderColor: "#FFD100",
+                borderWidth: 2,
+                borderDash: [8, 4],
+                pointRadius: 0,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                min: 75,
+                max: 100,
+                ticks: { callback: (v) => v + "%", font: { size: 10 } },
+              },
+              x: { ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+        updateTendencia();
+      }
+
+      // ===== NOVEDADES =====
+      function updateNovedades() {
+        const rows = document
+          .getElementById("table_novedades")
+          .querySelectorAll("tbody tr");
+        let g = 0;
+        const t = [];
+        rows.forEach((r, i) => {
+          let s = 0;
+          r.querySelectorAll("input").forEach((inp) => {
+            const v = parseFloat(inp.value);
+            if (!isNaN(v)) s += v;
+          });
+          r.querySelector(`td[id="nov_t${i + 1}"]`).textContent = s;
+          t.push(s);
+          g += s;
+        });
+        document.getElementById("novedades_total").textContent =
+          g.toLocaleString();
+        const sr = [...t].sort((a, b) => b - a);
+        document.getElementById("pareto_pct").textContent =
+          (g > 0
+            ? Math.round((sr.slice(0, 3).reduce((a, b) => a + b, 0) / g) * 100)
+            : 0) + "%";
+        if (charts.novedades) {
+          const lb = [
+            "CONSEC.",
+            "RECIBO",
+            "CARGUE",
+            "TRÁFICO",
+            "PROG.",
+            "DRIVER",
+            "VEHIC.",
+            "CLIMA",
+            "FACTURA",
+          ];
+          const sd = lb
+            .map((l, i) => ({ l, v: t[i] }))
+            .sort((a, b) => b.v - a.v);
+          let c = 0;
+          const cd = sd.map((d) => {
+            c += g > 0 ? (d.v / g) * 100 : 0;
+            return c;
+          });
+          charts.novedades.data.labels = sd.map((d) => d.l);
+          charts.novedades.data.datasets[0].data = sd.map((d) => d.v);
+          charts.novedades.data.datasets[1].data = cd;
+          charts.novedades.update();
+        }
+      }
+      function renderNovedades() {
+        const ctx = document.getElementById("chart_novedades");
+        if (!ctx) return;
+        const lb = [
+          "CONSEC.",
+          "RECIBO",
+          "CARGUE",
+          "TRÁFICO",
+          "PROG.",
+          "DRIVER",
+          "VEHIC.",
+          "CLIMA",
+          "FACTURA",
+        ];
+        const t = [619, 287, 239, 206, 142, 133, 52, 23, 21];
+        const sd = lb.map((l, i) => ({ l, v: t[i] })).sort((a, b) => b.v - a.v);
+        let c = 0;
+        const tot = t.reduce((a, b) => a + b, 0);
+        const cd = sd.map((d) => {
+          c += (d.v / tot) * 100;
+          return c;
+        });
+        if (charts.novedades) charts.novedades.destroy();
+        charts.novedades = new Chart(ctx, {
+          data: {
+            labels: sd.map((d) => d.l),
+            datasets: [
+              {
+                type: "bar",
+                label: "Casos",
+                data: sd.map((d) => d.v),
+                backgroundColor: "#ED1C24",
+                borderRadius: 4,
+                yAxisID: "y",
+              },
+              {
+                type: "line",
+                label: "%",
+                data: cd,
+                borderColor: "#1A1A2E",
+                borderWidth: 2,
+                pointRadius: 3,
+                yAxisID: "y1",
+                tension: 0.3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                beginAtZero: true,
+                position: "left",
+                ticks: { font: { size: 9 } },
+              },
+              y1: {
+                min: 0,
+                max: 100,
+                position: "right",
+                grid: { display: false },
+                ticks: { callback: (v) => v + "%", font: { size: 9 } },
+              },
+              x: { ticks: { font: { size: 8 }, maxRotation: 45 } },
+            },
+          },
+        });
+        updateNovedades();
+      }
+
+      // ===== EFECT SEM =====
+      function updateEfectSem() {
+        const d26 = getInputValues("table_efect_sem", 1);
+        const d25 = [
+          95.57, 96.69, 98.01, 98.09, 98.62, 98.91, 99.15, 97.87, 95.09, 95.87,
+          96.12, 97.03,
+        ];
+        let s = 0,
+          c = 0;
+        d26.forEach((v, i) => {
+          if (v !== null && d25[i]) {
+            s += v - d25[i];
+            c++;
+          }
+        });
+        document.getElementById("gap_sem_label").textContent =
+          c > 0 ? (s / c).toFixed(1) + " pp vs Año Anterior" : "—";
+        if (charts.efectSem) {
+          charts.efectSem.data.datasets[1].data = d26;
+          charts.efectSem.update();
+        }
+      }
+      function renderEfectSem() {
+        const ctx = document.getElementById("chart_efect_sem");
+        if (!ctx) return;
+        const w = [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11",
+          "S12",
+        ];
+        const d25 = [
+          95.57, 96.69, 98.01, 98.09, 98.62, 98.91, 99.15, 97.87, 95.09, 95.87,
+          96.12, 97.03,
+        ];
+        const d26 = getInputValues("table_efect_sem", 1);
+        if (charts.efectSem) charts.efectSem.destroy();
+        charts.efectSem = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: w,
+            datasets: [
+              {
+                label: "2025",
+                data: d25,
+                backgroundColor: "#B0BEC5",
+                borderRadius: 3,
+              },
+              {
+                label: "2026",
+                data: d26,
+                backgroundColor: "#ED1C24",
+                borderRadius: 3,
+              },
+              {
+                type: "line",
+                label: "T",
+                data: Array(12).fill(98.5),
+                borderColor: "#FFD100",
+                borderWidth: 2,
+                borderDash: [6, 3],
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                min: 60,
+                max: 105,
+                ticks: { callback: (v) => v + "%", font: { size: 10 } },
+              },
+              x: { ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+        updateEfectSem();
+      }
+
+      // ===== TIEMPOS =====
+      function updateTiempos() {
+        renderTiempos();
+      }
+      function renderTiempos() {
+        const ctx = document.getElementById("chart_tiempos");
+        if (!ctx) return;
+        const m = [
+          "ENE",
+          "FEB",
+          "MAR",
+          "ABR",
+          "MAY",
+          "JUN",
+          "JUL",
+          "AGO",
+          "SEP",
+          "OCT",
+          "NOV",
+          "DIC",
+        ];
+        const d25 = [
+          18.175, 18.32, 18.54, 18.47, 18.68, 18.71, 18.59, 18.97, 18.96, 19.38,
+          19.42, 19.17,
+        ];
+        const inputs = document
+          .getElementById("table_tiempos")
+          .querySelectorAll("tbody tr:nth-child(2) input");
+        const d26 = [];
+        inputs.forEach((inp) => d26.push(timeToDecimal(inp.value)));
+        if (charts.tiempos) charts.tiempos.destroy();
+        charts.tiempos = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: m,
+            datasets: [
+              {
+                label: "2025",
+                data: d25,
+                backgroundColor: "#B0BEC5",
+                borderRadius: 3,
+              },
+              {
+                label: "2026",
+                data: d26,
+                backgroundColor: "#ED1C24",
+                borderRadius: 3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 10 } } },
+            },
+            scales: {
+              y: {
+                min: 17.5,
+                max: 20.5,
+                ticks: {
+                  callback: (v) => {
+                    const h = Math.floor(v);
+                    const mn = Math.round((v - h) * 60);
+                    return h + ":" + (mn < 10 ? "0" : "") + mn;
+                  },
+                  font: { size: 10 },
+                },
+              },
+              x: { ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+      }
+
+      // ===== GENERIC BAR COMP =====
+      function renderBarComp(k, cid, tid, lb, d25, tgt, mn, mx) {
+        const ctx = document.getElementById(cid);
+        if (!ctx) return;
+        const d26 = getInputValues(tid, 1);
+        if (charts[k]) charts[k].destroy();
+        charts[k] = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: lb,
+            datasets: [
+              {
+                label: "2025",
+                data: d25,
+                backgroundColor: "#B0BEC5",
+                borderRadius: 3,
+              },
+              {
+                label: "2026",
+                data: d26,
+                backgroundColor: "#ED1C24",
+                borderRadius: 3,
+              },
+              {
+                type: "line",
+                label: "T",
+                data: Array(lb.length).fill(tgt),
+                borderColor: "#FFD100",
+                borderWidth: 2,
+                borderDash: [6, 3],
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                min: mn,
+                max: mx,
+                ticks: { callback: (v) => v + "%", font: { size: 10 } },
+              },
+              x: { ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+      }
+
+      function updatePosicMes() {
+        renderPosicMes();
+      }
+      function renderPosicMes() {
+        renderBarComp(
+          "posicMes",
+          "chart_posic_mes",
+          "table_posic_mes",
+          [
+            "ENE",
+            "FEB",
+            "MAR",
+            "ABR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AGO",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DIC",
+          ],
+          [100, 100, 100, 100, 99, 98, 99, 96, 96, 99, 98, 97],
+          100,
+          80,
+          102,
+        );
+      }
+      function updateArqueoMes() {
+        renderArqueoMes();
+      }
+      function renderArqueoMes() {
+        renderBarComp(
+          "arqueoMes",
+          "chart_arqueo_mes",
+          "table_arqueo_mes",
+          [
+            "ENE",
+            "FEB",
+            "MAR",
+            "ABR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AGO",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DIC",
+          ],
+          [95, 95, 95, 95, 95, 92, 90, 93, 73, 96, 93, 97],
+          95,
+          65,
+          102,
+        );
+      }
+      function updateArqueoSem() {
+        renderArqueoSem();
+      }
+      function renderArqueoSem() {
+        renderBarComp(
+          "arqueoSem",
+          "chart_arqueo_sem",
+          "table_arqueo_sem",
+          [
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6",
+            "S7",
+            "S8",
+            "S9",
+            "S10",
+            "S11",
+            "S12",
+          ],
+          [100, 92, 93, 95, 94, 96, 95, 95, 95, 96, 95, 94],
+          95,
+          70,
+          102,
+        );
+      }
+
+      // =====================================================
+      // SYNCED DATA: SLIDES 7, 8, 9
+      // =====================================================
+      function getMasterData() {
+        const tbl = document.getElementById("table_vehic_master");
+        const rows = tbl.querySelectorAll("tbody tr");
+        const sol = [],
+          pos = [],
+          maxD = [],
+          dias = [];
+        rows[0].querySelectorAll("td").forEach((c, i) => {
+          if (i === 0) return;
+          const inp = c.querySelector("input");
+          sol.push(inp ? parseFloat(inp.value) : null);
+        });
+        rows[1].querySelectorAll("td").forEach((c, i) => {
+          if (i === 0) return;
+          const inp = c.querySelector("input");
+          pos.push(inp ? parseFloat(inp.value) : null);
+        });
+        rows[3].querySelectorAll("td").forEach((c, i) => {
+          if (i === 0) return;
+          const inp = c.querySelector("input");
+          maxD.push(inp ? parseFloat(inp.value) : null);
+        });
+        rows[4].querySelectorAll("td").forEach((c, i) => {
+          if (i === 0) return;
+          const inp = c.querySelector("input");
+          dias.push(inp ? parseFloat(inp.value) : null);
+        });
+        // clean NaN
+        const clean = (a) => a.map((v) => (isNaN(v) ? null : v));
+        return {
+          sol: clean(sol),
+          pos: clean(pos),
+          maxD: clean(maxD),
+          dias: clean(dias),
+        };
+      }
+
+      function syncVehicleData() {
+        const d = getMasterData();
+        const weeks = [
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11",
+          "S12",
+        ];
+
+        // Calc cumplimiento % row
+        d.sol.forEach((s, i) => {
+          const el = document.getElementById("vc" + (i + 2));
+          if (el) {
+            if (s !== null && d.pos[i] !== null && s > 0) {
+              el.textContent = Math.round((d.pos[i] / s) * 100) + "%";
+            } else {
+              el.textContent = "—";
+            }
+          }
+        });
+
+        // === Update Slide 7 chart (posic sem) ===
+        const cumpPct = d.sol.map((s, i) =>
+          s !== null && d.pos[i] !== null && s > 0
+            ? Math.round((d.pos[i] / s) * 100)
+            : null,
+        );
+        const d25_posic = [
+          100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+        ];
+
+        if (charts.posicSem) charts.posicSem.destroy();
+        const ctx7 = document.getElementById("chart_posic_sem");
+        if (ctx7) {
+          charts.posicSem = new Chart(ctx7, {
+            type: "bar",
+            data: {
+              labels: weeks,
+              datasets: [
+                {
+                  label: "2025",
+                  data: d25_posic,
+                  backgroundColor: "#B0BEC5",
+                  borderRadius: 3,
+                },
+                {
+                  label: "2026",
+                  data: cumpPct,
+                  backgroundColor: cumpPct.map((v) =>
+                    v !== null && v < 95 ? "#FF6B6B" : "#ED1C24",
+                  ),
+                  borderRadius: 3,
+                },
+                {
+                  type: "line",
+                  label: "T",
+                  data: Array(11).fill(100),
+                  borderColor: "#FFD100",
+                  borderWidth: 2,
+                  borderDash: [6, 3],
+                  pointRadius: 0,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: {
+                y: {
+                  min: 75,
+                  max: 102,
+                  ticks: { callback: (v) => v + "%", font: { size: 10 } },
+                },
+                x: { ticks: { font: { size: 10 } } },
+              },
+            },
+          });
+        }
+
+        // === Update Slide 8 KPI cards ===
+        const validSol = d.sol.filter((v) => v !== null);
+        const validPos = d.pos.filter((v) => v !== null);
+        const totalSol = validSol.reduce((a, b) => a + b, 0);
+        const totalPos = validPos.reduce((a, b) => a + b, 0);
+        const gap = totalPos - totalSol;
+        const totalDias = d.dias
+          .filter((v) => v !== null)
+          .reduce((a, b) => a + b, 0);
+        const avgCump =
+          validSol.length > 0 ? Math.round((totalPos / totalSol) * 100) : 0;
+
+        document.getElementById("kd_sol").textContent = totalSol || "—";
+        document.getElementById("kd_pos").textContent = totalPos || "—";
+        document.getElementById("kd_gap").textContent =
+          gap !== 0 ? (gap > 0 ? "+" : "") + gap + " vehs" : "0";
+        document.getElementById("kd_cump").textContent = avgCump
+          ? avgCump + "%"
+          : "—";
+        document.getElementById("kd_cump").className =
+          "kpi-card-value" +
+          (avgCump >= 98 ? " green" : avgCump >= 95 ? "" : " red");
+        document.getElementById("kd_dias").textContent = totalDias || "—";
+
+        // Slide 8 charts
+        if (charts.detallePosic) charts.detallePosic.destroy();
+        const ctx8a = document.getElementById("chart_detalle_posic");
+        if (ctx8a) {
+          charts.detallePosic = new Chart(ctx8a, {
+            type: "bar",
+            data: {
+              labels: weeks,
+              datasets: [
+                {
+                  label: "Solicitados",
+                  data: d.sol,
+                  backgroundColor: "rgba(237,28,36,.3)",
+                  borderColor: "#ED1C24",
+                  borderWidth: 1,
+                  borderRadius: 3,
+                },
+                {
+                  label: "Posicionados",
+                  data: d.pos,
+                  backgroundColor: "#ED1C24",
+                  borderRadius: 3,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: "bottom", labels: { font: { size: 9 } } },
+              },
+              scales: {
+                y: { beginAtZero: true, ticks: { font: { size: 9 } } },
+                x: { ticks: { font: { size: 9 } } },
+              },
+            },
+          });
+        }
+
+        if (charts.detalleCump) charts.detalleCump.destroy();
+        const ctx8b = document.getElementById("chart_detalle_cump");
+        if (ctx8b) {
+          charts.detalleCump = new Chart(ctx8b, {
+            type: "line",
+            data: {
+              labels: weeks,
+              datasets: [
+                {
+                  label: "% Cumplimiento",
+                  data: cumpPct,
+                  borderColor: "#ED1C24",
+                  backgroundColor: "rgba(237,28,36,.08)",
+                  borderWidth: 3,
+                  pointRadius: 5,
+                  pointBackgroundColor: cumpPct.map((v) =>
+                    v !== null && v < 95 ? "#FF6B6B" : "#ED1C24",
+                  ),
+                  tension: 0.3,
+                  fill: true,
+                  spanGaps: false,
+                },
+                {
+                  label: "Target",
+                  data: Array(11).fill(100),
+                  borderColor: "#FFD100",
+                  borderWidth: 2,
+                  borderDash: [6, 3],
+                  pointRadius: 0,
+                  fill: false,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: {
+                y: {
+                  min: 75,
+                  max: 102,
+                  ticks: { callback: (v) => v + "%", font: { size: 10 } },
+                },
+                x: { ticks: { font: { size: 10 } } },
+              },
+            },
+          });
+        }
+
+        // Insight dinámico
+        const worstIdx = cumpPct.reduce(
+          (mi, v, i) => (v !== null && (mi === -1 || v < cumpPct[mi]) ? i : mi),
+          -1,
+        );
+        const worstWeek = worstIdx >= 0 ? weeks[worstIdx] : "—";
+        const worstVal = worstIdx >= 0 ? cumpPct[worstIdx] : "—";
+        const critCount = cumpPct.filter((v) => v !== null && v < 95).length;
+        document.getElementById("insight_detalle").innerHTML =
+          `<strong>Análisis:</strong> Peor semana: ${worstWeek} (${worstVal}%). Semanas críticas (&lt;95%): ${critCount}. Gap total: ${gap} vehículos. Cumplimiento promedio: ${avgCump}%.`;
+
+        // === Update Slide 9 ===
+        const promDiario = d.sol.map((s, i) =>
+          s !== null && d.dias[i] !== null && d.dias[i] > 0
+            ? Math.round((s / d.dias[i]) * 10) / 10
+            : null,
+        );
+        const maxHist = d.maxD.filter((v) => v !== null);
+        const globalMax = maxHist.length > 0 ? Math.max(...maxHist) : 0;
+        const globalMaxIdx = d.maxD.indexOf(globalMax);
+        const promGlobal = promDiario.filter((v) => v !== null);
+        const avgProm =
+          promGlobal.length > 0
+            ? (
+                promGlobal.reduce((a, b) => a + b, 0) / promGlobal.length
+              ).toFixed(1)
+            : 0;
+
+        document.getElementById("kv_prom").textContent = avgProm || "—";
+        document.getElementById("kv_max").textContent = globalMax
+          ? globalMax + " vehs"
+          : "—";
+        document.getElementById("kv_max_sem").textContent =
+          globalMaxIdx >= 0 ? weeks[globalMaxIdx] : "—";
+        document.getElementById("kv_semanas").textContent = promGlobal.length;
+
+        if (charts.vehiculos) charts.vehiculos.destroy();
+        const ctx9 = document.getElementById("chart_vehiculos");
+        if (ctx9) {
+          charts.vehiculos = new Chart(ctx9, {
+            type: "bar",
+            data: {
+              labels: weeks,
+              datasets: [
+                {
+                  label: "Prom. Diario",
+                  data: promDiario,
+                  backgroundColor: "#ED1C24",
+                  borderRadius: 4,
+                },
+                {
+                  label: "Máx. Diario",
+                  data: d.maxD,
+                  backgroundColor: "#B0BEC5",
+                  borderRadius: 4,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: "bottom", labels: { font: { size: 9 } } },
+              },
+              scales: {
+                y: { beginAtZero: true },
+                x: { ticks: { font: { size: 10 } } },
+              },
+            },
+          });
+        }
+
+        // Donut - calc participación dinámica
+        const base = 24;
+        let catStd = 0,
+          cat10 = 0,
+          cat20 = 0,
+          cat30 = 0;
+        promDiario.forEach((p) => {
+          if (p === null) return;
+          if (p <= base) catStd++;
+          else if (p <= base * 1.1) cat10++;
+          else if (p <= base * 1.2) cat20++;
+          else cat30++;
+        });
+        const catTotal = catStd + cat10 + cat20 + cat30;
+
+        if (charts.flotaDonut) charts.flotaDonut.destroy();
+        const ctx9d = document.getElementById("chart_flota_donut");
+        if (ctx9d && catTotal > 0) {
+          charts.flotaDonut = new Chart(ctx9d, {
+            type: "doughnut",
+            data: {
+              labels: [
+                `Estándar ≤24 (${Math.round((catStd / catTotal) * 100)}%)`,
+                `+10% (${Math.round((cat10 / catTotal) * 100)}%)`,
+                `+20% (${Math.round((cat20 / catTotal) * 100)}%)`,
+                `+30% (${Math.round((cat30 / catTotal) * 100)}%)`,
+              ],
+              datasets: [
+                {
+                  data: [catStd, cat10, cat20, cat30],
+                  backgroundColor: ["#ED1C24", "#F39C12", "#FFD100", "#B0BEC5"],
+                  borderWidth: 0,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "55%",
+              plugins: {
+                legend: {
+                  position: "right",
+                  labels: { font: { size: 9 }, boxWidth: 12 },
+                },
+              },
+            },
+          });
+        }
+
+        // Hallazgo
+        const over20Pct =
+          catTotal > 0 ? Math.round(((cat20 + cat30) / catTotal) * 100) : 0;
+        const minRecom = Math.ceil(avgProm * 1.05);
+        document.getElementById("kv_hallazgo").innerHTML =
+          `El ${over20Pct}% de las semanas se utiliza +20% de la flota base (24). Promedio diario: <strong>${avgProm}</strong> vehículos. Umbral mínimo recomendado: <strong>${minRecom} vehículos</strong>.`;
+      }
+
+      // ===== ROTACIÓN =====
+      function updateRotacion() {
+        const t = document.getElementById("table_rotacion");
+        const fv = parseFloat(
+          t.querySelectorAll("tbody tr:nth-child(3) input")[0].value,
+        );
+        const mv = parseFloat(
+          t.querySelectorAll("tbody tr:nth-child(4) input")[0].value,
+        );
+        document.getElementById("rot_feb_kpi").textContent = !isNaN(fv)
+          ? ((fv / 19) * 100).toFixed(1) + "%"
+          : "—";
+        document.getElementById("rot_mar_kpi").textContent = !isNaN(mv)
+          ? ((mv / 19) * 100).toFixed(1) + "%"
+          : "—";
+        renderRotacion();
+      }
+      function renderRotacion() {
+        const ctx = document.getElementById("chart_rotacion");
+        if (!ctx) return;
+        const t = document.getElementById("table_rotacion");
+        const fv = parseFloat(
+          t.querySelectorAll("tbody tr:nth-child(3) input")[0].value,
+        );
+        const mv = parseFloat(
+          t.querySelectorAll("tbody tr:nth-child(4) input")[0].value,
+        );
+        const data = [
+          10.5,
+          21.1,
+          !isNaN(fv) ? (fv / 19) * 100 : null,
+          !isNaN(mv) ? (mv / 19) * 100 : null,
+        ];
+        const colors = data.map((v) =>
+          v !== null && v > 5 ? "#ED1C24" : v !== null ? "#27AE60" : "#ddd",
+        );
+        if (charts.rotacion) charts.rotacion.destroy();
+        charts.rotacion = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["DIC", "ENE", "FEB", "MAR"],
+            datasets: [
+              {
+                label: "KPI",
+                data: data,
+                backgroundColor: colors,
+                borderRadius: 4,
+              },
+              {
+                type: "line",
+                label: "Meta",
+                data: [5, 5, 5, 5],
+                borderColor: "#FFD100",
+                borderWidth: 2,
+                borderDash: [6, 3],
+                pointRadius: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                min: 0,
+                max: 25,
+                ticks: { callback: (v) => v + "%", font: { size: 10 } },
+              },
+              x: { ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+      }
+
+      // ===== RENDER ROUTER =====
+      function renderChartsForSlide(n) {
+        setTimeout(() => {
+          switch (n) {
+            case 2:
+              renderTendencia();
+              break;
+            case 3:
+              renderNovedades();
+              break;
+            case 4:
+              renderEfectSem();
+              break;
+            case 5:
+              renderTiempos();
+              break;
+            case 6:
+              renderPosicMes();
+              break;
+            case 7:
+              syncVehicleData();
+              break;
+            case 8:
+              syncVehicleData();
+              break;
+            case 9:
+              syncVehicleData();
+              break;
+            case 10:
+              renderArqueoMes();
+              break;
+            case 11:
+              renderArqueoSem();
+              break;
+            case 12:
+              renderRotacion();
+              break;
+          }
+        }, 50);
+      }
+
+      initThumbNav();
+    </script>
+  </body>
+</html>

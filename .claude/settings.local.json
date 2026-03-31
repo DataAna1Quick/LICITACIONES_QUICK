@@ -4,7 +4,17 @@
       "Bash(du -sh \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\"/* 2>/dev/null | sort -h)",
       "Bash(git -C \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" log --oneline -10)",
       "Bash(git -C \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" log --pretty=format:\"%h %s\" -10)",
-      "Bash(cd \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" && python PrimerAnalisis/src/auto_push.py --once)"
+      "Bash(cd \"C:/Users/Quick/OneDrive/OneDrive - Quick Help SAS/INFORMES/LICITACIONES\" && python PrimerAnalisis/src/auto_push.py --once)",
+      "WebFetch(domain:claude.ai)",
+      "Bash(gh api:*)",
+      "Bash(where gh:*)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(cd:*)",
+      "Bash(npx --yes @babel/cli@7 --presets @babel/preset-react dashboard_lastmile_colsubsidio.jsx -o dashboard_compiled.js)",
+      "Bash(npm install:*)",
+      "Bash(npx babel:*)"
     ]
   }
 }
